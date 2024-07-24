@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class MoveCommand : Command
@@ -11,7 +12,7 @@ public class MoveCommand : Command
     public override void Execute()
     {
         _beforePosition = _transform.position;
-        _transform.position = _targetPosition;
+        _transform.DOMove(_targetPosition, _duration);
     }
 
     public override void Redo()
