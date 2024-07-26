@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    protected CommandInvoker commandInvoker = new CommandInvoker();
+    [SerializeField] float _speed = 1f;
+    [SerializeField] float _moveSpace = 1f;
     private void Update()
     {
     }
     public virtual void Move(Vector3 direction)
     {
-        commandInvoker.ExecuteCommand(new MoveCommand(transform, 1f, transform.position + direction));
+        transform.position += direction;
     }
 }
