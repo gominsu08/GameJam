@@ -22,26 +22,26 @@ public class InputReader : ScriptableObject, IDefaultActions
             _instance = value;
         }
     }
-    Controls _controls;
+    public Controls controls;
 
     public Action<Vector2> OnPlayer1Move;
     public Action<Vector2> OnPlayer2Move;
 
     private void OnEnable()
     {
-        if (_controls == null)
+        if (controls == null)
         {
-            _controls = new Controls();
+            controls = new Controls();
         }
-        _controls.Default.SetCallbacks(this);
-        _controls.Default.Enable();
+        controls.Default.SetCallbacks(this);
+        controls.Default.Enable();
         Instance = this;
     }
     private void OnDisable()
     {
         if (Instance == this)
         {
-            _controls.Default.Disable();
+            controls.Default.Disable();
             Instance = null;
         }
     }

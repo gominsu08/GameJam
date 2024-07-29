@@ -13,8 +13,8 @@ public class NumCalculate : MonoBehaviour
 
     private void Update()
     {
-        pc1num = playerNum.pc1Num;
-        pc2num = playerNum.pc2Num;
+        pc1num = playerNum.Pc1Num;
+        pc2num = playerNum.Pc2Num;
     }
 
     public void StageClear() 
