@@ -25,12 +25,11 @@ public class MoveCommand : Command
     public override void Execute()
     {
         commandState.Value = EnumCommandState.Executing;
+
         _beforePosition = _transform.position;
-
-        Vector2 moveDir = _targetPosition - _transform.position;
-
         _entity.transform.position = _targetPosition;
         _transform.position = _beforePosition;
+
         _transform.DOMove(_targetPosition, _duration).OnComplete(() => onCompleteAction?.Invoke());
         // _transform.DOMove(_targetPosition, _duration).OnComplete(() => commandState.Value = EnumCommandState.waiting);
     }
