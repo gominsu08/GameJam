@@ -20,7 +20,12 @@ public class Grid : MonoSingleton<Grid>
     public bool set(Entity entity, Vector2 pos)
     {
         if (gridTilemap.GetTile(gridTilemap.WorldToCell(pos)) || mapTilemap.GetTile(mapTilemap.WorldToCell(pos)) == null) return false;
-        entityDic.Add(Vector2Int.RoundToInt(pos), entity);
+
+        if (entityDic.ContainsKey(Vector2Int.RoundToInt(pos)))
+            entityDic[Vector2Int.RoundToInt(pos)] = entity;
+        else
+            entityDic.Add(Vector2Int.RoundToInt(pos), entity);
+
         gridTilemap.SetTile(gridTilemap.WorldToCell(pos), tile);
         return true;
     }
