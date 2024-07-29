@@ -25,15 +25,15 @@ public class Calculate : MonoBehaviour
 
     private void CalculatePlayersNumbers()
     {
-        Vector2 centerPos = (_player1.position + _player2.position) / 2f;
+        //Vector2 centerPos = (_player1.position + _player2.position) / 2f;
 
-        _hit = Physics2D.RaycastAll(centerPos, Dir.normalized, Dir.magnitude / 2f)
+        _hit = Physics2D.RaycastAll(_player1.position, Dir.normalized, Dir.magnitude)
             .Select(A => A.collider)
             .Where(B => B.transform != _player1 && B.transform != _player2)
-            .OrderBy(hit => Vector2.Distance(centerPos, hit.transform.position))
+            .OrderBy(hit => Vector2.Distance(_player1.position, hit.transform.position))
             .ToList();
 
-        Debug.DrawRay(centerPos, Dir.normalized * (Dir.magnitude / 2f), Color.red);
+        Debug.DrawRay(_player1.position, Dir.normalized * (Dir.magnitude), Color.red);
 
 
         usedObjects.Clear(); 
