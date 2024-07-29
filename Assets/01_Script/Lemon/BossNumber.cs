@@ -5,7 +5,7 @@ using TMPro;
 
 public class BossNumber : MonoBehaviour
 {  
-    private int _bossNum;
+    public int _bossNum { get; private set; }
     [SerializeField] TMP_Text bossNumText;
     [SerializeField] RoundManager roundManager;
 

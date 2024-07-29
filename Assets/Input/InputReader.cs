@@ -24,12 +24,11 @@ public class InputReader : ScriptableObject, IDefaultActions
     }
     public Controls controls;
 
-    public Action<Vector2> OnPlayer2Move;
     public Action<Vector2> OnPlayer1Move;
+    public Action<Vector2> OnPlayer2Move;
 
     private void OnEnable()
     {
-        Debug.LogError("�ٶ���");
         if (controls == null)
         {
             controls = new Controls();

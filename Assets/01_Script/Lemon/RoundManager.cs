@@ -13,7 +13,7 @@ public class RoundManager : MonoBehaviour
     public UnityEvent Roundlose;
 
     [SerializeField] private bool _isEndRound = false;
-    [SerializeField] public bool isRoundWin = false;          
+    [SerializeField] public bool isRoundWin = false;
     [SerializeField] private int _round = 0;
     [SerializeField] TMP_Text stageText;
 
@@ -22,20 +22,22 @@ public class RoundManager : MonoBehaviour
         if (_isEndRound) // ¶ó¿îµå ³¡
         {
             timer.TimerStop();
-            if (RoundClear != null & isRoundWin) // ÀÌ±è ¤»
+            if (isRoundWin) // ÀÌ±è ¤»RoundClear != null & 
             {
                 RoundClear.Invoke();
                 RoundWin.Invoke();
                 _round++;
                 stageText.text = $"stage [ {_round} ]";
                 timer.TimerFlow();
-                _isEndRound = false; 
+                _isEndRound = false;
             }
-            else if (RoundClear != null & !isRoundWin) // Áü ¤Ð¤Ð
+            else if (!isRoundWin) // Áü ¤Ð¤Ð
             {
                 RoundClear.Invoke();
                 Roundlose.Invoke();
+                Debug.Log("ming");
                 _isEndRound = false;
+
             }
         }
     }

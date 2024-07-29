@@ -13,6 +13,7 @@ public class Calculate : MonoBehaviour
 
     private void Update()
     {
+        if (_player1 == null || _player2 == null) return; 
         if (IsPlayerInLine(_player1.position, _player2.position))
         {
             CalculatePlayersNumbers();
@@ -37,12 +38,12 @@ public class Calculate : MonoBehaviour
 
 
         usedObjects.Clear(); 
-        _playerNum.pc1Num = CalculatePlayerNumber(_playerNum.pc1Num);
+        _playerNum.Pc1Num = CalculatePlayerNumber(_playerNum.Pc1Num);
 
         usedObjects.Clear(); 
-        _playerNum.pc2Num = CalculatePlayerNumber(_playerNum.pc2Num);
+        _playerNum.Pc2Num = CalculatePlayerNumber(_playerNum.Pc2Num);
 
-        _playerNum.PCNumChange(_playerNum.pc1Num, _playerNum.pc2Num);
+        _playerNum.PCNumChange(_playerNum.Pc1Num, _playerNum.Pc2Num);
 
 
         foreach (Collider2D usedObj in usedObjects)
