@@ -10,6 +10,8 @@ public class GameTimer : MonoBehaviour
     [SerializeField] bool isTimeFlow = true;
     [SerializeField] TMP_Text timerText;
 
+    [SerializeField] private RoundManager roundManager;
+     
     private void Start()
     {        
         timerText.text = $"Time [ {Mathf.Round(CountDown123)} ]";
@@ -28,14 +30,19 @@ public class GameTimer : MonoBehaviour
             {
                 timerText.text = $"Time [ {Mathf.Round(SetTime)} ]";
                 SetTime -= Time.deltaTime;
-
             }
-        }   
+        }
+
+        if (SetTime <= 0)
+        {
+            roundManager.EndRound();
+            TimeReset();
+        }
     }
 
     public void TimeReset()
     {
-        SetTime = 60.0f;
+        SetTime = 5;
         CountDown123 = 0.0f;
         isTimeFlow = false;
     }

@@ -183,10 +183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74786421250bc84ba2187ca1df6d04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SetTime: 60
+  SetTime: 5
   CountDown123: 0
   isTimeFlow: 1
   timerText: {fileID: 454404638}
+  roundManager: {fileID: 886869748}
 --- !u!4 &143493032
 Transform:
   m_ObjectHideFlags: 0
@@ -480,7 +481,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isEndRound: 0
-  isRoundWin: 0
+  isRoundWin: 1
   round: 0
   stageText: {fileID: 1754901427}
 --- !u!4 &886869749
