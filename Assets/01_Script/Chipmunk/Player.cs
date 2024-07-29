@@ -27,12 +27,6 @@ public class Player : Entity
                 break;
         }
     }
-
-    private void MoveEnemy()
-    {
-        throw new NotImplementedException();
-    }
-
     private void Update()
     {
     }
