@@ -21,7 +21,7 @@ public class Entity : MonoBehaviour
     }
     protected virtual void OnDestroy()
     {
-
+        Grid.Instance.remove(transform.position);
     }
     private void Update()
     {
@@ -36,6 +36,7 @@ public class Entity : MonoBehaviour
         if (!Grid.Instance.set(targetPosition))
         {
             command = new BlockCommand(this, 1 / _speed);
+            // on 
         }
         else
         {
