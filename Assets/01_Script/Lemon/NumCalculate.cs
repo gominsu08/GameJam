@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +9,38 @@ public class NumCalculate : MonoBehaviour
     private int pc2num; // 플레이어 넘 연결 필요
     [SerializeField] BossNumber bossNumber;
     [SerializeField] RoundManager roundManager;
+    [SerializeField] private PlayerNum playerNum;
 
-    public void StageClear(int pc1num , int pc2num , int bossnum) 
+    private void Update()
     {
-        if ((pc1num <= bossnum & bossnum <= pc2num) || (pc2num <= bossnum & bossnum <= pc1num))
+        pc1num = playerNum.Pc1Num;
+        pc2num = playerNum.Pc2Num;
+    }
+
+    public void StageClear() 
+    {
+
+        if ((pc1num <= bossNumber._bossNum && bossNumber._bossNum <= pc2num) || (pc2num <= bossNumber._bossNum & bossNumber._bossNum <= pc1num))
         {
-            roundManager.isRoundWin = true;
+            StartCoroutine(Clear());
         }
         else 
         {
-            roundManager.isRoundWin = false; 
+            roundManager.isRoundWin = false;
+            roundManager.EndRound();
         }
+
+        
+    }
+
+    private IEnumerator Clear()
+    {
+        yield return new WaitForSeconds(1);
+        roundManager.isRoundWin = true;
+        StageManager.Instance.StageReset();
+        roundManager.EndRound();
+        bossNumber.BossNumRand();
+
+
     }
 }
