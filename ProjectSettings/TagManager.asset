@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UI
+    uniqueID: 2462890335
+    locked: 0
+  - name: VFX
+    uniqueID: 4144162471
+    locked: 0
+  - name: Agent
+    uniqueID: 4196644927
+    locked: 0
