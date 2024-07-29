@@ -16,6 +16,8 @@ public class Entity : MonoBehaviour
     {
         if (_visualTrm == null)
             _visualTrm = transform.Find("Visual");
+        if (!Grid.Instance.set(transform.position))
+            Debug.Log($"entity : {transform.position}좌표에 이미 벽이 있습니다!");
     }
     protected virtual void OnDestroy()
     {
@@ -28,21 +30,21 @@ public class Entity : MonoBehaviour
     {
         if (isMoveing) return;
         isMoveing = true;
-        Debug.Log(direction);
         Vector2 targetPosition = (Vector2)transform.position + direction;
         Command command;
-        if (Physics2D.RaycastAll(transform.position, direction, direction.magnitude).ToList().Any((a) => a.transform != transform))
+        // if (Physics2D.RaycastAll(transform.position, direction, direction.magnitude).ToList().Any((a) => a.transform != transform))
+        if (!Grid.Instance.set(targetPosition))
         {
             command = new BlockCommand(this, 1 / _speed);
         }
         else
         {
+            Grid.Instance.remove(transform.position);
             OnMoveEvent?.Invoke(direction);
             command = new MoveCommand(this, 1 / _speed, targetPosition);
         }
         command.onCompleteAction += () => isMoveing = false;
-        Physics2D.RaycastAll(transform.position, direction, direction.magnitude).ToList().Any((a) => a.transform != transform);
         commandInvoker.ExecuteCommand(command);
-        Debug.Log(Physics2D.RaycastAll(transform.position, direction, direction.magnitude).ToList().Any((a) => a.transform != transform));
+        Debug.Log(Physics2D.RaycastAll(transform.position, Vector2.zero, direction.magnitude).ToList().Any((a) => a.transform != transform));
     }
 }
