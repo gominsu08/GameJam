@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerNum : MonoBehaviour
 {
-    private int _pc1Num, _pc2Num;
+    public int pc1Num, pc2Num;
     [SerializeField] TMP_Text pc1NumText, pc2NumText;
 
     private void Start()
@@ -15,9 +15,9 @@ public class PlayerNum : MonoBehaviour
 
     public void PCNumChange(int num1, int num2)
     {
-        _pc1Num = num1;
-        _pc2Num = num2;
-        pc1NumText.text = ($"{_pc1Num}");
-        pc2NumText.text = ($"{_pc2Num}");
+        pc1Num = num1;
+        pc2Num = num2;
+        pc1NumText.text = ($"{pc1Num}");
+        pc2NumText.text = ($"{pc2Num}");
     }
 }
