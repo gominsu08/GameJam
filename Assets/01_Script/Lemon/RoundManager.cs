@@ -12,42 +12,41 @@ public class RoundManager : MonoBehaviour
     public UnityEvent RoundWin;
     public UnityEvent Roundlose;
 
-    [SerializeField] bool isEndRound = false;
-    [SerializeField] bool isRoundWin = false;
-    [SerializeField] int round = 0;
+    [SerializeField] private bool _isEndRound = false;
+    [SerializeField] public bool isRoundWin = false;          
+    [SerializeField] private int _round = 0;
     [SerializeField] TMP_Text stageText;
-
 
     public void Update()
     {
-        if (isEndRound)
+        if (_isEndRound) // ¶ó¿îµå ³¡
         {
-            if (RoundClear != null & isRoundWin)
+            timer.TimerStop();
+            if (RoundClear != null & isRoundWin) // ÀÌ±è ¤»
             {
                 RoundClear.Invoke();
                 RoundWin.Invoke();
-                round++;
-                stageText.text = $"stage [ {round} ]";
+                _round++;
+                stageText.text = $"stage [ {_round} ]";
                 timer.TimerFlow();
-                isEndRound = false; 
+                _isEndRound = false; 
             }
-            else if (RoundClear != null & !isRoundWin) 
+            else if (RoundClear != null & !isRoundWin) // Áü ¤Ð¤Ð
             {
                 RoundClear.Invoke();
                 Roundlose.Invoke();
-                timer.TimerFlow();
-                isEndRound = false;
+                _isEndRound = false;
             }
         }
     }
 
     public void EndRound()
     {
-        isEndRound = true;
+        _isEndRound = true;
     }
 
     public void ResetRound()
     {
-        round = 0; 
+        _round = 0; 
     }
 }
