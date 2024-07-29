@@ -10,12 +10,17 @@ public class StageManager : MonoSingleton<StageManager>
 
     [SerializeField] private List<MapData> _mapData = new List<MapData>();
 
+    [SerializeField] private int _enemyCount;
+    [SerializeField] private int _boxCount;
 
     //타일맵
     [SerializeField] private Tilemap _tileMap;
+    //박스 타일맵
+    [SerializeField] private Tilemap _boxTileMap;
     //기본 타일
     [SerializeField] private Tile _baseTile;
-
+    //박스 타일
+    [SerializeField] private Tile _boxTile;
     //타일맵 위치
     [SerializeField] private Vector2 _tileTransform;
 
@@ -77,12 +82,26 @@ public class StageManager : MonoSingleton<StageManager>
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            for (int i = 0; i < 25; i++)
-            {
-                _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
-            }
+            CreateBox(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
         }
     }
+
+    public void CreateBox(int xMin, int xMax, int yMin, int yMax)
+    {
+            int xRand = Random.Range(xMin, xMax + 1);
+            int yRand = Random.Range(yMin, yMax + 1);
+
+            if (_boxTileMap.GetTile(new Vector3Int(xRand, yRand)))
+            {
+                CreateBox(xMin, xMax, yMin, yMax);
+            }
+            else
+            {
+                _boxTileMap.SetTile(new Vector3Int(xRand, yRand), _boxTile);
+            }
+    }
+
+    
 
 
     public void CreateEnemy(int count)
@@ -160,7 +179,13 @@ public class StageManager : MonoSingleton<StageManager>
         }
 
         _roundManager.timer.TileSet();
-        CreateEnemy(20);
+        CreateEnemy(_enemyCount);
+
+        for (int i = 0; i < _boxCount; i++)
+        {
+            CreateBox(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
+        }
+
     }
 
 
