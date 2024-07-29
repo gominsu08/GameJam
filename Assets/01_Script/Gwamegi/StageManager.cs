@@ -8,31 +8,23 @@ public class StageManager : MonoSingleton<StageManager>
 {
     [SerializeField] private RoundManager _roundManager;
 
-    [SerializeField] private List<MapData> _mapData = new List<MapData>();
-
-    [SerializeField] private int _enemyCount;
-    [SerializeField] private int _boxCount;
 
     //타일맵
     [SerializeField] private Tilemap _tileMap;
-    //박스 타일맵
-    [SerializeField] private Tilemap _boxTileMap;
     //기본 타일
     [SerializeField] private Tile _baseTile;
-    //박스 타일
-    [SerializeField] private Tile _boxTile;
+
     //타일맵 위치
     [SerializeField] private Vector2 _tileTransform;
 
     private CreateEnemy _createEnemy;
 
-    public int stage;
 
     //초기값 + 맵 데이터 나중에 없애도 상관없음
-    private int _xMaxSize;
-    private int _xMinSize;
-    private int _yMaxSize;
-    private int _yMinSize;
+    [SerializeField] private int _xMaxSize;
+    [SerializeField] private int _xMinSize;
+    [SerializeField] private int _yMaxSize;
+    [SerializeField] private int _yMinSize;
 
     //삭제 할떄 상용되는 변수
     private int _xMaxSizeIn;
@@ -44,11 +36,6 @@ public class StageManager : MonoSingleton<StageManager>
     protected override void Awake()
     {
         base.Awake();
-        _xMaxSize = _mapData[stage].xMax;
-        _yMaxSize = _mapData[stage].yMax;
-        _xMinSize = _mapData[stage].xMin;
-        _yMinSize = _mapData[stage].yMin;
-
         _createEnemy = GetComponent<CreateEnemy>();
         _xMaxSizeIn = _xMaxSize;
         _yMaxSizeIn = _yMaxSize;
@@ -60,11 +47,6 @@ public class StageManager : MonoSingleton<StageManager>
     private void Update()
     {
         _tileMap.transform.position = _tileTransform;
-
-        _xMaxSize = _mapData[stage].xMax;
-        _yMaxSize = _mapData[stage].yMax;
-        _xMinSize = _mapData[stage].xMin;
-        _yMinSize = _mapData[stage].yMin;
 
         if (Input.GetKeyDown(KeyCode.V))
         {
@@ -82,26 +64,12 @@ public class StageManager : MonoSingleton<StageManager>
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            CreateBox(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
+            for (int i = 0; i < 25; i++)
+            {
+                _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
+            }
         }
     }
-
-    public void CreateBox(int xMin, int xMax, int yMin, int yMax)
-    {
-            int xRand = Random.Range(xMin, xMax + 1);
-            int yRand = Random.Range(yMin, yMax + 1);
-
-            if (_boxTileMap.GetTile(new Vector3Int(xRand, yRand)))
-            {
-                CreateBox(xMin, xMax, yMin, yMax);
-            }
-            else
-            {
-                _boxTileMap.SetTile(new Vector3Int(xRand, yRand), _boxTile);
-            }
-    }
-
-    
 
 
     public void CreateEnemy(int count)
@@ -179,13 +147,7 @@ public class StageManager : MonoSingleton<StageManager>
         }
 
         _roundManager.timer.TileSet();
-        CreateEnemy(_enemyCount);
-
-        for (int i = 0; i < _boxCount; i++)
-        {
-            CreateBox(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
-        }
-
+        CreateEnemy(20);
     }
 
 

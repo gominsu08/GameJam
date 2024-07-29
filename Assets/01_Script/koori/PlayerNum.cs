@@ -5,7 +5,8 @@ using TMPro;
 
 public class PlayerNum : MonoBehaviour
 {
-    public int pc1Num, pc2Num;
+    public int pc1Num { get { return pc1Num; } set { if (value >= 100) { pc1Num = 99; } else { pc1Num = value; } } }
+    public int pc2Num { get {return pc2Num; } set { if (value >= 100) { pc2Num = 99; } else { pc2Num = value; } } }
     [SerializeField] TMP_Text pc1NumText, pc2NumText;
 
     private void Start()

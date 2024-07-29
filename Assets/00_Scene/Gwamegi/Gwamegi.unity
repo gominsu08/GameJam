@@ -432,13 +432,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39db7d40033d9604c8b6b8d561c14733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDontDestroy: 0
-  _roundManager: {fileID: 0}
-  _mapData: []
   _tileMap: {fileID: 1379120427}
   _baseTile: {fileID: 11400000, guid: 9514161b835ec5e409e11b70aa58b5ad, type: 2}
   _tileTransform: {x: 0, y: 0}
-  stage: 0
+  _xMaxSize: 10
+  _xMinSize: -10
+  _yMaxSize: 10
+  _yMinSize: -10
 --- !u!4 &1275332249
 Transform:
   m_ObjectHideFlags: 0
@@ -468,10 +468,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileMap: {fileID: 1379120427}
   _enemyPrefab:
-  - {fileID: 8898962388225187353, guid: 8036ac6e70372cc4e966eef9dc95d03c, type: 3}
-  - {fileID: 2866298838092197010, guid: c8c35d7d95ad10940bdcdf4b80289bd5, type: 3}
-  - {fileID: 3199509322794161802, guid: 2fa4d236b92d699488a3ffb40beab061, type: 3}
-  - {fileID: 5634010594692859572, guid: 1c92af50d33a8a341830cafc4a041cd3, type: 3}
+  - {fileID: 4534403350294044396, guid: 4eadda3e35426a34da0369231a95699d, type: 3}
+  - {fileID: 3727456849145168809, guid: 14cd1af6d55a6cd4dbce03c16c933645, type: 3}
+  - {fileID: 4554177128188233845, guid: 9d49bf48adacf1a47bd9b63677eb80fc, type: 3}
+  - {fileID: 2806595401193520730, guid: 190cc20b358601348a673a69dc883446, type: 3}
+  - {fileID: 1359153082820466116, guid: 63f561e8007293b409ad4e151b4e99b4, type: 3}
 --- !u!19719996 &1275332251
 TilemapCollider2D:
   m_ObjectHideFlags: 0

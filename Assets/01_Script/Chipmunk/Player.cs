@@ -27,12 +27,12 @@ public class Player : Entity
                 break;
         }
     }
-
-    private void MoveEnemy()
+    protected override void OnDestroy()
     {
-        throw new NotImplementedException();
+        base.OnDestroy();
+        _inputReader.OnPlayer1Move -= Move;
+        _inputReader.OnPlayer2Move -= Move;
     }
-
     private void Update()
     {
     }
