@@ -30,7 +30,6 @@ public class Entity : MonoBehaviour
     }
     public virtual void Move(Vector2 direction)
     {
-        Debug.Log("헉스");
         if (isMoveing) return;
         isMoveing = true;
         Vector2 targetPosition = (Vector2)transform.position + direction;
