@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Entity : MonoBehaviour
 {
     [SerializeField] float _speed = 1f;
     [SerializeField] float _moveSpace = 1f;
     CommandInvoker commandInvoker { get => CommandManager.Instance.commandInvoker; }
-    [SerializeField] public Transform _visualTrm { get; protected set; }
+    [SerializeField] protected UnityEvent<Vector2> OnMoveEvent;
+    [field: SerializeField] public Transform _visualTrm { get; protected set; }
     public bool isMoveing { get; protected set; }
     protected virtual void Awake()
     {
-        _visualTrm = transform.Find("Visual");
+        if (_visualTrm == null)
+            _visualTrm = transform.Find("Visual");
+    }
+    protected virtual void OnDestroy()
+    {
+
     }
     private void Update()
     {
@@ -30,6 +37,7 @@ public class Entity : MonoBehaviour
         }
         else
         {
+            OnMoveEvent?.Invoke(direction);
             command = new MoveCommand(this, 1 / _speed, targetPosition);
         }
         command.onCompleteAction += () => isMoveing = false;

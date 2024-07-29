@@ -25,6 +25,12 @@ public class Player : Entity
                 break;
         }
     }
+
+    private void MoveEnemy()
+    {
+        throw new NotImplementedException();
+    }
+
     private void Update()
     {
         // #region 프로토타입 코드
