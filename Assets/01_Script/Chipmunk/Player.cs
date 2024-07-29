@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class Player : Entity
 {
-    public static bool isPlayerMoving;
+    public static bool isPlayerMoving = false;
     InputReader _inputReader { get => InputReader.Instance; }
     public enum EnumPlayerType
     {

@@ -12,7 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f3ae140f6e7f0418ca8f737d6a0f42, type: 3}
   m_Name: InputReader
   m_EditorClassIdentifier: 
-  OnPlayer1Move:
-    _value: {x: 0, y: 0}
-  OnPlayer2Move:
-    _value: {x: 0, y: 0}

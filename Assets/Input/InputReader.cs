@@ -5,10 +5,23 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static Controls;
 
-[CreateAssetMenu(menuName = "SO/InputReader")]
+[CreateAssetMenu(menuName = "SO/InputReader", fileName = "InputReader")]
 public class InputReader : ScriptableObject, IDefaultActions
 {
-    public static InputReader Instance { get; private set; }
+    private static InputReader _instance;
+    public static InputReader Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = ScriptableObject.CreateInstance<InputReader>();
+            return _instance;
+        }
+        private set
+        {
+            _instance = value;
+        }
+    }
     Controls _controls;
 
     public Action<Vector2> OnPlayer1Move;
@@ -23,6 +36,14 @@ public class InputReader : ScriptableObject, IDefaultActions
         _controls.Default.SetCallbacks(this);
         _controls.Default.Enable();
         Instance = this;
+    }
+    private void OnDisable()
+    {
+        if (Instance == this)
+        {
+            _controls.Default.Disable();
+            Instance = null;
+        }
     }
 
     public void OnPlayer1(InputAction.CallbackContext context)
