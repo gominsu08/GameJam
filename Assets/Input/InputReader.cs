@@ -15,6 +15,7 @@ public class InputReader : ScriptableObject, IDefaultActions
 
     private void OnEnable()
     {
+        Debug.LogError("´Ù¶÷Áã");
         if (_controls == null)
         {
             _controls = new Controls();
