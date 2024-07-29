@@ -8,6 +8,8 @@ public class StageManager : MonoSingleton<StageManager>
 {
     [SerializeField] private RoundManager _roundManager;
 
+    [SerializeField] private List<MapData> _mapData = new List<MapData>();
+
 
     //타일맵
     [SerializeField] private Tilemap _tileMap;
@@ -19,12 +21,13 @@ public class StageManager : MonoSingleton<StageManager>
 
     private CreateEnemy _createEnemy;
 
+    public int stage;
 
     //초기값 + 맵 데이터 나중에 없애도 상관없음
-    [SerializeField] private int _xMaxSize;
-    [SerializeField] private int _xMinSize;
-    [SerializeField] private int _yMaxSize;
-    [SerializeField] private int _yMinSize;
+    private int _xMaxSize;
+    private int _xMinSize;
+    private int _yMaxSize;
+    private int _yMinSize;
 
     //삭제 할떄 상용되는 변수
     private int _xMaxSizeIn;
@@ -36,6 +39,11 @@ public class StageManager : MonoSingleton<StageManager>
     protected override void Awake()
     {
         base.Awake();
+        _xMaxSize = _mapData[stage].xMax;
+        _yMaxSize = _mapData[stage].yMax;
+        _xMinSize = _mapData[stage].xMin;
+        _yMinSize = _mapData[stage].yMin;
+
         _createEnemy = GetComponent<CreateEnemy>();
         _xMaxSizeIn = _xMaxSize;
         _yMaxSizeIn = _yMaxSize;
@@ -47,6 +55,11 @@ public class StageManager : MonoSingleton<StageManager>
     private void Update()
     {
         _tileMap.transform.position = _tileTransform;
+
+        _xMaxSize = _mapData[stage].xMax;
+        _yMaxSize = _mapData[stage].yMax;
+        _xMinSize = _mapData[stage].xMin;
+        _yMinSize = _mapData[stage].yMin;
 
         if (Input.GetKeyDown(KeyCode.V))
         {
