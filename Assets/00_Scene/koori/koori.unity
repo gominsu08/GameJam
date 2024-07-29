@@ -3010,6 +3010,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca185dc6dbd46144ae2764f0ef07cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pc1Num: 0
+  pc2Num: 0
   pc1NumText: {fileID: 670598618}
   pc2NumText: {fileID: 2098818888}
 --- !u!4 &1432539192
@@ -3074,7 +3076,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 0
-  <tilemap>k__BackingField: {fileID: 0}
+  <gridTilemap>k__BackingField: {fileID: 0}
+  <mapTilemap>k__BackingField: {fileID: 84690618}
   <tile>k__BackingField: {fileID: 11400000, guid: 9514161b835ec5e409e11b70aa58b5ad, type: 2}
 --- !u!483693784 &1495726090
 TilemapRenderer:
@@ -3416,6 +3419,7 @@ MonoBehaviour:
   _hit: []
   _player1: {fileID: 1257061465}
   _player2: {fileID: 925615439}
+  _playerNum: {fileID: 1432539191}
 --- !u!4 &1863171111
 Transform:
   m_ObjectHideFlags: 0

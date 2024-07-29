@@ -8,17 +8,14 @@ public class Calculate : MonoBehaviour
     [SerializeField] private List<Collider2D> _hit = new List<Collider2D>();
     [SerializeField] private Transform _player1, _player2;
     [SerializeField] private PlayerNum _playerNum;
+    private List<Collider2D> usedObjects = new List<Collider2D>();
     private Vector2 Dir { get => -(_player1.position - _player2.position); }
 
     private void Update()
     {
-        Debug.Log(IsPlayerInLine(_player1.position, _player2.position));
         if (IsPlayerInLine(_player1.position, _player2.position))
         {
-            _hit = Physics2D.RaycastAll(_player1.position, Dir.normalized, Dir.magnitude).Select(A => A.collider).Where(B => B.transform != _player1 && B.transform != _player2).ToList();
-            Debug.DrawRay(_player1.position, Dir.normalized);
-            Operation(_player1, ref _playerNum.pc1Num); // 플레이어 1 연산
-            Operation(_player2, ref _playerNum.pc2Num); // 플레이어 2 연산
+            CalculatePlayersNumbers();
         }
         else
         {
@@ -26,73 +23,82 @@ public class Calculate : MonoBehaviour
         }
     }
 
-    private bool IsPlayerInLine(Vector2 player1Pos, Vector2 player2Pos)
+    private void CalculatePlayersNumbers()
     {
-        // x 좌표가 같은 경우 (세로 방향 일직선)
-        if (player1Pos.x == player2Pos.x)
+        // 1. 두 플레이어 사이의 중간 지점 계산
+        Vector2 centerPos = (_player1.position + _player2.position) / 2f;
+
+        // 2. 중간 지점에서 RaycastAll 실행
+        _hit = Physics2D.RaycastAll(centerPos, Dir.normalized, Dir.magnitude / 2f) // 거리는 절반만큼
+            .Select(A => A.collider)
+            .Where(B => B.transform != _player1 && B.transform != _player2)
+            .OrderBy(hit => Vector2.Distance(centerPos, hit.transform.position)) // 중간 지점에서의 거리 순으로 정렬
+            .ToList();
+
+        Debug.DrawRay(centerPos, Dir.normalized * (Dir.magnitude / 2f), Color.red); // 디버깅 Ray 그리기
+
+        // 3. 플레이어 1과 플레이어 2의 숫자 계산
+        _playerNum.pc1Num = CalculatePlayerNumber(_playerNum.pc1Num);
+        _playerNum.pc2Num = CalculatePlayerNumber(_playerNum.pc2Num);
+
+        _playerNum.PCNumChange(_playerNum.pc1Num, _playerNum.pc2Num);
+
+        // 4. 사용된 오브젝트 삭제
+        foreach (Collider2D usedObj in usedObjects)
         {
-            return true;
+            Destroy(usedObj.gameObject);
         }
-        // y 좌표가 같은 경우 (가로 방향 일직선)
-        else if (player1Pos.y == player2Pos.y)
-        {
-            return true;
-        }
-        // 그 외의 경우　仕事したくない．．．
-        else
-        {
-            return false;
-        }
+        usedObjects.Clear();
     }
 
-    private void Operation(Transform player, ref int playerNum)
+    // 플레이어 숫자 계산 함수
+    private int CalculatePlayerNumber(int playerNum)
     {
-        _hit = Physics2D.RaycastAll(player.position, Dir.normalized, Dir.magnitude)
-                .Select(A => A.collider)
-                .Where(B => B.transform != _player1 && B.transform != _player2)
-                .ToList();
-
         float result = playerNum;
-
-        List<Collider2D> usedObjects = new List<Collider2D>();
 
         foreach (Collider2D col in _hit)
         {
             NumberContainer container = col.GetComponent<NumberContainer>();
-            if (container != null)
+            if (container != null && !usedObjects.Contains(col))
             {
                 switch (container.operatorType)
                 {
                     case EnumOperator.Plus:
                         result += container.number;
-                        usedObjects.Add(col);
                         break;
                     case EnumOperator.Minus:
                         result -= container.number;
-                        usedObjects.Add(col);
                         break;
                     case EnumOperator.Multiply:
                         result *= container.number;
-                        usedObjects.Add(col);
                         break;
                     case EnumOperator.Division:
-                        if (container.number != 0) // 0으로 나누는 오류 방지
+                        if (container.number != 0)
                         {
                             result /= container.number;
-                            usedObjects.Add(col);
                         }
                         break;
                 }
+                usedObjects.Add(col); // 연산 후 사용된 오브젝트 추가
             }
         }
 
-        playerNum = (int)result;
+        return (int)result;
+    }
 
-        _playerNum.PCNumChange(_playerNum.pc1Num, _playerNum.pc2Num);
-
-        foreach (Collider2D usedObj in usedObjects)
+    private bool IsPlayerInLine(Vector2 player1Pos, Vector2 player2Pos)
+    {
+        if (Mathf.Approximately(player1Pos.x, player2Pos.x))
         {
-            Destroy(usedObj.gameObject);
+            return true;
+        }
+        else if (Mathf.Approximately(player1Pos.y, player2Pos.y))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
