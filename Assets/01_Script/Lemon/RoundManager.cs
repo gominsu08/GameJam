@@ -17,10 +17,6 @@ public class RoundManager : MonoBehaviour
     [SerializeField] int round = 0;
     [SerializeField] TMP_Text stageText;
 
-    private void Awake()
-    {
-        timer = GetComponent<GameTimer>();
-    }
 
     public void Update()
     {
@@ -32,12 +28,14 @@ public class RoundManager : MonoBehaviour
                 RoundWin.Invoke();
                 round++;
                 stageText.text = $"stage [ {round} ]";
+                timer.TimerFlow();
                 isEndRound = false; 
             }
             else if (RoundClear != null & !isRoundWin) 
             {
                 RoundClear.Invoke();
                 Roundlose.Invoke();
+                timer.TimerFlow();
                 isEndRound = false;
             }
         }
