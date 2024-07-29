@@ -13,6 +13,7 @@ public enum EnumDir
 public class GameManager : MonoSingleton<GameManager>
 {
     public EventBus<EnumDir> eventBus = new EventBus<EnumDir>();
+    Entity[,] entityGrid;
     protected override void Awake()
     {
         base.Awake();
