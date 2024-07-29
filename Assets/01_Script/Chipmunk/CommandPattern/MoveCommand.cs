@@ -22,7 +22,6 @@ public class MoveCommand : Command
     /// NotifyValue
     /// </summary>
     NotifyValue<EnumCommandState> commandState = new NotifyValue<EnumCommandState>();
-    LayerMask layerMask { get => LayerMask.GetMask("Entity"); }
     public override void Execute()
     {
         commandState.Value = EnumCommandState.Executing;
@@ -30,16 +29,9 @@ public class MoveCommand : Command
 
         Vector2 moveDir = _targetPosition - _transform.position;
 
-        if (Physics2D.RaycastAll(_transform.position, _targetPosition - _transform.position, moveDir.magnitude).ToList().Any((a) => a.transform != _entity.transform))
-        {
-            _transform.DOShakePosition(_duration, moveDir.magnitude / 5).OnComplete(() => onCompleteAction?.Invoke());
-        }
-        else
-        {
-            _entity.transform.position = _targetPosition;
-            _transform.position = _beforePosition;
-            _transform.DOMove(_targetPosition, _duration).OnComplete(() => onCompleteAction?.Invoke());
-        }
+        _entity.transform.position = _targetPosition;
+        _transform.position = _beforePosition;
+        _transform.DOMove(_targetPosition, _duration).OnComplete(() => onCompleteAction?.Invoke());
         // _transform.DOMove(_targetPosition, _duration).OnComplete(() => commandState.Value = EnumCommandState.waiting);
     }
 
@@ -50,6 +42,7 @@ public class MoveCommand : Command
 
     public override void Undo()
     {
+        _entity.transform.position = _beforePosition;
         _transform.position = _beforePosition;
     }
     public MoveCommand(Entity entity, float duration = 1f, Vector2 targetPosition = default)
