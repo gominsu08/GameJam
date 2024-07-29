@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,10 @@ using static Controls;
 public class InputReader : ScriptableObject, IDefaultActions
 {
     public static InputReader Instance { get; private set; }
-    Controls _controls = new Controls();
-    public NotifyValue<Vector2> OnPlayer1Move = new();
-    public NotifyValue<Vector2> OnPlayer2Move = new();
+    Controls _controls;
+
+    public Action<Vector2> OnPlayer1Move;
+    public Action<Vector2> OnPlayer2Move;
 
     private void OnEnable()
     {
@@ -24,12 +26,12 @@ public class InputReader : ScriptableObject, IDefaultActions
     public void OnPlayer1(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnPlayer1Move.Value = context.ReadValue<Vector2>();
+            OnPlayer1Move?.Invoke(context.ReadValue<Vector2>());
     }
 
     public void OnPlayer2(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnPlayer2Move.Value = context.ReadValue<Vector2>();
+            OnPlayer2Move?.Invoke(context.ReadValue<Vector2>());
     }
 }
