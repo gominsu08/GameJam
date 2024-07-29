@@ -25,7 +25,9 @@ public class CreateEnemy : MonoBehaviour
         else
         {
             Debug.Log("타일 위에 오브젝트가 없습니다.");
-            Instantiate(_enemyPrefab[Random.Range(0, _enemyPrefab.Count)], _tileMap.GetCellCenterWorld(new Vector3Int(xRand, yRand)), Quaternion.identity);
+            GameObject enemy = Instantiate(_enemyPrefab[Random.Range(0, _enemyPrefab.Count)], _tileMap.GetCellCenterWorld(new Vector3Int(xRand, yRand)), Quaternion.identity);
+            enemy.GetComponent<NumberContainer>().number = Random.Range(1,10);
+            StageManager.Instance.enemyList.Add(enemy);
         }
 
         

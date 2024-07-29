@@ -12,9 +12,9 @@ public class NumberContainer : MonoBehaviour
 {
     [SerializeField] public EnumOperator operatorType = EnumOperator.Plus;
     [SerializeField] public TMP_Text text;
-    [SerializeField] public int number;
+    public int number;
 
-    private void OnEnable()
+    private void Update()
     {
         switch (operatorType)
         {
