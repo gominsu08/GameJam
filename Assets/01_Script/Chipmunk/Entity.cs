@@ -16,6 +16,8 @@ public class Entity : MonoBehaviour
     {
         if (_visualTrm == null)
             _visualTrm = transform.Find("Visual");
+        if (!Grid.Instance.set(transform.position))
+            Debug.Log($"entity : {transform.position}좌표에 이미 벽이 있습니다!");
     }
     protected virtual void OnDestroy()
     {
@@ -43,6 +45,5 @@ public class Entity : MonoBehaviour
         }
         command.onCompleteAction += () => isMoveing = false;
         commandInvoker.ExecuteCommand(command);
-        Debug.Log(Physics2D.RaycastAll(transform.position, Vector2.zero, direction.magnitude).ToList().Any((a) => a.transform != transform));
     }
 }
