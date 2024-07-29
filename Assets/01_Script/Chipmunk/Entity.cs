@@ -6,9 +6,9 @@ using UnityEngine.Events;
 
 public class Entity : MonoBehaviour
 {
-    [SerializeField] float _speed = 1f;
-    [SerializeField] float _moveSpace = 1f;
-    CommandInvoker commandInvoker { get => CommandManager.Instance.commandInvoker; }
+    [SerializeField] protected float _speed = 1f;
+    [SerializeField] protected float _moveSpace = 1f;
+    protected CommandInvoker commandInvoker { get => CommandManager.Instance.commandInvoker; }
     [SerializeField] protected UnityEvent<Vector2> OnMoveEvent;
     [field: SerializeField] public Transform _visualTrm { get; protected set; }
     public bool isMoveing { get; protected set; }
