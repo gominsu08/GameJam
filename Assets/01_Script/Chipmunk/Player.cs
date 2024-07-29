@@ -35,42 +35,24 @@ public class Player : Entity
 
     private void Update()
     {
-        // #region 프로토타입 코드
-        // if (Input.GetKeyDown(KeyCode.W))
-        // {
-        //     Move(Vector3.up);
-        // }
-        // if (Input.GetKeyDown(KeyCode.S))
-        // {
-        //     Move(Vector3.down);
-        // }
-        // if (Input.GetKeyDown(KeyCode.A))
-        // {
-        //     Move(Vector3.left);
-        // }
-        // if (Input.GetKeyDown(KeyCode.D))
-        // {
-        //     Move(Vector3.right);
-        // }
-        // #endregion
     }
-    public override void Move(Vector2 direction)
-    {
-        if (isPlayerMoving) return;
-        isPlayerMoving = true;
-        Debug.Log(direction);
-        Vector2 targetPosition = (Vector2)transform.position + direction;
-        Command command;
-        if (Physics2D.RaycastAll(transform.position, direction, direction.magnitude).ToList().Any((a) => a.transform != transform))
-        {
-            command = new BlockCommand(this, 1 / _speed);
-        }
-        else
-        {
-            OnMoveEvent?.Invoke(direction);
-            command = new MoveCommand(this, 1 / _speed, targetPosition);
-        }
-        command.onCompleteAction += () => isPlayerMoving = false;
-        commandInvoker.ExecuteCommand(command);
-    }
+    // public override void Move(Vector2 direction)
+    // {
+    //     if (isPlayerMoving) return;
+    //     isPlayerMoving = true;
+    //     Debug.Log(direction);
+    //     Vector2 targetPosition = (Vector2)transform.position + direction;
+    //     Command command;
+    //     if (Physics2D.RaycastAll(transform.position, direction, direction.magnitude).ToList().Any((a) => a.transform != transform))
+    //     {
+    //         command = new BlockCommand(this, 1 / _speed);
+    //     }
+    //     else
+    //     {
+    //         OnMoveEvent?.Invoke(direction);
+    //         command = new MoveCommand(this, 1 / _speed, targetPosition);
+    //     }
+    //     command.onCompleteAction += () => isPlayerMoving = false;
+    //     commandInvoker.ExecuteCommand(command);
+    // }
 }
