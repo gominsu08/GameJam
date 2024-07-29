@@ -10,7 +10,7 @@ public class CreateEnemy : MonoBehaviour
     [SerializeField] private List<GameObject> _enemyPrefab = new List<GameObject>();
 
 
-    public void EnemyCreate(int xMin, int xMax, int yMin, int yMax, int count)
+    public void EnemyCreate(int xMin, int xMax, int yMin, int yMax)
     {
         int xRand = Random.Range(xMin, xMax + 1);
         int yRand = Random.Range(yMin, yMax + 1);
@@ -20,7 +20,7 @@ public class CreateEnemy : MonoBehaviour
         if (hit.collider != null)
         {
             Debug.Log("오브젝트가 존재합니다: " + hit.collider.gameObject.name);
-            EnemyCreate(xMin, xMax,yMin,yMax,count);
+            EnemyCreate(xMin, xMax,yMin,yMax);
         }
         else
         {

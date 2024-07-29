@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
-public class StageManager : MonoBehaviour
+public class StageManager : MonoSingleton<StageManager>
 {
+    [SerializeField] private RoundManager _roundManager;
+
+
     //타일맵
     [SerializeField] private Tilemap _tileMap;
     //기본 타일
@@ -30,8 +33,9 @@ public class StageManager : MonoBehaviour
     private int _yMinSizeIn;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _createEnemy = GetComponent<CreateEnemy>();
         _xMaxSizeIn = _xMaxSize;
         _yMaxSizeIn = _yMaxSize;
@@ -62,17 +66,23 @@ public class StageManager : MonoBehaviour
         {
             for (int i = 0; i < 25; i++)
             {
-                _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize, 1);
+                _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
             }
         }
     }
 
-    /// <summary>
-    /// 타일맵 생성해주는 함수
-    /// </summary>
+
+    public void CreateEnemy(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
+        }
+    }
+
     public void TileSetCoroutineStart()
     {
-        TileSet(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
+        StartCoroutine(Setting(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize));
     }
 
     private IEnumerator TileSet(int xMin, int xMax, int yMin, int yMax)
@@ -105,28 +115,28 @@ public class StageManager : MonoBehaviour
             for (int i = xMinSize; i <= xMaxSize; i++)
             {
                 _tileMap.SetTile(new Vector3Int(i, yMaxSize), _baseTile);
-                
-                    yield return new WaitForSeconds(0.001f);
+
+                yield return new WaitForSeconds(0.001f);
             }
 
             for (int i = yMaxSize; i >= yMinSize; i--)
             {
                 _tileMap.SetTile(new Vector3Int(xMaxSize, i), _baseTile);
-               
+
                 yield return new WaitForSeconds(0.001f);
             }
 
             for (int i = xMaxSize; i >= xMinSize; i--)
             {
                 _tileMap.SetTile(new Vector3Int(i, yMinSize), _baseTile);
-                
+
                 yield return new WaitForSeconds(0.001f);
             }
 
             for (int i = yMinSize; i <= yMaxSize; i++)
             {
                 _tileMap.SetTile(new Vector3Int(xMinSize, i), _baseTile);
-                
+
                 yield return new WaitForSeconds(0.001f);
             }
 
@@ -135,6 +145,9 @@ public class StageManager : MonoBehaviour
             yMaxSize--;
             yMinSize++;
         }
+
+        _roundManager.timer.TileSet();
+        CreateEnemy(20);
     }
 
 
