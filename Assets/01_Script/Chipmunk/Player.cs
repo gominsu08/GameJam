@@ -18,17 +18,12 @@ public class Player : Entity
         switch (playerType)
         {
             case EnumPlayerType.Horizontal:
-                _inputReader.OnPlayer1Move.OnvalueChanged += GetMoveInput;
+                _inputReader.OnPlayer1Move += Move;
                 break;
             case EnumPlayerType.Vertical:
-                _inputReader.OnPlayer2Move.OnvalueChanged += GetMoveInput;
+                _inputReader.OnPlayer2Move += Move;
                 break;
         }
-    }
-
-    private void GetMoveInput(Vector2 prev, Vector2 next)
-    {
-        Move(next);
     }
     private void Update()
     {
