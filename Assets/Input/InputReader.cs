@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Controls;
+
 [CreateAssetMenu(menuName = "SO/InputReader")]
 public class InputReader : ScriptableObject, IDefaultActions
 {
@@ -23,15 +24,42 @@ public class InputReader : ScriptableObject, IDefaultActions
         _controls.Default.Enable();
         Instance = this;
     }
+
     public void OnPlayer1(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnPlayer1Move?.Invoke(context.ReadValue<Vector2>());
+        {
+            Vector2 input = context.ReadValue<Vector2>();
+            Vector2 filteredInput = FilterDiagonalInput(input);
+            OnPlayer1Move?.Invoke(filteredInput);
+        }
     }
 
     public void OnPlayer2(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnPlayer2Move?.Invoke(context.ReadValue<Vector2>());
+        {
+            Vector2 input = context.ReadValue<Vector2>();
+            Vector2 filteredInput = FilterDiagonalInput(input);
+            OnPlayer2Move?.Invoke(filteredInput);
+        }
+    }
+
+    private Vector2 FilterDiagonalInput(Vector2 input)
+    {
+        if (Mathf.Abs(input.x) > 0 && Mathf.Abs(input.y) > 0)
+        {
+            if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+            {
+                input.y = 0;
+                input.x = 1;
+            }
+            else
+            {
+                input.x = 0;
+                input.y = 1;
+            }
+        }
+        return input;
     }
 }
