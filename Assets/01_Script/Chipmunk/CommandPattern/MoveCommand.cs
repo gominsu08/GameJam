@@ -30,6 +30,7 @@ public class MoveCommand : Command
         _entity.transform.position = _targetPosition;
         _transform.position = _beforePosition;
 
+
         _transform.DOMove(_targetPosition, _duration).OnComplete(() => onCompleteAction?.Invoke());
         // _transform.DOMove(_targetPosition, _duration).OnComplete(() => commandState.Value = EnumCommandState.waiting);
     }
