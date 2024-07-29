@@ -30,6 +30,7 @@ public class InputReader : ScriptableObject, IDefaultActions
         if (context.performed)
         {
             Vector2 input = context.ReadValue<Vector2>();
+            if (input == Vector2.zero) return;
             Vector2 filteredInput = FilterDiagonalInput(input);
             OnPlayer1Move?.Invoke(filteredInput);
         }
@@ -40,6 +41,7 @@ public class InputReader : ScriptableObject, IDefaultActions
         if (context.performed)
         {
             Vector2 input = context.ReadValue<Vector2>();
+            if (input == Vector2.zero) return;
             Vector2 filteredInput = FilterDiagonalInput(input);
             OnPlayer2Move?.Invoke(filteredInput);
         }

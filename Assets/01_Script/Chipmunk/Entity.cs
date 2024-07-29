@@ -19,8 +19,9 @@ public class Entity : MonoBehaviour
     {
         if (isMoveing) return;
         isMoveing = true;
+        Debug.Log(direction);
         MoveCommand command = new MoveCommand(transform, 1 / _speed, (Vector2)transform.position + direction);
-        command.onMoveCompleteAction += () => isMoveing = false;
+        command.onCompleteAction += () => isMoveing = false;
         commandInvoker.ExecuteCommand(command);
     }
 }

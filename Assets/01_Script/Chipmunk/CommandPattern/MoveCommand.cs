@@ -17,7 +17,6 @@ public class MoveCommand : Command
     float _duration;
     Vector3 _targetPosition;
     Vector3 _beforePosition;
-    public Action onMoveCompleteAction;
     /// <summary>
     /// NotifyValue
     /// </summary>
@@ -31,9 +30,9 @@ public class MoveCommand : Command
         Vector2 moveDir = _targetPosition - _transform.position;
 
         if (Physics2D.RaycastAll(_transform.position, _targetPosition - _transform.position, moveDir.magnitude).ToList().Any((a) => a.transform != _transform))
-            _transform.DOShakePosition(0.5f, 0.2f).OnComplete(() => onMoveCompleteAction?.Invoke());
+            _transform.DOShakePosition(_duration, moveDir.magnitude / 5).OnComplete(() => onCompleteAction?.Invoke());
         else
-            _transform.DOMove(_targetPosition, _duration).OnComplete(() => onMoveCompleteAction?.Invoke());
+            _transform.DOMove(_targetPosition, _duration).OnComplete(() => onCompleteAction?.Invoke());
         // _transform.DOMove(_targetPosition, _duration).OnComplete(() => commandState.Value = EnumCommandState.waiting);
     }
 
