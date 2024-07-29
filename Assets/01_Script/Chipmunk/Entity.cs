@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -21,7 +22,16 @@ public class Entity : MonoBehaviour
         if (isMoveing) return;
         isMoveing = true;
         Debug.Log(direction);
-        MoveCommand command = new MoveCommand(this, 1 / _speed, (Vector2)transform.position + direction);
+        Vector2 targetPosition = (Vector2)transform.position + direction;
+        Command command;
+        if (Physics2D.RaycastAll(transform.position, direction, direction.magnitude).ToList().Any((a) => a.transform != transform))
+        {
+            command = new BlockCommand(this, 1 / _speed);
+        }
+        else
+        {
+            command = new MoveCommand(this, 1 / _speed, targetPosition);
+        }
         command.onCompleteAction += () => isMoveing = false;
         commandInvoker.ExecuteCommand(command);
     }
