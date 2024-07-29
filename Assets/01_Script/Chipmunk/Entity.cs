@@ -7,10 +7,11 @@ public class Entity : MonoBehaviour
     [SerializeField] float _speed = 1f;
     [SerializeField] float _moveSpace = 1f;
     CommandInvoker commandInvoker { get => CommandManager.Instance.commandInvoker; }
+    [SerializeField] public Transform _visualTrm { get; protected set; }
     public bool isMoveing { get; protected set; }
     protected virtual void Awake()
     {
-
+        _visualTrm = transform.Find("Visual");
     }
     private void Update()
     {
@@ -20,7 +21,7 @@ public class Entity : MonoBehaviour
         if (isMoveing) return;
         isMoveing = true;
         Debug.Log(direction);
-        MoveCommand command = new MoveCommand(transform, 1 / _speed, (Vector2)transform.position + direction);
+        MoveCommand command = new MoveCommand(this, 1 / _speed, (Vector2)transform.position + direction);
         command.onCompleteAction += () => isMoveing = false;
         commandInvoker.ExecuteCommand(command);
     }
