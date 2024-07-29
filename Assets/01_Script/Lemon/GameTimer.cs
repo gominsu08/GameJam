@@ -64,4 +64,9 @@ public class GameTimer : MonoBehaviour
     {
         isTimeFlow = true;
     }
+
+    public void TimerStop()
+    {
+        isTimeFlow = false;
+    }
 }
