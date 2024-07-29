@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class EventBus<TEnum> where TEnum : Enum
 {
-    private static Dictionary<TEnum, Action> eventTable = new Dictionary<TEnum, Action>();
-    public static void AddListener(TEnum eventType, Action listener)
+    private Dictionary<TEnum, Action> eventTable = new Dictionary<TEnum, Action>();
+    public void AddListener(TEnum eventType, Action listener)
     {
         if (!eventTable.ContainsKey(eventType))
         {
@@ -16,7 +16,7 @@ public class EventBus<TEnum> where TEnum : Enum
             eventTable[eventType] += listener;
         }
     }
-    public static void RemoveListener(TEnum eventType, Action listener)
+    public void RemoveListener(TEnum eventType, Action listener)
     {
         if (eventTable.ContainsKey(eventType))
         {
@@ -27,7 +27,7 @@ public class EventBus<TEnum> where TEnum : Enum
             }
         }
     }
-    public static void Publish(TEnum eventType)
+    public void Publish(TEnum eventType)
     {
         if (eventTable.ContainsKey(eventType))
         {
