@@ -5,15 +5,21 @@ using UnityEngine;
 
 public class Calculate : MonoBehaviour
 {
-    private Player _player;
+    [SerializeField] private List<Collider2D> _hit = new List<Collider2D>();
     [SerializeField] private Transform _player1, _player2;
+    private Vector2 Dir { get => -(_player1.position - _player2.position); }
 
     private void Update()
     {
         Debug.Log(IsPlayerInLine(_player1.position, _player2.position)) ;
         if (IsPlayerInLine(_player1.position, _player2.position))
         {
-            List<RaycastHit2D> hit = Physics2D.RaycastAll(_player1.position, _player2.position).ToList();
+            _hit = Physics2D.RaycastAll(_player1.position,Dir.normalized, Dir.magnitude).Select(A => A.collider).Where(B => B.transform != _player1 && B.transform != _player2).ToList();
+            Debug.DrawRay(_player1.position, Dir.normalized);
+        }
+        else
+        {
+            _hit.Clear();
         }
     }
 
@@ -34,5 +40,10 @@ public class Calculate : MonoBehaviour
         {
             return false;
         }
+    }
+
+    private void Operation()
+    {
+        
     }
 }
