@@ -18,7 +18,7 @@ public class GameTimer : MonoBehaviour
     {        
         timerText.text = $"Time [ {Mathf.Round(CountDown123)} ]";
         StageManager.Instance.TileSetCoroutineStart();
-        
+        InputReader.Instance.controls.Default.Enable();
     }
 
     private void Update()
