@@ -45,6 +45,5 @@ public class Entity : MonoBehaviour
         }
         command.onCompleteAction += () => isMoveing = false;
         commandInvoker.ExecuteCommand(command);
-        Debug.Log(Physics2D.RaycastAll(transform.position, Vector2.zero, direction.magnitude).ToList().Any((a) => a.transform != transform));
     }
 }
