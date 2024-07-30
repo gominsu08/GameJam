@@ -11,6 +11,9 @@ public class Enemy : Entity, IPoolable
 
     public GameObject ObjectPrefab => gameObject;
 
+    [SerializeField] private ParticleSystem _particleSystem;
+
+
     public void Initialize()
     {
         #region 프로토타입 코드
@@ -19,12 +22,11 @@ public class Enemy : Entity, IPoolable
     protected override void Awake()
     {
         base.Awake();
-        if (!enemies.Contains(this))
-            enemies.Add(this);
+        
     }
-    protected override void OnDestroy()
+    protected override void OnDisable()
     {
-        base.OnDestroy();
+        base.OnDisable();
         if (enemies.Contains(this))
             enemies.Remove(this);
     }
@@ -33,5 +35,12 @@ public class Enemy : Entity, IPoolable
     public void ResetItem()
     {
         gameObject.SetActive(true);
+        if (!enemies.Contains(this))
+            enemies.Add(this);
+    }
+
+    public void Effect()
+    {
+        Instantiate(_particleSystem, transform.position, Quaternion.identity);
     }
 }

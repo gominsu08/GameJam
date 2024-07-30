@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolName: Division
   prefab: {fileID: 8898962388225187353, guid: 8036ac6e70372cc4e966eef9dc95d03c, type: 3}
-  count: 0
+  count: 10
