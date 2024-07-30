@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,14 @@ public class Entity : MonoBehaviour
     protected virtual void OnDestroy()
     {
         OnDeathEvent?.Invoke();
-        Grid.Instance.remove(transform.position);
+        try
+        {
+            Grid.Instance.remove(transform.position);
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning(e.ToString());
+        }
     }
     private void Update()
     {

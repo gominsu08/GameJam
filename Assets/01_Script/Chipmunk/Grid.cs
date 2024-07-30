@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class Grid : MonoSingleton<Grid>
@@ -10,6 +11,13 @@ public class Grid : MonoSingleton<Grid>
     [field: SerializeField] public Tilemap mapTilemap { get; private set; }
     [field: SerializeField] public Tile tile { get; private set; }
     public Dictionary<Vector2Int, Entity> entityDic = new();
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
     protected override void Awake()
     {
         base.Awake();
