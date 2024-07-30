@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum BrightValue
@@ -13,7 +14,7 @@ public enum BrightValue
 
 public class SettingManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _window, _creditWindow;
+    [SerializeField] private GameObject _window, _creditWindow, _goTiltleBtn;
     [SerializeField] private Image _effectOn, _effectOff, _veryLow, _low, _high, _veryHigh;
     [SerializeField] private Sprite _btnOn, _btnOff;
     [SerializeField] private Scrollbar _musicBar, _sfxBar;
@@ -22,6 +23,7 @@ public class SettingManager : MonoBehaviour
     [SerializeField] private Volume _volume;
     [SerializeField] private Bloom _bloom;
     [SerializeField] private float _musicVolume = 50, _sfxVolume = 50;
+    [SerializeField] private bool _isTitle;
     public bool effect = true;
 
     private void Start()
@@ -36,12 +38,10 @@ public class SettingManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)&&_window.active)
         {
-            Time.timeScale = 1.0f;
             Close();
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = 0f;
             Open();
         }
 
@@ -60,10 +60,22 @@ public class SettingManager : MonoBehaviour
     public void Open()
     {
         _window?.SetActive(true);
+        if (_isTitle)
+        {
+            _goTiltleBtn.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0f;
+        }
     }
 
     public void Close()
     {
+        if (!_isTitle)
+        {
+            Time.timeScale = 1.0f;
+        }
         _window?.SetActive(false);
     }
 
@@ -99,8 +111,15 @@ public class SettingManager : MonoBehaviour
         _sfxVolume = _sfxBar.value * 100;
     }
 
+    public void GoToTitle()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Title");
+    }
+
     public void BrightChanged(string value)
     {
+        EffectOn();
         BrightReset();
         _brightValue = (BrightValue)Enum.Parse(typeof(BrightValue), value);
         VolumeChange(_brightValue);
