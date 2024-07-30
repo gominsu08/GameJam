@@ -17,6 +17,9 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+    }
+    private void Start()
+    {
         switch (playerType)
         {
             case EnumPlayerType.Horizontal:
@@ -35,6 +38,12 @@ public class Player : Entity
     }
     private void Update()
     {
+    }
+    public override void Move(Vector2 direction)
+    {
+        Debug.Log("Player");
+        base.Move(direction);
+        GameManager.Instance.test?.Invoke();
     }
     // public override void Move(Vector2 direction)
     // {
