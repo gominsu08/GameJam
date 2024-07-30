@@ -58,13 +58,14 @@ public class StageManager : MonoSingleton<StageManager>
 
     public void StageReset()
     {
+        _createEnemy.SetEnemyDic();
+        _createEnemy.SetEnemyList();
         foreach (GameObject item in enemyList)
         {
             Destroy(item);
         }
         MapDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn);
         StartCoroutine(BoxTileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
-        _createEnemy.SetEnemyList();
         MapSetting();
     }
     public void playerMoveCountting()

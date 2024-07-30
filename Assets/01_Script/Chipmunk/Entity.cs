@@ -36,12 +36,12 @@ public class Entity : MonoBehaviour
     private void Update()
     {
     }
+        public Command command;
     public virtual void Move(Vector2 direction)
     {
         if (isMoveing) return;
         isMoveing = true;
         Vector2 targetPosition = (Vector2)transform.position + direction;
-        Command command;
         // if (Physics2D.RaycastAll(transform.position, direction, direction.magnitude).ToList().Any((a) => a.transform != transform))
         if (!Grid.Instance.set(this, targetPosition))
         {
@@ -78,8 +78,8 @@ public class Entity : MonoBehaviour
         else
         {
             Grid.Instance.remove(transform.position);
-            OnMoveEvent?.Invoke(targetPosition);
             command = new MoveCommand(this, 1 / _speed, targetPosition);
+            OnMoveEvent?.Invoke(targetPosition);
             command.onCompleteAction += () => isMoveing = false;
             commandInvoker.ExecuteCommand(command);
         }

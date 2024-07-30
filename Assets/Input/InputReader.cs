@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using static Controls;
 
 [CreateAssetMenu(menuName = "SO/InputReader", fileName = "InputReader")]
-public class InputReader : ScriptableObject, IDefaultActions
+public class InputReader : ScriptableObject, IDefaultActions, IBossActions
 {
     private static InputReader _instance;
     public static InputReader Instance
@@ -26,6 +26,7 @@ public class InputReader : ScriptableObject, IDefaultActions
 
     public Action<Vector2> OnPlayer1Move;
     public Action<Vector2> OnPlayer2Move;
+    public Action<Vector2> OnBossPlayerMove;
 
     private void OnEnable()
     {
@@ -35,6 +36,8 @@ public class InputReader : ScriptableObject, IDefaultActions
         }
         controls.Default.SetCallbacks(this);
         controls.Default.Enable();
+        controls.Boss.SetCallbacks(this);
+        controls.Boss.Enable();
         Instance = this;
     }
     private void OnDisable()
@@ -75,14 +78,38 @@ public class InputReader : ScriptableObject, IDefaultActions
             if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
             {
                 input.y = 0;
-                input.x = 1;
+                input.x = input.x > 0 ? 1 : -1;
             }
             else
             {
                 input.x = 0;
-                input.y = 1;
+                input.y = input.y > 0 ? 1 : -1;
             }
         }
         return input;
+    }
+
+    public void OnBossPlayerUp(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnBossPlayerMove?.Invoke(Vector2.up);
+    }
+
+    public void OnBossPlayerLeft(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnBossPlayerMove?.Invoke(Vector2.left);
+    }
+
+    public void OnBossPlayerRight(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnBossPlayerMove?.Invoke(Vector2.right);
+    }
+
+    public void OnBossPlayerDown(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnBossPlayerMove?.Invoke(Vector2.down);
     }
 }
