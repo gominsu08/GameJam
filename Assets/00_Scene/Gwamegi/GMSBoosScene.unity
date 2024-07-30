@@ -1381,53 +1381,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1048559066
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1048559068}
-  - component: {fileID: 1048559067}
-  m_Layer: 0
-  m_Name: DataManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1048559067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048559066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28abccb06c2b9874dae47b598110046e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDontDestroy: 1
-  round: 1
-  time: 5
---- !u!4 &1048559068
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048559066}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1061727552
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,7 +2104,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  maxhp: 100
+  maxhp: 200
   invincibility: 0
   hp: 0
   onHitEvent:
@@ -2205,8 +2158,6 @@ MonoBehaviour:
   _patternList:
   - pattern: {fileID: 3051827044833337203, guid: a5661091e09649043904619c9df65966, type: 3}
     delay: 0.3
-  - pattern: {fileID: 3051827044833337203, guid: a5661091e09649043904619c9df65966, type: 3}
-    delay: 0.5
   - pattern: {fileID: 3051827044833337203, guid: a5661091e09649043904619c9df65966, type: 3}
     delay: 1.1
   - pattern: {fileID: 3051827044833337203, guid: a5661091e09649043904619c9df65966, type: 3}
@@ -3848,7 +3799,6 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1048559068}
   - {fileID: 1079583685}
   - {fileID: 71255461}
   - {fileID: 952290463}
@@ -3860,8 +3810,8 @@ SceneRoots:
   - {fileID: 1422908063}
   - {fileID: 212456469}
   - {fileID: 927779397}
-  - {fileID: 1693533022}
   - {fileID: 559634241}
   - {fileID: 1009743333}
   - {fileID: 1343502314}
   - {fileID: 1281967267}
+  - {fileID: 1693533022}

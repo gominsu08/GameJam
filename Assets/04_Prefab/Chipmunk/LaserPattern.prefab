@@ -52,7 +52,7 @@ MonoBehaviour:
   _attacker: {fileID: 3770315784347453035}
   damage: 5
   _spriteRenderer: {fileID: 5927142694490359400}
-  _duration: 0.4
+  _duration: 0.7
 --- !u!212 &5927142694490359400
 SpriteRenderer:
   m_ObjectHideFlags: 0

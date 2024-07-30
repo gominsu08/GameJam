@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Stage 3
   m_EditorClassIdentifier: 
   stage: 3
-  xMax: 50
-  yMax: 50
+  xMax: 15
+  yMax: 15
   xMin: -3
   yMin: -3
   boxCount: 5
-  enemyCount: 2
+  enemyCount: 5
   spawnEnemyType: 00000000
   minBossNum: 10
-  maxBossNum: 10
+  maxBossNum: 30
   roundTime: 30
   player1: 1
   player2: 9

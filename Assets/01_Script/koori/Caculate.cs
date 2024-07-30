@@ -71,6 +71,7 @@ public class Caculate : MonoBehaviour
 
         foreach (Collider2D usedObj in usedObjects)
         {
+            StageManager.Instance.enemyList.Remove(usedObj.gameObject);
             usedObj.gameObject.GetComponent<Enemy>().Effect();
             PoolManager.Instance.Push(usedObj.gameObject.GetComponent<Enemy>());
         }
