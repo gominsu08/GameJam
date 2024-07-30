@@ -7,14 +7,18 @@ public class GameOverManager : MonoBehaviour
 {
     [SerializeField] private GameObject _gameOverPanel;
 
-    public void GameOver()
+    public void BossScene()
     {
         SceneManager.LoadScene("GMSBoosScene");
 
         //이동막는거 넣어야함
-        //_gameOverPanel.SetActive(true);
-        //InputReader.Instance.controls.Default.Disable();
 
+    }
+
+    public void GameOver()
+    {
+        _gameOverPanel.SetActive(true);
+        InputReader.Instance.controls.Default.Disable();
     }
 
     public void Title()

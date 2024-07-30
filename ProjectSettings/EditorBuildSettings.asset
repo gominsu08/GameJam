@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_Scene/koori/Title.unity
     guid: 1395a8b38e179954ca49479f6123725e
+  - enabled: 1
+    path: Assets/00_Scene/Gwamegi/GMSBoosScene.unity
+    guid: 5115d94198489ef4986769fcfc689392
   m_configObjects: {}
