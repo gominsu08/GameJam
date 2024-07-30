@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e23757968faea3488ee3c9338a4865c, type: 3}
   m_Name: Stage2MapData
   m_EditorClassIdentifier: 
-  stage: 1
+  stage: 2
   xMax: 12
   yMax: 12
   xMin: -12
   yMin: -12
+  boxCount: 50
+  enemyCount: 50
+  spawnEnemyType: 0000000000000000
+  minBossNum: 0
+  maxBossNum: 0

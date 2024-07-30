@@ -16,7 +16,7 @@ public class BossNumber : MonoBehaviour
 
     public void BossNumRand()
     {
-        _bossNum = Random.Range(1, 99);
+        _bossNum = Random.Range(StageManager.Instance.minBossNum, StageManager.Instance.maxBossNum + 1);
         bossNumText.text = $"BossNum [ {_bossNum} ]";
     }
 
