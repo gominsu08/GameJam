@@ -62,7 +62,7 @@ public class StageManager : MonoSingleton<StageManager>
         _createEnemy.SetEnemyList();
         foreach (GameObject item in enemyList)
         {
-            Destroy(item);
+            PoolManager.Instance.Push(item.GetComponent<IPoolable>());
         }
         MapDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn);
         StartCoroutine(BoxTileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
@@ -304,7 +304,11 @@ public class StageManager : MonoSingleton<StageManager>
             if (hit.collider != null)
             {
                 Debug.Log("오브젝트가 존재합니다: " + hit.collider.gameObject.name);
-                Destroy(hit.collider.gameObject);
+                hit.collider.gameObject.SetActive(false);
+                if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
+                {
+                    PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
+                }
             }
             else
             {
@@ -323,7 +327,11 @@ public class StageManager : MonoSingleton<StageManager>
             if (hit.collider != null)
             {
                 Debug.Log("오브젝트가 존재합니다: " + hit.collider.gameObject.name);
-                Destroy(hit.collider.gameObject);
+                hit.collider.gameObject.SetActive(false);
+                if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
+                {
+                    PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
+                }
             }
             else
             {
@@ -342,7 +350,11 @@ public class StageManager : MonoSingleton<StageManager>
             if (hit.collider != null)
             {
                 Debug.Log("오브젝트가 존재합니다: " + hit.collider.gameObject.name);
-                Destroy(hit.collider.gameObject);
+                hit.collider.gameObject.SetActive(false);
+                if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
+                {
+                    PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
+                }
             }
             else
             {

@@ -12,14 +12,14 @@ public class RoundManager : MonoBehaviour
     public UnityEvent RoundWin;
     public UnityEvent Roundlose;
 
-    [SerializeField] private bool _isEndRound = false;
+    public bool isEndRound = false;
     [SerializeField] public bool isRoundWin = false;
     public int round = 1;
     [SerializeField] TMP_Text stageText;
 
     public void Update()
     {
-        if (_isEndRound) // 라운드 끝
+        if (isEndRound) // 라운드 끝
         {
             InputReader.Instance.controls.Default.Disable();
             timer.TimerStop();
@@ -29,14 +29,14 @@ public class RoundManager : MonoBehaviour
                 RoundWin.Invoke();
                 stageText.text = $"라운드 [ {round} ]";
                 timer.TimerFlow();
-                _isEndRound = false;
+                isEndRound = false;
             }
             else if (!isRoundWin) // 짐 ㅠㅠ
             {
                 RoundClear.Invoke();
                 Roundlose.Invoke();
                 Debug.Log("ming");
-                _isEndRound = false;
+                isEndRound = false;
 
             }
         }
@@ -44,7 +44,7 @@ public class RoundManager : MonoBehaviour
 
     public void EndRound()
     {
-        _isEndRound = true;
+        isEndRound = true;
     }
 
     public void ResetRound()
