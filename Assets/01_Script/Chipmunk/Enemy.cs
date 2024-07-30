@@ -21,8 +21,11 @@ public class Enemy : Entity, IPoolable
     }
     protected override void Awake()
     {
+
         base.Awake();
-        
+        if (!enemies.Contains(this))
+            enemies.Add(this);
+
     }
     protected override void OnDisable()
     {

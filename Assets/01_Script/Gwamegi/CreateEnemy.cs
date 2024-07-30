@@ -53,9 +53,6 @@ public class CreateEnemy : MonoBehaviour
             enemy.GetComponent<NumberContainer>().number = Random.Range(1,10);
             StageManager.Instance.enemyList.Add(enemy.gameObject);
         }
-
-        
-
     }
 
 }
