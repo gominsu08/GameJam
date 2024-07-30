@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    public UnityEvent OnDieEvent;
+
     [SerializeField]
     public int maxhp = 100;
     [SerializeField][Tooltip("무적기능")] bool invincibility = false;
@@ -42,6 +44,7 @@ public class Health : MonoBehaviour
     }
     private void Die()
     {
-        Destroy(gameObject);
+        OnDieEvent?.Invoke();
+        gameObject.SetActive(false); 
     }
 }
