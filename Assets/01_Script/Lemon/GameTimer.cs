@@ -19,7 +19,7 @@ public class GameTimer : MonoBehaviour
 
     private bool isTileMapCreate;
      
-    private void Start()
+    public void Initialize()
     {        
         StageManager.Instance.TileSetCoroutineStart();
         InputReader.Instance.controls.Default.Disable();
@@ -51,15 +51,21 @@ public class GameTimer : MonoBehaviour
 
         if (SetTime <= 0)
         {
-            TimeReset();
-            _numCalculate.StageClear();
-            isTileMapCreate = false;
+            Debug.Log("³ª if¹®ÀÓ");
+            RoundEnd();
         }
+    }
+
+    public void RoundEnd()
+    {
+        TimeReset();
+        _numCalculate.StageClear();
+        isTileMapCreate = false;
     }
 
     public void TimeSet()
     {
-        SetTime = 0.1f;
+        SetTime = 0;
     }
 
     public void TileSet()

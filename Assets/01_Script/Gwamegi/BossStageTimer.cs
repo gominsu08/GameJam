@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BossStageTimer : MonoBehaviour
-{
+{ 
+
     private float time;
 
     public float Times
@@ -27,7 +28,7 @@ public class BossStageTimer : MonoBehaviour
 
     private void BossStageClear()
     {
-        DataManager.Instance.round++;
+       
         SceneManager.LoadScene("InGameScene");
     }
 

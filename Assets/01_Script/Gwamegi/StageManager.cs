@@ -25,6 +25,7 @@ public class StageManager : MonoSingleton<StageManager>
     public int player2;
 
     public UnityEvent OnGameOver;
+    public UnityEvent OnPlayerDeath;
 
     //타일맵
     [SerializeField] private Tilemap _tileMap;
@@ -59,9 +60,10 @@ public class StageManager : MonoSingleton<StageManager>
 
     private int _playerMoveCount;
 
-
+    public bool isEnemyReset;
     public void StageReset()
     {
+        isEnemyReset = false;
         _createEnemy.SetEnemyDic();
         _createEnemy.SetEnemyList();
         foreach (GameObject item in enemyList)
@@ -71,6 +73,7 @@ public class StageManager : MonoSingleton<StageManager>
         MapDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn);
         StartCoroutine(BoxTileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
         MapSetting();
+        isEnemyReset = true;
     }
     public void playerMoveCountting()
     {
@@ -93,16 +96,33 @@ public class StageManager : MonoSingleton<StageManager>
     protected override void Awake()
     {
         base.Awake();
+        
+        _createEnemy = GetComponent<CreateEnemy>();
+    }
+
+    private void Start()
+    {
         MapSetting();
 
         _xMaxSizeIn = _map.xMax;
         _yMaxSizeIn = _map.yMax;
         _xMinSizeIn = _map.xMin;
         _yMinSizeIn = _map.yMin;
-        _createEnemy = GetComponent<CreateEnemy>();
+
+        _roundManager.timer.Initialize();
     }
     private void Update()
     {
+        Debug.Log(enemyList.Count);
+        Debug.Log(isEnemyReset);
+        if (enemyList.Count <= 0 && isEnemyReset)
+        {
+            Debug.Log("에너미 없음");
+            _roundManager.timer.TimeSet();
+            _roundManager.timer.RoundEnd();
+            isEnemyReset = false;
+        }
+
         _moveCountText.text = $"이동횟수[{_playerMoveCount}]";
 
         _tileMap.transform.position = _tileTransform;
@@ -117,6 +137,9 @@ public class StageManager : MonoSingleton<StageManager>
                 _map = item;
             }
         }
+
+        Debug.Log(DataManager.Instance.round);
+        Debug.Log(_map);
 
         player1 = _map.player1;
         player2 = _map.player2;
@@ -157,6 +180,7 @@ public class StageManager : MonoSingleton<StageManager>
         {
             _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize, spawnEnemyType);
         }
+        isEnemyReset = true;
     }
     public void TileSetCoroutineStart()
     {
@@ -291,11 +315,12 @@ public class StageManager : MonoSingleton<StageManager>
                 hit.collider.gameObject.SetActive(false);
                 if(hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
+                    enemyList.Remove(hit.collider.gameObject);
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
                 else
                 {
-                    OnGameOver?.Invoke();
+                    OnPlayerDeath?.Invoke();
                     yield break;
                 }
             }
@@ -318,11 +343,12 @@ public class StageManager : MonoSingleton<StageManager>
                 hit.collider.gameObject.SetActive(false);
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
+                    enemyList.Remove(hit.collider.gameObject);
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
                 else
                 {
-                    OnGameOver?.Invoke();
+                    OnPlayerDeath?.Invoke();
                     yield break;
                 }
             }
@@ -346,11 +372,12 @@ public class StageManager : MonoSingleton<StageManager>
                 hit.collider.gameObject.SetActive(false);
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
+                    enemyList.Remove(hit.collider.gameObject);
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
                 else
                 {
-                    OnGameOver?.Invoke();
+                    OnPlayerDeath?.Invoke();
                     yield break;
                 }
             }
@@ -374,11 +401,12 @@ public class StageManager : MonoSingleton<StageManager>
                 hit.collider.gameObject.SetActive(false);
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
+                    enemyList.Remove(hit.collider.gameObject);
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
                 else
                 {
-                    OnGameOver?.Invoke();
+                    OnPlayerDeath?.Invoke();
                     yield break;
                 }
             }
