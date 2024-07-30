@@ -1,18 +1,53 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Cosole : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject _window;
+    [SerializeField] private TMP_Text _result;
+    [SerializeField] private TMP_InputField _fileld;
+    private string _input;
+
+    private void Awake()
     {
-        
+        _window.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Open()
     {
-        
+        _window.SetActive(true);
+    }
+    public void Close()
+    {
+        _window.SetActive(false);
+    }
+
+    public void Input()
+    {
+        _input = _fileld.text;
+        _fileld.text = null ;
+        Check();
+    }
+
+    private void Check()
+    {
+        if (_input != null)
+        {
+            switch (_input)
+            {
+                case "밍":
+                    _result.text = _input; break;
+                case "하늘":
+                    _result.text = "158"; break;
+                case "대상혁":
+                    _result.text = "그는 신이야! 숭배해야만 해!"; break ;
+
+            }
+        }
+        else
+            _result.text = "Null";
     }
 }
