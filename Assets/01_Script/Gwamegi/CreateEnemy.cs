@@ -10,13 +10,13 @@ public class CreateEnemy : MonoBehaviour
 
     [SerializeField] private List<GameObject> _enemyPrefab = new List<GameObject>();
 
-    private List<GameObject> _spawnEnemy = new List<GameObject>();
+    private List<string> _spawnEnemy = new List<string>();
 
 
     
     public void SetEnemyList()
     {
-        _spawnEnemy = new List<GameObject>();
+        _spawnEnemy = new List<string>();
     }
 
 
@@ -30,7 +30,7 @@ public class CreateEnemy : MonoBehaviour
             {
                 if(enemy.GetComponent<NumberContainer>().operatorType == item)
                 {
-                    _spawnEnemy.Add(enemy);
+                    _spawnEnemy.Add(enemy.GetComponent<Enemy>().poolName);
                 }
             }
         }
@@ -48,9 +48,10 @@ public class CreateEnemy : MonoBehaviour
         else
         {
             Debug.Log("타일 위에 오브젝트가 없습니다.");
-            GameObject enemy = Instantiate(_spawnEnemy[Random.Range(0, _spawnEnemy.Count)], _tileMap.GetCellCenterWorld(new Vector3Int(xRand, yRand)), Quaternion.identity);
+            Enemy enemy = PoolManager.Instance.Pop(_spawnEnemy[Random.Range(0, _spawnEnemy.Count)]) as Enemy;
+            enemy.gameObject.transform.position = _tileMap.GetCellCenterWorld(new Vector3Int(xRand, yRand));
             enemy.GetComponent<NumberContainer>().number = Random.Range(1,10);
-            StageManager.Instance.enemyList.Add(enemy);
+            StageManager.Instance.enemyList.Add(enemy.gameObject);
         }
 
         

@@ -71,7 +71,8 @@ public class Calculate : MonoBehaviour
 
         foreach (Collider2D usedObj in usedObjects)
         {
-            Destroy(usedObj.gameObject);
+            usedObj.gameObject.SetActive(false);
+            PoolManager.Instance.Push(usedObj.gameObject.GetComponent<Enemy>());
         }
         usedObjects.Clear();
     }
