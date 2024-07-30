@@ -97,7 +97,6 @@ GameObject:
   - component: {fileID: 9008595302995999676}
   - component: {fileID: 1588166433675402006}
   - component: {fileID: 2420694338035011320}
-  - component: {fileID: -1933792310776506117}
   m_Layer: 0
   m_Name: Minus
   m_TagString: Enemy
@@ -186,7 +185,7 @@ MonoBehaviour:
   OnDeathEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1933792310776506117}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EffectFeedback, Assembly-CSharp
         m_MethodName: Effect
         m_Mode: 1
@@ -199,6 +198,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   <_visualTrm>k__BackingField: {fileID: 0}
+  poolName: Minus
+  _particleSystem: {fileID: 202788387992376501, guid: e3cef12d533762f42bf840e133e4b2d0, type: 3}
 --- !u!114 &2420694338035011320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,19 +215,6 @@ MonoBehaviour:
   operatorType: 1
   text: {fileID: 7381695093069227701}
   number: 3
---- !u!114 &-1933792310776506117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2866298838092197010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dff4a0ef6d1d6b4b9c2732977b9c5a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 202788387992376501, guid: e3cef12d533762f42bf840e133e4b2d0, type: 3}
 --- !u!1 &6682511827128322884
 GameObject:
   m_ObjectHideFlags: 0

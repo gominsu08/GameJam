@@ -17,6 +17,7 @@ public class CameraMove : MonoBehaviour
 
     private void Move()
     {
+        if(player1 == null || player2 == null) return;
         Vector2 vec = (player2.transform.position + player1.transform.position) / 2;
 
         transform.DOMove(new Vector3(vec.x, vec.y, -10),0.1f);

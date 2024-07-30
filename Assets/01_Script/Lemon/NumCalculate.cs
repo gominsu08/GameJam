@@ -11,6 +11,9 @@ public class NumCalculate : MonoBehaviour
     [SerializeField] RoundManager roundManager;
     [SerializeField] private PlayerNum playerNum;
 
+    [SerializeField] private GameObject _player1; 
+    [SerializeField] private GameObject _player2; 
+
     private void Update()
     {
         pc1num = playerNum.Pc1Num;
@@ -37,7 +40,8 @@ public class NumCalculate : MonoBehaviour
     private IEnumerator Clear()
     {
         yield return new WaitForSeconds(1);
-        Debug.Log("³ª ½ÇÇà");
+        _player1.transform.position = new Vector3(0,1,0);
+        _player2.transform.position = new Vector3(2,1,0);
         roundManager.round++;
         roundManager.isRoundWin = true;
         StageManager.Instance.StageReset();
