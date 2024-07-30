@@ -34,7 +34,7 @@ public class NumCalculate : MonoBehaviour
             DataManager.Instance.Hp = pc1num + pc2num;
             DataManager.Instance.time = 
                 ((pc1num > pc2num ? pc1num : pc2num) < bossNumber._bossNum ?
-                bossNumber._bossNum - (pc1num > pc2num ? pc1num : pc2num) : (pc1num > pc2num ? pc2num : pc1num) - bossNumber._bossNum) + 30;
+                bossNumber._bossNum - (pc1num > pc2num ? pc1num : pc2num) : (pc1num > pc2num ? pc2num : pc1num) - bossNumber._bossNum) + 10;
             roundManager.EndRound();
         }
 

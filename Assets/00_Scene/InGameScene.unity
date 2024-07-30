@@ -3860,6 +3860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDontDestroy: 1
   round: 0
+  time: 0
 --- !u!4 &816081699
 Transform:
   m_ObjectHideFlags: 0
@@ -4275,7 +4276,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 952290462}
         m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
-        m_MethodName: GameOver
+        m_MethodName: BossScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
