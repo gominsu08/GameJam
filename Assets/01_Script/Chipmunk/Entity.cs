@@ -67,7 +67,6 @@ public class Entity : MonoBehaviour
                 }
 
                 targetEntity.OnMoveEvent.AddListener(OnTargetMove);
-                targetEntity.OnMoveEvent.AddListener(a => Debug.Log("밍"));
             }
             else
             {
