@@ -49,12 +49,17 @@ public class GameTimer : MonoBehaviour
             }
         }
 
-        if (SetTime <= 0 )
+        if (SetTime <= 0)
         {
             TimeReset();
             _numCalculate.StageClear();
             isTileMapCreate = false;
         }
+    }
+
+    public void TimeSet()
+    {
+        SetTime = 0.1f;
     }
 
     public void TileSet()
