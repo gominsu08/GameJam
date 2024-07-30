@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e23757968faea3488ee3c9338a4865c, type: 3}
-  m_Name: Stage4
+  m_Name: New Map Data
   m_EditorClassIdentifier: 
   stage: 0
   xMax: 0
@@ -22,3 +22,6 @@ MonoBehaviour:
   spawnEnemyType: 
   minBossNum: 0
   maxBossNum: 0
+  roundTime: 0
+  player1: 0
+  player2: 0
