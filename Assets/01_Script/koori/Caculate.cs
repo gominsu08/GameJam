@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Calculate : MonoBehaviour
+public class Caculate : MonoBehaviour
 {
     [SerializeField] private List<Collider2D> _hit = new List<Collider2D>();
     [SerializeField] private Transform _player1, _player2;
