@@ -50,7 +50,7 @@ public class GameTimer : MonoBehaviour
         if (SetTime <= 0 )
         {
             TimeReset();
-            _numCalculate.StageClear();
+            
             isTileMapCreate = false;
         }
     }
@@ -65,6 +65,7 @@ public class GameTimer : MonoBehaviour
         SetTime = StageManager.Instance.roundTime;
         CountDown123 = 0.0f;
         isTimeFlow = false;
+        _numCalculate.StageClear();
     }
 
     public void TimerFlow()
