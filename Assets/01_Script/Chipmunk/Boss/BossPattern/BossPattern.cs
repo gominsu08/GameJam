@@ -11,6 +11,9 @@ public abstract class BossPattern : MonoBehaviour
     protected virtual void Awake() {
         gameObject.SetActive(false);
     }
+    private void OnDestroy() {
+        _sequence.Kill();
+    }
     public virtual void Pattern(){
         gameObject.SetActive(true);
         Debug.Log("Pattern");
