@@ -21,6 +21,7 @@ public class RoundManager : MonoBehaviour
     {
         if (_isEndRound) // 라운드 끝
         {
+            InputReader.Instance.controls.Default.Disable();
             timer.TimerStop();
             if (isRoundWin) // 이김 ㅋRoundClear != null & 
             {

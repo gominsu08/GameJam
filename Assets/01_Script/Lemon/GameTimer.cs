@@ -22,6 +22,7 @@ public class GameTimer : MonoBehaviour
     {        
         timerText.text = $"남은시간 [ {Mathf.Round(CountDown123)} ]";
         StageManager.Instance.TileSetCoroutineStart();
+        InputReader.Instance.controls.Default.Disable();
         SetTime = StageManager.Instance.roundTime;
 
     }
