@@ -12,7 +12,7 @@ public enum BrightValue
     VeryLow, Low, High, VeryHigh
 }
 
-public class SettingManager : MonoBehaviour
+public class SettingManager : MonoSingleton<SettingManager>
 {
     [SerializeField] private GameObject _window, _creditWindow, _goTiltleBtn;
     [SerializeField] private Image _effectOn, _effectOff, _veryLow, _low, _high, _veryHigh;

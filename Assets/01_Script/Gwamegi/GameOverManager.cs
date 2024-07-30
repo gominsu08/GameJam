@@ -12,10 +12,12 @@ public class GameOverManager : MonoBehaviour
         //이동막는거 넣어야함
         _gameOverPanel.SetActive(true);
         InputReader.Instance.controls.Default.Disable();
+
     }
 
     public void Title()
     {
+        SettingManager.Instance.DataSave();
         SceneManager.LoadScene("Title");
     }
 
@@ -23,6 +25,7 @@ public class GameOverManager : MonoBehaviour
     {
         //재시작
         InputReader.Instance.controls.Default.Enable();
+        SettingManager.Instance.DataSave();
         SceneManager.LoadScene("InGameScene");
     }
 }
