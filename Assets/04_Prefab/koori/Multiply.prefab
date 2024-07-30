@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 4899659193976037088}
   - component: {fileID: 2577980775778725482}
   - component: {fileID: 7054718071611783799}
+  - component: {fileID: -490227618506030346}
   m_Layer: 0
   m_Name: Multiply
   m_TagString: Enemy
@@ -268,6 +269,21 @@ MonoBehaviour:
   OnMoveEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -490227618506030346}
+        m_TargetAssemblyTypeName: EffectFeedback, Assembly-CSharp
+        m_MethodName: Effect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <_visualTrm>k__BackingField: {fileID: 0}
 --- !u!114 &7054718071611783799
 MonoBehaviour:
@@ -284,6 +300,19 @@ MonoBehaviour:
   operatorType: 2
   text: {fileID: 8628833354005561060}
   number: 2
+--- !u!114 &-490227618506030346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3199509322794161802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dff4a0ef6d1d6b4b9c2732977b9c5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 3635028125485006336, guid: e568ac82dc7317643b1a68a22af41306, type: 3}
 --- !u!1 &9061142092890781082
 GameObject:
   m_ObjectHideFlags: 0

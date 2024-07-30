@@ -14,7 +14,7 @@ public class RoundManager : MonoBehaviour
 
     [SerializeField] private bool _isEndRound = false;
     [SerializeField] public bool isRoundWin = false;
-    [SerializeField] private int _round = 0;
+    public int round = 1;
     [SerializeField] TMP_Text stageText;
 
     public void Update()
@@ -26,8 +26,8 @@ public class RoundManager : MonoBehaviour
             {
                 RoundClear.Invoke();
                 RoundWin.Invoke();
-                _round++;
-                stageText.text = $"stage [ {_round} ]";
+                round++;
+                stageText.text = $"stage [ {round} ]";
                 timer.TimerFlow();
                 _isEndRound = false;
             }
@@ -49,6 +49,6 @@ public class RoundManager : MonoBehaviour
 
     public void ResetRound()
     {
-        _round = 0; 
+        round = 0; 
     }
 }
