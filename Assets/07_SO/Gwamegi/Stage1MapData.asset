@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Stage1MapData
   m_EditorClassIdentifier: 
   stage: 1
-  xMax: 3
-  yMax: 50
-  xMin: -3
-  yMin: -50
-  boxCount: 5
-  enemyCount: 2
-  spawnEnemyType: 00000000
-  minBossNum: 5
-  maxBossNum: 5
-  roundTime: 20
+  xMax: 5
+  yMax: 5
+  xMin: -5
+  yMin: -5
+  boxCount: 10
+  enemyCount: 20
+  spawnEnemyType: 0000000001000000
+  minBossNum: 0
+  maxBossNum: 0
+  roundTime: 30
