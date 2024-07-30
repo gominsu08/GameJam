@@ -26,7 +26,7 @@ public class RoundManager : MonoBehaviour
             {
                 RoundClear.Invoke();
                 RoundWin.Invoke();
-                stageText.text = $"stage [ {round} ]";
+                stageText.text = $"¶ó¿îµå [ {round} ]";
                 timer.TimerFlow();
                 _isEndRound = false;
             }

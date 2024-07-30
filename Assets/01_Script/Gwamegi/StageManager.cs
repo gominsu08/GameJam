@@ -17,6 +17,8 @@ public class StageManager : MonoSingleton<StageManager>
     private int _enemyCount;
     private int _boxCount;
 
+    public int roundTime;
+
 
 
     //Å¸ÀÏ¸Ê
@@ -91,18 +93,15 @@ public class StageManager : MonoSingleton<StageManager>
         _yMinSizeIn = _map.yMin;
         _createEnemy = GetComponent<CreateEnemy>();
     }
-
-
     private void Update()
     {
-        _moveCountText.text = $"MoveCount[{_playerMoveCount}]";
+        _moveCountText.text = $"ÀÌµ¿È½¼ö[{_playerMoveCount}]";
 
         MapSetting();
 
         _tileMap.transform.position = _tileTransform;
 
     }
-
     private void MapSetting()
     {
         foreach (MapData item in _mapData)
@@ -114,6 +113,8 @@ public class StageManager : MonoSingleton<StageManager>
         }
 
         spawnEnemyType = _map.spawnEnemyType;
+
+        roundTime = _map.roundTime;
 
         minBossNum = _map.minBossNum;
         maxBossNum = _map.maxBossNum;
@@ -150,18 +151,6 @@ public class StageManager : MonoSingleton<StageManager>
     {
         MapSetting();
         StartCoroutine(Setting(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize));
-    }
-    private IEnumerator TileSet(int xMin, int xMax, int yMin, int yMax)
-    {
-        for (int i = xMin; i <= xMax; i++)
-        {
-            for (int j = yMin; j <= yMax; j++)
-            {
-                _tileMap.SetTile(new Vector3Int(i, j), _baseTile);
-                yield return new WaitForSeconds(0.005f);
-
-            }
-        }
     }
     private IEnumerator Setting(int xMin, int xMax, int yMin, int yMax)
     {
@@ -224,7 +213,6 @@ public class StageManager : MonoSingleton<StageManager>
         }
 
     }
-
     private IEnumerator BoxTileDestroy(int xMin, int xMax, int yMin, int yMax)
     {
         int xMaxSize = xMax;
@@ -359,7 +347,6 @@ public class StageManager : MonoSingleton<StageManager>
 
 
     }
-
     private void MapDestroy(int xMin, int xMax, int yMin, int yMax)
     {
 
