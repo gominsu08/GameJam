@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,6 +17,8 @@ public class RoundManager : MonoBehaviour
     [SerializeField] public bool isRoundWin = false;
     public int round = 1;
     [SerializeField] TMP_Text stageText;
+
+    private int maxRound;
 
     public void Update()
     {
@@ -36,10 +39,21 @@ public class RoundManager : MonoBehaviour
                 RoundClear.Invoke();
                 Roundlose.Invoke();
                 Debug.Log("ming");
+                RoundDataSave();
                 isEndRound = false;
 
             }
         }
+    }
+
+    public void RoundDataSave()
+    {
+        SaveManager.Instance.LoadPlayerData();
+        maxRound = SaveManager.Instance.playerData.round;
+
+        SaveManager.Instance.playerData.round = round >= maxRound ? round : maxRound;
+        SettingManager.Instance.DataSave();
+
     }
 
     public void EndRound()
