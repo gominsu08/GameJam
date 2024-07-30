@@ -284,8 +284,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7064697504183150622}
   m_Father: {fileID: 0}
@@ -305,6 +305,9 @@ MonoBehaviour:
   _speed: 5
   _moveSpace: 1
   OnMoveEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeathEvent:
     m_PersistentCalls:
       m_Calls: []
   <_visualTrm>k__BackingField: {fileID: 0}

@@ -2,23 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameTimer : MonoBehaviour
 {
-    [SerializeField] float SetTime = 60.0f;
+    public float SetTime;
     [SerializeField] float CountDown123 = 0.0f;
     [SerializeField] bool isTimeFlow = true;
     [SerializeField] TMP_Text timerText;
+    [SerializeField] private NumCalculate _numCalculate;
 
     [SerializeField] private RoundManager roundManager;
+
+
 
     private bool isTileMapCreate;
      
     private void Start()
     {        
-        timerText.text = $"Time [ {Mathf.Round(CountDown123)} ]";
+        timerText.text = $"남은시간 [ {Mathf.Round(CountDown123)} ]";
         StageManager.Instance.TileSetCoroutineStart();
-        InputReader.Instance.controls.Default.Enable();
+        InputReader.Instance.controls.Default.Disable();
+        SetTime = StageManager.Instance.roundTime;
+
     }
 
     private void Update()
@@ -27,23 +33,25 @@ public class GameTimer : MonoBehaviour
         {
             if (Mathf.Round(CountDown123) <= 3 && isTileMapCreate)
             {
-                timerText.text = $"Time [ {Mathf.Round(CountDown123)} ]";
+                InputReader.Instance.controls.Default.Disable();
+
+                timerText.text = $"남은시간 [ {Mathf.Round(CountDown123)} ]";
                 CountDown123 += Time.deltaTime;
             }
             else if (Mathf.Round(CountDown123) > 3 && isTileMapCreate)
             {
                 if (SetTime <= 0) return;
-                timerText.text = $"Time [ {Mathf.Round(SetTime)} ]";
+                InputReader.Instance.controls.Default.Enable();
+                timerText.text = $"남은시간 [ {Mathf.Round(SetTime)} ]";
                 SetTime -= Time.deltaTime;
-
+                
             }
         }
 
         if (SetTime <= 0 )
         {
-            roundManager.EndRound();
             TimeReset();
-            StageManager.Instance.TileSetCoroutineStart();
+            _numCalculate.StageClear();
             isTileMapCreate = false;
         }
     }
@@ -55,7 +63,7 @@ public class GameTimer : MonoBehaviour
 
     public void TimeReset()
     {
-        SetTime = 5;
+        SetTime = StageManager.Instance.roundTime;
         CountDown123 = 0.0f;
         isTimeFlow = false;
     }

@@ -21,7 +21,7 @@ public class Entity : MonoBehaviour
         if (!Grid.Instance.set(this, transform.position))
             Debug.Log($"entity : {transform.position}좌표에 이미 벽이 있습니다!");
     }
-    protected virtual void OnDestroy()
+    protected virtual void OnDisable()
     {
         OnDeathEvent?.Invoke();
         try
@@ -67,7 +67,6 @@ public class Entity : MonoBehaviour
                 }
 
                 targetEntity.OnMoveEvent.AddListener(OnTargetMove);
-                targetEntity.OnMoveEvent.AddListener(a => Debug.Log("밍"));
             }
             else
             {

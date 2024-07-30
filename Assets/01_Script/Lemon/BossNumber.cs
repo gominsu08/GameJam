@@ -5,7 +5,7 @@ using TMPro;
 
 public class BossNumber : MonoBehaviour
 {  
-    private int _bossNum;
+    public int _bossNum { get; private set; }
     [SerializeField] TMP_Text bossNumText;
     [SerializeField] RoundManager roundManager;
 
@@ -16,8 +16,8 @@ public class BossNumber : MonoBehaviour
 
     public void BossNumRand()
     {
-        _bossNum = Random.Range(1, 99);
-        bossNumText.text = $"BossNum [ {_bossNum} ]";
+        _bossNum = Random.Range(StageManager.Instance.minBossNum, StageManager.Instance.maxBossNum + 1);
+        bossNumText.text = $"보스숫자 [ {_bossNum} ]";
     }
 
 

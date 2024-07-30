@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
-public class MapData : MonoBehaviour
+[CreateAssetMenu(menuName = "SO/MapData")]
+public class MapData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int stage;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int xMax;
+    public int yMax;
+    public int xMin;
+    public int yMin;
+
+    public int boxCount;
+    public int enemyCount;
+
+    public List<EnumOperator> spawnEnemyType = new List<EnumOperator>();
+
+    public int minBossNum, maxBossNum;
+
+    public int roundTime;
+
+    public int player1;
+    public int player2;
 }

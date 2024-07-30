@@ -27,9 +27,9 @@ public class Player : Entity
                 break;
         }
     }
-    protected override void OnDestroy()
+    protected override void OnDisable()
     {
-        base.OnDestroy();
+        base.OnDisable();
         _inputReader.OnPlayer1Move -= Move;
         _inputReader.OnPlayer2Move -= Move;
     }
