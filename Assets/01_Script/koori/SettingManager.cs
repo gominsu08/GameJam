@@ -14,7 +14,7 @@ public enum BrightValue
 
 public class SettingManager : MonoSingleton<SettingManager>
 {
-    [SerializeField] private GameObject _window, _creditWindow, _goTiltleBtn;
+    [SerializeField] private GameObject _window, _creditWindow, _goTiltleBtn, _colsoleBtn;
     [SerializeField] private Image _effectOn, _effectOff, _veryLow, _low, _high, _veryHigh;
     [SerializeField] private Sprite _btnOn, _btnOff;
     [SerializeField] private Scrollbar _musicBar, _sfxBar;
@@ -24,6 +24,7 @@ public class SettingManager : MonoSingleton<SettingManager>
     [SerializeField] private Bloom _bloom;
     [SerializeField] private float _musicVolume, _sfxVolume;
     [SerializeField] private bool _isTitle;
+    [SerializeField] private AudioClip _sfxClip, _clickClip;
     public bool effect;
 
     private void OnEnable()
@@ -55,15 +56,18 @@ public class SettingManager : MonoSingleton<SettingManager>
     public void OpenCredit()
     {
         _creditWindow?.SetActive(true);
+        SFXPlayer.Instance.PlaySFX(_clickClip);
     }
 
     public void CloseCredit()
     {
         _creditWindow.SetActive(false);
+        SFXPlayer.Instance.PlaySFX(_sfxClip);
     }
 
     public void Open()
     {
+        SFXPlayer.Instance.PlaySFX(_clickClip);
         _window?.SetActive(true);
         if (_isTitle)
         {
@@ -71,12 +75,14 @@ public class SettingManager : MonoSingleton<SettingManager>
         }
         else
         {
+            _colsoleBtn.SetActive(false);
             Time.timeScale = 0f;
         }
     }
 
     public void Close()
     {
+        SFXPlayer.Instance.PlaySFX(_sfxClip);
         if (!_isTitle)
         {
             Time.timeScale = 1.0f;
@@ -86,6 +92,7 @@ public class SettingManager : MonoSingleton<SettingManager>
 
     public void EffectOn()
     {
+        SFXPlayer.Instance.PlaySFX(_clickClip);
         if (!effect)
         {
             _effectOn.sprite = _btnOn;
@@ -96,6 +103,7 @@ public class SettingManager : MonoSingleton<SettingManager>
     }
     public void EffectOff()
     {
+        SFXPlayer.Instance.PlaySFX(_clickClip);
         if (effect)
         {
             _effectOff.sprite = _btnOn;
@@ -114,10 +122,13 @@ public class SettingManager : MonoSingleton<SettingManager>
     public void SFXVolumeChanged()
     {
         _sfxVolume = _sfxBar.value * 100;
+        SFXPlayer.Instance.ChangeVolume(_sfxVolume);
+        SFXPlayer.Instance.PlaySFX(_sfxClip);
     }
 
     public void GoToTitle()
     {
+        SFXPlayer.Instance.PlaySFX(_clickClip);
         Time.timeScale = 1.0f;
         DataSave();
         SceneManager.LoadScene("Title");
@@ -135,6 +146,7 @@ public class SettingManager : MonoSingleton<SettingManager>
 
     public void BrightChanged(string value)
     {
+        SFXPlayer.Instance.PlaySFX(_clickClip);
         BrightReset();
         _brightValue = (BrightValue)Enum.Parse(typeof(BrightValue), value);
         if (effect)
@@ -159,13 +171,13 @@ public class SettingManager : MonoSingleton<SettingManager>
         switch (value)
         {
             case BrightValue.VeryLow :
-                _bloom.intensity.value = 1; break;
+                _bloom.intensity.value = 1f; break;
             case BrightValue.Low :
-                _bloom.intensity.value = 2; break;
+                _bloom.intensity.value = 1.5f; break;
             case BrightValue.High :
-                _bloom.intensity.value = 3; break;
+                _bloom.intensity.value = 2f; break;
             case BrightValue.VeryHigh :
-                _bloom.intensity.value = 4; break;
+                _bloom.intensity.value = 2.5f; break;
         }
     }
 
