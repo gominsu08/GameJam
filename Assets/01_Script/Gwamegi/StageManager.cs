@@ -281,7 +281,11 @@ public class StageManager : MonoSingleton<StageManager>
             if (hit.collider != null)
             {
                 Debug.Log("오브젝트가 존재합니다: " + hit.collider.gameObject.name);
-                Destroy(hit.collider.gameObject);
+                hit.collider.gameObject.SetActive(false);
+                if(hit.collider.gameObject.TryGetComponent(out Enemy enemy))
+                {
+                    PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
+                }
             }
             else
             {
