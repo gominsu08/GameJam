@@ -34,6 +34,13 @@ public class BossPlayer : Entity
         // transform.DORotate(new Vector3(0, 0, transform.rotation.eulerAngles.z + 90), 1 / _speed);
     }
     Queue<Vector2> moveQueue = new Queue<Vector2>();
+
+
+    private void OnDisable()
+    {
+        InputReader.Instance.OnBossPlayerMove -= Move;
+    }
+
     // IEnumerator goodControl(Vector2 direction)
     // {
     //     float startTime = Time.time;

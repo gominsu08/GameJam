@@ -5,8 +5,8 @@ using UnityEngine;
 public class DataManager : MonoSingleton<DataManager>
 {
     public int round = 1;
-    private int hp;
-
+    private int hp = 40;
+    public int time;
     public int Hp
     {
         get
