@@ -31,12 +31,15 @@ public class GameTimer : MonoBehaviour
         {
             if (Mathf.Round(CountDown123) <= 3 && isTileMapCreate)
             {
+                InputReader.Instance.controls.Default.Disable();
+
                 timerText.text = $"Time [ {Mathf.Round(CountDown123)} ]";
                 CountDown123 += Time.deltaTime;
             }
             else if (Mathf.Round(CountDown123) > 3 && isTileMapCreate)
             {
                 if (SetTime <= 0) return;
+                InputReader.Instance.controls.Default.Enable();
                 timerText.text = $"Time [ {Mathf.Round(SetTime)} ]";
                 SetTime -= Time.deltaTime;
                 

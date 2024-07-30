@@ -23,6 +23,7 @@ public class NumCalculate : MonoBehaviour
         if ((pc1num <= bossNumber._bossNum && bossNumber._bossNum <= pc2num) || (pc2num <= bossNumber._bossNum & bossNumber._bossNum <= pc1num))
         {
             StartCoroutine(Clear());
+            InputReader.Instance.controls.Default.Disable();
         }
         else 
         {
@@ -36,8 +37,10 @@ public class NumCalculate : MonoBehaviour
     private IEnumerator Clear()
     {
         yield return new WaitForSeconds(1);
+        roundManager.round++;
         roundManager.isRoundWin = true;
         StageManager.Instance.StageReset();
+        StageManager.Instance.TileSetCoroutineStart();
         roundManager.EndRound();
         bossNumber.BossNumRand();
 
