@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField]
     public int maxhp = 100;
+    [SerializeField][Tooltip("무적기능")] bool invincibility = false;
     [SerializeField]
     private int hp;
     public int HP
@@ -15,9 +16,10 @@ public class Health : MonoBehaviour
         get { return hp; }
         set
         {
-            if (hp > value)
-                onHitEvent?.Invoke();
-            hp = value;
+            if (hp > value) { }
+            onHitEvent?.Invoke();
+            if (!invincibility)
+                hp = value;
             if (hp <= 0)
             {
                 hp = 0;

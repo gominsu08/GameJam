@@ -30,12 +30,18 @@ public class Boom : BossAttackPattern
             _sequence.Append(_spriteRenderer.DOColor(_defaultColor, time / 3));
             _sequence.AppendInterval(time);
         }
+        _sequence.OnComplete(() => _spriteRenderer.enabled = false);
         base.Pattern();
+    }
+    private IEnumerator WaitForParticle()
+    {
+        _particle.Play();
+        yield return new WaitWhile(() => _particle.isPlaying);
+        base.EndPattern();
     }
     public override void EndPattern()
     {
         Attack();
-        base.EndPattern();
-        _particle.Play();
+        StartCoroutine(WaitForParticle());
     }
 }
