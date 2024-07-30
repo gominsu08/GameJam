@@ -119,8 +119,18 @@ public class SettingManager : MonoBehaviour
     public void GoToTitle()
     {
         Time.timeScale = 1.0f;
-        SaveManager.Instance.SavePlayerDataToJson();
+        DataSave();
         SceneManager.LoadScene("Title");
+    }
+
+    public void DataSave()
+    {
+        SaveManager.Instance.playerData.musicVolume = _musicVolume;
+        SaveManager.Instance.playerData.sfxVolume = _sfxVolume;
+        SaveManager.Instance.playerData.effectOn = effect;
+        SaveManager.Instance.playerData.bright = _brightValue;
+
+        SaveManager.Instance.SavePlayerDataToJson();
     }
 
     public void BrightChanged(string value)
