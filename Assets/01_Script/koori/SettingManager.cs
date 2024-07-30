@@ -14,7 +14,7 @@ public enum BrightValue
 
 public class SettingManager : MonoSingleton<SettingManager>
 {
-    [SerializeField] private GameObject _window, _creditWindow, _goTiltleBtn;
+    [SerializeField] private GameObject _window, _creditWindow, _goTiltleBtn, _colsoleBtn;
     [SerializeField] private Image _effectOn, _effectOff, _veryLow, _low, _high, _veryHigh;
     [SerializeField] private Sprite _btnOn, _btnOff;
     [SerializeField] private Scrollbar _musicBar, _sfxBar;
@@ -71,6 +71,7 @@ public class SettingManager : MonoSingleton<SettingManager>
         }
         else
         {
+            _colsoleBtn.SetActive(false);
             Time.timeScale = 0f;
         }
     }
@@ -159,13 +160,13 @@ public class SettingManager : MonoSingleton<SettingManager>
         switch (value)
         {
             case BrightValue.VeryLow :
-                _bloom.intensity.value = 1; break;
+                _bloom.intensity.value = 1f; break;
             case BrightValue.Low :
-                _bloom.intensity.value = 2; break;
+                _bloom.intensity.value = 1.5f; break;
             case BrightValue.High :
-                _bloom.intensity.value = 3; break;
+                _bloom.intensity.value = 2f; break;
             case BrightValue.VeryHigh :
-                _bloom.intensity.value = 4; break;
+                _bloom.intensity.value = 2.5f; break;
         }
     }
 

@@ -9104,7 +9104,8 @@ MonoBehaviour:
   isDontDestroy: 0
   _window: {fileID: 1112621394}
   _creditWindow: {fileID: 1373031069}
-  _goTiltleBtn: {fileID: 0}
+  _goTiltleBtn: {fileID: 56489531}
+  _colsoleBtn: {fileID: 1607157925}
   _effectOn: {fileID: 1953015609}
   _effectOff: {fileID: 306031821}
   _veryLow: {fileID: 557135638}

@@ -13528,9 +13528,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1543230b4ba676a42ac3d7619b0926cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDontDestroy: 0
   _window: {fileID: 68036396}
   _creditWindow: {fileID: 1146225872}
   _goTiltleBtn: {fileID: 1587468871}
+  _colsoleBtn: {fileID: 1143786631}
   _effectOn: {fileID: 239986367}
   _effectOff: {fileID: 18282608}
   _veryLow: {fileID: 31499039}
