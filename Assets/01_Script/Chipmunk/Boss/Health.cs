@@ -2,18 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
     [SerializeField]
     public int maxhp = 100;
     [SerializeField]
-    private int hp = 100;
+    private int hp;
     public int HP
     {
         get { return hp; }
         set
         {
+            if (hp > value)
+                onHitEvent?.Invoke();
             hp = value;
             if (hp <= 0)
             {
@@ -26,6 +29,7 @@ public class Health : MonoBehaviour
             }
         }
     }
+    [SerializeField] UnityEvent onHitEvent;
     public void Initialize()
     {
         hp = maxhp;

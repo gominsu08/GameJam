@@ -10,19 +10,19 @@ public class BossPlayer : Entity
     {
         base.Awake();
         InputReader.Instance.OnBossPlayerMove += Move;
-        OnMoveEvent.AddListener(a =>
-        {
-            command.onCompleteAction += () =>
-            {
+        // OnMoveEvent.AddListener(a =>
+        // {
+        //     command.onCompleteAction += () =>
+        //     {
 
-                if (moveQueue.Count == 0) return;
-                Vector2 moveDir = moveQueue.Dequeue();
-                Debug.Log(moveQueue.Count);
-                Debug.Log(moveDir);
-                Debug.Log(isMoveing);
-                Move(moveDir);
-            };
-        });
+        //         if (moveQueue.Count == 0) return;
+        //         Vector2 moveDir = moveQueue.Dequeue();
+        //         Debug.Log(moveQueue.Count);
+        //         Debug.Log(moveDir);
+        //         Debug.Log(isMoveing);
+        //         Move(moveDir);
+        //     };
+        // });
     }
     public override void Move(Vector2 direction)
     {
