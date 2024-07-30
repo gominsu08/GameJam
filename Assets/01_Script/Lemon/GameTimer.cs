@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class GameTimer : MonoBehaviour
 {
-    [SerializeField] float SetTime = 60.0f;
+    public float SetTime;
     [SerializeField] float CountDown123 = 0.0f;
     [SerializeField] bool isTimeFlow = true;
     [SerializeField] TMP_Text timerText;
@@ -20,8 +20,9 @@ public class GameTimer : MonoBehaviour
      
     private void Start()
     {        
-        timerText.text = $"Time [ {Mathf.Round(CountDown123)} ]";
+        timerText.text = $"남은시간 [ {Mathf.Round(CountDown123)} ]";
         StageManager.Instance.TileSetCoroutineStart();
+        SetTime = StageManager.Instance.roundTime;
 
     }
 
@@ -33,14 +34,14 @@ public class GameTimer : MonoBehaviour
             {
                 InputReader.Instance.controls.Default.Disable();
 
-                timerText.text = $"Time [ {Mathf.Round(CountDown123)} ]";
+                timerText.text = $"남은시간 [ {Mathf.Round(CountDown123)} ]";
                 CountDown123 += Time.deltaTime;
             }
             else if (Mathf.Round(CountDown123) > 3 && isTileMapCreate)
             {
                 if (SetTime <= 0) return;
                 InputReader.Instance.controls.Default.Enable();
-                timerText.text = $"Time [ {Mathf.Round(SetTime)} ]";
+                timerText.text = $"남은시간 [ {Mathf.Round(SetTime)} ]";
                 SetTime -= Time.deltaTime;
                 
             }
@@ -61,7 +62,7 @@ public class GameTimer : MonoBehaviour
 
     public void TimeReset()
     {
-        SetTime = 60;
+        SetTime = StageManager.Instance.roundTime;
         CountDown123 = 0.0f;
         isTimeFlow = false;
     }

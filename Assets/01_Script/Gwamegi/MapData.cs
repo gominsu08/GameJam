@@ -18,5 +18,7 @@ public class MapData : ScriptableObject
 
     public List<EnumOperator> spawnEnemyType = new List<EnumOperator>();
 
-    public int minBossNum, maxBossNum; 
+    public int minBossNum, maxBossNum;
+
+    public int roundTime;
 }

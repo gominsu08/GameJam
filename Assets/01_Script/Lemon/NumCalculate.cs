@@ -41,6 +41,7 @@ public class NumCalculate : MonoBehaviour
         roundManager.isRoundWin = true;
         StageManager.Instance.StageReset();
         StageManager.Instance.TileSetCoroutineStart();
+        roundManager.timer.SetTime = StageManager.Instance.roundTime;
         roundManager.EndRound();
         bossNumber.BossNumRand();
 
