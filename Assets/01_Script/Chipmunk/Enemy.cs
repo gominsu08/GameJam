@@ -22,5 +22,8 @@ public class Enemy : Entity
         if (enemies.Contains(this))
             enemies.Remove(this);
     }
-    public virtual void MoveVertical() { }
+    public override void Move(Vector2 direction)
+    {
+        base.Move(direction);
+    }
 }

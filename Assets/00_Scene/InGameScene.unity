@@ -1930,6 +1930,9 @@ MonoBehaviour:
   _tileTransform: {x: 0.5, y: 0.5}
   _moveCountText: {fileID: 1956043620}
   stage: 0
+  spawnEnemyType: 
+  minBossNum: 0
+  maxBossNum: 0
 --- !u!4 &1357428705
 Transform:
   m_ObjectHideFlags: 0
@@ -2596,7 +2599,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.size
@@ -2607,6 +2610,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
+      propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -2615,11 +2622,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1357428704}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
+      propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1422908062}
+    - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 952290462}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
+      propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
@@ -2631,6 +2646,10 @@ PrefabInstance:
       value: playerMoveCountting
       objectReference: {fileID: 0}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
+      propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: aa
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GameOver
       objectReference: {fileID: 0}
@@ -2639,11 +2658,19 @@ PrefabInstance:
       value: StageManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
+      propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Calculate, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: GameOverManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
+      propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
