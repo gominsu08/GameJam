@@ -17,9 +17,9 @@ MonoBehaviour:
   yMax: 6
   xMin: -6
   yMin: -6
-  boxCount: 20
-  enemyCount: 20
-  spawnEnemyType: 000000000200000003000000
+  boxCount: 1
+  enemyCount: 5
+  spawnEnemyType: 00000000
   minBossNum: 1
   maxBossNum: 2
   roundTime: 2

@@ -63,6 +63,8 @@ public class StageManager : MonoSingleton<StageManager>
         }
         MapDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn);
         StartCoroutine(BoxTileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
+        _createEnemy.SetEnemyList();
+        MapSetting();
     }
     public void playerMoveCountting()
     {
@@ -96,8 +98,6 @@ public class StageManager : MonoSingleton<StageManager>
     private void Update()
     {
         _moveCountText.text = $"ÀÌµ¿È½¼ö[{_playerMoveCount}]";
-
-        MapSetting();
 
         _tileMap.transform.position = _tileTransform;
 
@@ -149,7 +149,6 @@ public class StageManager : MonoSingleton<StageManager>
     }
     public void TileSetCoroutineStart()
     {
-        MapSetting();
         StartCoroutine(Setting(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize));
     }
     private IEnumerator Setting(int xMin, int xMax, int yMin, int yMax)
