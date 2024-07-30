@@ -9,9 +9,11 @@ public class GameOverManager : MonoBehaviour
 
     public void GameOver()
     {
+        SceneManager.LoadScene("GMSBoosScene");
+
         //이동막는거 넣어야함
-        _gameOverPanel.SetActive(true);
-        InputReader.Instance.controls.Default.Disable();
+        //_gameOverPanel.SetActive(true);
+        //InputReader.Instance.controls.Default.Disable();
 
     }
 

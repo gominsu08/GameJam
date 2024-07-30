@@ -1725,7 +1725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8021779666189321466, guid: 116e365263aac094d893fbc996876048, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8021779666189321466, guid: 116e365263aac094d893fbc996876048, type: 3}
       propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -5733,6 +5733,7 @@ MonoBehaviour:
   isDontDestroy: 0
   enemyList: []
   _roundManager: {fileID: 886869748}
+  _playerNum: {fileID: 358052791}
   _mapData:
   - {fileID: 11400000, guid: 547d09014fc886a4aba96885b89b1100, type: 2}
   - {fileID: 11400000, guid: d120503df0f76724a989ba79e9916de3, type: 2}
@@ -5747,6 +5748,21 @@ MonoBehaviour:
   roundTime: 0
   player1: 0
   player2: 0
+  OnGameOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 952290462}
+        m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
+        m_MethodName: GameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _tileMap: {fileID: 2135348196}
   _boxTileMap: {fileID: 733472296}
   _baseTile: {fileID: 11400000, guid: 9514161b835ec5e409e11b70aa58b5ad, type: 2}
@@ -8095,7 +8111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
