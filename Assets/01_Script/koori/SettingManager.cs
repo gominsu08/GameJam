@@ -12,7 +12,7 @@ public enum BrightValue
     VeryLow, Low, High, VeryHigh
 }
 
-public class SettingManager : MonoBehaviour
+public class SettingManager : MonoSingleton<SettingManager>
 {
     [SerializeField] private GameObject _window, _creditWindow, _goTiltleBtn;
     [SerializeField] private Image _effectOn, _effectOff, _veryLow, _low, _high, _veryHigh;
@@ -26,7 +26,7 @@ public class SettingManager : MonoBehaviour
     [SerializeField] private bool _isTitle;
     public bool effect;
 
-    private void Start()
+    private void OnEnable()
     {
         SaveManager.Instance.LoadPlayerData();
         _musicVolume = SaveManager.Instance.playerData.musicVolume;
