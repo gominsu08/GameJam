@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
@@ -10,6 +11,8 @@ public class StageManager : MonoSingleton<StageManager>
     public List<GameObject> enemyList = new List<GameObject>();
 
     [SerializeField] private RoundManager _roundManager;
+
+    [SerializeField] private PlayerNum _playerNum;
 
     [SerializeField] private List<MapData> _mapData = new List<MapData>();
     private MapData _map;
@@ -21,6 +24,7 @@ public class StageManager : MonoSingleton<StageManager>
     public int player1;
     public int player2;
 
+    public UnityEvent OnGameOver;
 
     //≈∏¿œ∏ 
     [SerializeField] private Tilemap _tileMap;
@@ -108,7 +112,7 @@ public class StageManager : MonoSingleton<StageManager>
     {
         foreach (MapData item in _mapData)
         {
-            if (item.stage == _roundManager.round)
+            if (item.stage == DataManager.Instance.round)
             {
                 _map = item;
             }
@@ -116,6 +120,8 @@ public class StageManager : MonoSingleton<StageManager>
 
         player1 = _map.player1;
         player2 = _map.player2;
+
+        _playerNum.Start();
 
         spawnEnemyType = _map.spawnEnemyType;
 
@@ -287,6 +293,11 @@ public class StageManager : MonoSingleton<StageManager>
                 {
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
+                else
+                {
+                    OnGameOver?.Invoke();
+                    yield break;
+                }
             }
             else
             {
@@ -308,6 +319,11 @@ public class StageManager : MonoSingleton<StageManager>
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
+                }
+                else
+                {
+                    OnGameOver?.Invoke();
+                    yield break;
                 }
             }
             else
@@ -332,6 +348,11 @@ public class StageManager : MonoSingleton<StageManager>
                 {
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
+                else
+                {
+                    OnGameOver?.Invoke();
+                    yield break;
+                }
             }
             else
             {
@@ -354,6 +375,11 @@ public class StageManager : MonoSingleton<StageManager>
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
+                }
+                else
+                {
+                    OnGameOver?.Invoke();
+                    yield break;
                 }
             }
             else

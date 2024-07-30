@@ -31,6 +31,7 @@ public class NumCalculate : MonoBehaviour
         else 
         {
             roundManager.isRoundWin = false;
+            DataManager.Instance.Hp = pc1num + pc2num;  
             roundManager.EndRound();
         }
 
@@ -42,7 +43,7 @@ public class NumCalculate : MonoBehaviour
         yield return new WaitForSeconds(1);
         _player1.transform.position = new Vector3(0,1,0);
         _player2.transform.position = new Vector3(2,1,0);
-        roundManager.round++;
+        DataManager.Instance.round++;
         roundManager.isRoundWin = true;
         StageManager.Instance.StageReset();
         roundManager.timer.SetTime = StageManager.Instance.roundTime;
