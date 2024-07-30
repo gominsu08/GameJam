@@ -2093,7 +2093,6 @@ MonoBehaviour:
   _mapData:
   - {fileID: 11400000, guid: 340e438e852206245845d805a3defadd, type: 2}
   - {fileID: 11400000, guid: 669e5fd35e75adb40a450fc464efa779, type: 2}
-  - {fileID: 11400000, guid: dee88cb6f0d40564f97b3583db25322a, type: 2}
   roundTime: 0
   player1: 0
   player2: 0
