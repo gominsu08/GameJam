@@ -4620,13 +4620,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f19b3a82a34c047a6721b692454204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDontDestroy: 0
   playerData:
-    musicVolume: 0
-    sfxVolume: 0
-    bright: 0
-    effectOn: 0
+    musicVolume: 50
+    sfxVolume: 50
+    bright: 1
+    effectOn: 1
     round: 0
-    first: 0
 --- !u!4 &1203963430
 Transform:
   m_ObjectHideFlags: 0
@@ -11400,6 +11400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 042d8c6fb60c6e34dab234ce7474840c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settingManager: {fileID: 2141628015}
 --- !u!4 &1686643865
 Transform:
   m_ObjectHideFlags: 0

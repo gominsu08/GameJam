@@ -3339,6 +3339,57 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8277062476108948694, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
   m_PrefabInstance: {fileID: 1866709632}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &709122830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 709122832}
+  - component: {fileID: 709122831}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &709122831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709122830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f19b3a82a34c047a6721b692454204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDontDestroy: 0
+  playerData:
+    musicVolume: 50
+    sfxVolume: 50
+    bright: 1
+    effectOn: 1
+    round: 0
+--- !u!4 &709122832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709122830}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 956.4758, y: 497.70892, z: -0.42891955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &710426965
 GameObject:
   m_ObjectHideFlags: 0
@@ -9592,6 +9643,7 @@ Tilemap:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 709122832}
   - {fileID: 1174371349}
   - {fileID: 1357428705}
   - {fileID: 886869749}

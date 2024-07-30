@@ -10,7 +10,6 @@ public class SaveManager : MonoSingleton<SaveManager>
     private void Awake()
     {
         playerData = new SaveData();
-        LoadPlayerData();
     }
 
     [ContextMenu("To Json Data")] // 컴포넌트 메뉴에 아래 함수를 호출하는 To Json Data 라는 명령어가 생성됨

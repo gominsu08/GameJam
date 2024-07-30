@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class TitleBtn : MonoBehaviour
 {
-
+    [SerializeField] private SettingManager _settingManager;
     public void GameStart()
     {
-        SaveManager.Instance.SavePlayerDataToJson();
+        _settingManager.DataSave();
        
         SceneManager.LoadScene("InGameScene");
     }
