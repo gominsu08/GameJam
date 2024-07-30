@@ -10,6 +10,8 @@ public class TitleBtn : MonoBehaviour
 
     public void GameStart()
     {
+        SaveManager.Instance.SavePlayerDataToJson();
+       
         SceneManager.LoadScene("InGameScene");
     }
 

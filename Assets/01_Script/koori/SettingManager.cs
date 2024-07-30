@@ -19,15 +19,20 @@ public class SettingManager : MonoBehaviour
     [SerializeField] private Sprite _btnOn, _btnOff;
     [SerializeField] private Scrollbar _musicBar, _sfxBar;
     [SerializeField] private AudioSource _music;
-    [SerializeField] private BrightValue _brightValue = BrightValue.High;
+    [SerializeField] private BrightValue _brightValue;
     [SerializeField] private Volume _volume;
     [SerializeField] private Bloom _bloom;
-    [SerializeField] private float _musicVolume = 50, _sfxVolume = 50;
+    [SerializeField] private float _musicVolume, _sfxVolume;
     [SerializeField] private bool _isTitle;
-    public bool effect = true;
+    public bool effect;
 
     private void Start()
     {
+        SaveManager.Instance.LoadPlayerData();
+        _musicVolume = SaveManager.Instance.playerData.musicVolume;
+        _sfxVolume = SaveManager.Instance.playerData.sfxVolume;
+        effect = SaveManager.Instance.playerData.effectOn;
+        _brightValue = SaveManager.Instance.playerData.bright;
         _volume.profile.TryGet<Bloom>(out _bloom);
         SettingReset();
         _window?.SetActive(false);
@@ -114,15 +119,18 @@ public class SettingManager : MonoBehaviour
     public void GoToTitle()
     {
         Time.timeScale = 1.0f;
+        SaveManager.Instance.SavePlayerDataToJson();
         SceneManager.LoadScene("Title");
     }
 
     public void BrightChanged(string value)
     {
-        EffectOn();
         BrightReset();
         _brightValue = (BrightValue)Enum.Parse(typeof(BrightValue), value);
-        VolumeChange(_brightValue);
+        if (effect)
+        {
+            VolumeChange(_brightValue);
+        }
         switch (_brightValue)
         {
             case BrightValue.VeryLow:
@@ -163,16 +171,22 @@ public class SettingManager : MonoBehaviour
     {
         _musicBar.value = _musicVolume / 100;
         _sfxBar.value = _sfxVolume / 100;
+        MusicVolumeChanged();
+        SFXVolumeChanged();
 
         if (effect)
         {
             _effectOn.sprite = _btnOn;
             _effectOff.sprite = _btnOff;
+            effect = true;
+            VolumeChange(_brightValue);
         }
         else
         {
-            _effectOn.sprite = _btnOff;
             _effectOff.sprite = _btnOn;
+            _effectOn.sprite = _btnOff;
+            effect = false;
+            _bloom.intensity.value = 0;
         }
 
         BrightReset();
