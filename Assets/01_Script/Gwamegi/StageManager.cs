@@ -12,9 +12,12 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField] private RoundManager _roundManager;
 
     [SerializeField] private List<MapData> _mapData = new List<MapData>();
+    private MapData _map;
 
-    [SerializeField] private int _enemyCount;
-    [SerializeField] private int _boxCount;
+    private int _enemyCount;
+    private int _boxCount;
+
+    
 
     //≈∏¿œ∏ 
     [SerializeField] private Tilemap _tileMap;
@@ -58,8 +61,6 @@ public class StageManager : MonoSingleton<StageManager>
         }
         StartCoroutine(BoxTileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
     }
-
-
     public void playerMoveCountting()
     {
 
@@ -72,19 +73,17 @@ public class StageManager : MonoSingleton<StageManager>
         }
     }
 
+
+
+    public List<EnumOperator> spawnEnemyType = new List<EnumOperator>();
+
+    public int minBossNum, maxBossNum;
+
     protected override void Awake()
     {
         base.Awake();
-        _xMaxSize = _mapData[stage].xMax;
-        _yMaxSize = _mapData[stage].yMax;
-        _xMinSize = _mapData[stage].xMin;
-        _yMinSize = _mapData[stage].yMin;
-
+        MapSetting();
         _createEnemy = GetComponent<CreateEnemy>();
-        _xMaxSizeIn = _xMaxSize;
-        _yMaxSizeIn = _yMaxSize;
-        _xMinSizeIn = _xMinSize;
-        _yMinSizeIn = _yMinSize;
     }
 
 
@@ -92,33 +91,39 @@ public class StageManager : MonoSingleton<StageManager>
     {
         _moveCountText.text = $"MoveCount[{_playerMoveCount}]";
 
+        MapSetting();
+
         _tileMap.transform.position = _tileTransform;
-
-        _xMaxSize = _mapData[stage].xMax;
-        _yMaxSize = _mapData[stage].yMax;
-        _xMinSize = _mapData[stage].xMin;
-        _yMinSize = _mapData[stage].yMin;
-
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            StartCoroutine(Setting(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize));
-            _xMaxSizeIn = _xMaxSize;
-            _yMaxSizeIn = _yMaxSize;
-            _xMinSizeIn = _xMinSize;
-            _yMinSizeIn = _yMinSize;
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            StartCoroutine(TileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CreateBox(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
-        }
+        
     }
 
+    private void MapSetting()
+    {
+        foreach (MapData item in _mapData)
+        {
+            if (item.stage == _roundManager.round)
+            {
+                _map = item;
+            }
+        }
+
+        spawnEnemyType = _map.spawnEnemyType;
+
+        minBossNum = _map.minBossNum;
+        maxBossNum = _map.maxBossNum;
+
+        _xMaxSize = _map.xMax;
+        _yMaxSize = _map.yMax;
+        _xMinSize = _map.xMin;
+        _yMinSize = _map.yMin;
+        _enemyCount = _map.enemyCount;
+        _boxCount = _map.boxCount;
+
+        _xMaxSizeIn = _map.xMax;
+        _yMaxSizeIn = _map.yMax;
+        _xMinSizeIn = _map.xMin;
+        _yMinSizeIn = _map.yMin;
+    }
     public void CreateBox(int xMin, int xMax, int yMin, int yMax)
     {
         int xRand = Random.Range(xMin, xMax + 1);
@@ -141,7 +146,7 @@ public class StageManager : MonoSingleton<StageManager>
     {
         for (int i = 0; i < count; i++)
         {
-            _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
+            _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize, spawnEnemyType);
         }
     }
 
