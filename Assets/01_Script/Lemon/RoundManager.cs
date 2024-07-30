@@ -15,10 +15,14 @@ public class RoundManager : MonoBehaviour
 
     public bool isEndRound = false;
     [SerializeField] public bool isRoundWin = false;
-    public int round = 1;
     [SerializeField] TMP_Text stageText;
 
     private int maxRound;
+
+    private void Awake()
+    {
+        DataManager.Instance.round = 1;
+    }
 
     public void Update()
     {
@@ -30,7 +34,7 @@ public class RoundManager : MonoBehaviour
             {
                 RoundClear.Invoke();
                 RoundWin.Invoke();
-                stageText.text = $"라운드 [ {round} ]";
+                stageText.text = $"라운드 [ {DataManager.Instance.round} ]";
                 timer.TimerFlow();
                 isEndRound = false;
             }
@@ -51,7 +55,7 @@ public class RoundManager : MonoBehaviour
         SaveManager.Instance.LoadPlayerData();
         maxRound = SaveManager.Instance.playerData.round;
 
-        SaveManager.Instance.playerData.round = round >= maxRound ? round : maxRound;
+        SaveManager.Instance.playerData.round = DataManager.Instance.round >= maxRound ? DataManager.Instance.round : maxRound;
         SettingManager.Instance.DataSave();
 
     }
@@ -63,6 +67,6 @@ public class RoundManager : MonoBehaviour
 
     public void ResetRound()
     {
-        round = 0; 
+        DataManager.Instance.round = 1; 
     }
 }

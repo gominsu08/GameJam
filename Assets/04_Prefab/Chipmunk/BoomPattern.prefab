@@ -64,7 +64,7 @@ MonoBehaviour:
   _attacker: {fileID: 3809818678056674913}
   damage: 5
   _spriteRenderer: {fileID: 4786556497956466570}
-  _duration: 2
+  _duration: 0.1
   _particle: {fileID: 0}
   _defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &4786556497956466570
