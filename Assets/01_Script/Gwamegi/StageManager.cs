@@ -356,17 +356,6 @@ public class StageManager : MonoSingleton<StageManager>
 
         for (int j = 0; j <= (xMax - xMin) / 2; j++)
         {
-
-            if (xMin == xMax - 2) return;
-            if (yMax - 2 == yMin) return;
-
-            if (xMin == (xMax - 1)) return;
-            if ((yMax - 1) == yMin) return;
-
-            
-
-            
-
             for (int i = xMinSize; i <= xMaxSize; i++)
             {
                 _tileMap.SetTile(new Vector3Int(i, yMaxSize), null);
