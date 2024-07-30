@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7210e7f3308437c45932b71dcf91e4e6, type: 3}
+  m_Name: BossPatternListSO
+  m_EditorClassIdentifier: 
+  bossPatterns:
+  - {fileID: 3051827044833337203, guid: a5661091e09649043904619c9df65966, type: 3}

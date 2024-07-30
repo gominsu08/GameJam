@@ -6,6 +6,7 @@ public class BossCameraMover : MonoBehaviour
 {
     [SerializeField] Ease _ease = Ease.Linear;
     [SerializeField] float _duration = 0.5f;
+    [SerializeField] float _shakePower = 0.5f;
     private Vector3 _startPos;
     private void Awake()
     {
@@ -15,5 +16,9 @@ public class BossCameraMover : MonoBehaviour
     {
         Vector2 movePos = (pos + ((Vector2)_startPos)) / 2;
         transform.DOMove(new Vector3(movePos.x, movePos.y, _startPos.z), _duration).SetEase(_ease);
+    }
+    public void shake()
+    {
+        transform.DOShakePosition(0.5f, _shakePower);
     }
 }
