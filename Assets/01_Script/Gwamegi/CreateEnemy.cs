@@ -14,10 +14,15 @@ public class CreateEnemy : MonoBehaviour
 
 
     
+    public void SetEnemyList()
+    {
+        _spawnEnemy = new List<GameObject>();
+    }
 
 
     public void EnemyCreate(int xMin, int xMax, int yMin, int yMax, List<EnumOperator> spawnEnemy)
     {
+        SetEnemyList();
 
         foreach (EnumOperator item in spawnEnemy)
         {

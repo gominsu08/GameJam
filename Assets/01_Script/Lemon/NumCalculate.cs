@@ -37,11 +37,12 @@ public class NumCalculate : MonoBehaviour
     private IEnumerator Clear()
     {
         yield return new WaitForSeconds(1);
+        Debug.Log("³ª ½ÇÇà");
         roundManager.round++;
         roundManager.isRoundWin = true;
         StageManager.Instance.StageReset();
-        StageManager.Instance.TileSetCoroutineStart();
         roundManager.timer.SetTime = StageManager.Instance.roundTime;
+        StageManager.Instance.TileSetCoroutineStart();
         roundManager.EndRound();
         bossNumber.BossNumRand();
 
