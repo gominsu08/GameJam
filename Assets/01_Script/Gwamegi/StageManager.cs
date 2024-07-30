@@ -18,7 +18,8 @@ public class StageManager : MonoSingleton<StageManager>
     private int _boxCount;
 
     public int roundTime;
-
+    public int player1;
+    public int player2;
 
 
     //≈∏¿œ∏ 
@@ -111,6 +112,9 @@ public class StageManager : MonoSingleton<StageManager>
                 _map = item;
             }
         }
+
+        player1 = _map.player1;
+        player2 = _map.player2;
 
         spawnEnemyType = _map.spawnEnemyType;
 

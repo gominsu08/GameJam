@@ -21,4 +21,7 @@ public class MapData : ScriptableObject
     public int minBossNum, maxBossNum;
 
     public int roundTime;
+
+    public int player1;
+    public int player2;
 }

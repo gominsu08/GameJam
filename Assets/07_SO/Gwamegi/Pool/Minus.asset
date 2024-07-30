@@ -9,17 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e23757968faea3488ee3c9338a4865c, type: 3}
-  m_Name: Stage1TestMapData
+  m_Script: {fileID: 11500000, guid: a372c9a490a69dc44aceeb8a293ba977, type: 3}
+  m_Name: Minus
   m_EditorClassIdentifier: 
-  stage: 1
-  xMax: 5
-  yMax: 5
-  xMin: -5
-  yMin: -5
-  boxCount: 20
-  enemyCount: 10
-  spawnEnemyType: 00000000
-  minBossNum: 1
-  maxBossNum: 2
-  roundTime: 2
+  poolName: Minus
+  prefab: {fileID: 2866298838092197010, guid: c8c35d7d95ad10940bdcdf4b80289bd5, type: 3}
+  count: 0

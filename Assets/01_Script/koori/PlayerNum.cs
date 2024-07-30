@@ -34,7 +34,7 @@ public class PlayerNum : MonoBehaviour
 
     private void Start()
     {
-        PCNumChange(1, 9);
+        PCNumChange(StageManager.Instance.player1, StageManager.Instance.player1);
     }
 
     public void PCNumChange(int num1, int num2)
