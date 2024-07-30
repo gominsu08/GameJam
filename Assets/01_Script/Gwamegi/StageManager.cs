@@ -17,7 +17,9 @@ public class StageManager : MonoSingleton<StageManager>
     private int _enemyCount;
     private int _boxCount;
 
-    
+    public int roundTime;
+
+
 
     //Å¸ÀÏ¸Ê
     [SerializeField] private Tilemap _tileMap;
@@ -59,7 +61,10 @@ public class StageManager : MonoSingleton<StageManager>
         {
             Destroy(item);
         }
+        MapDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn);
         StartCoroutine(BoxTileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
+        _createEnemy.SetEnemyList();
+        MapSetting();
     }
     public void playerMoveCountting()
     {
@@ -83,20 +88,20 @@ public class StageManager : MonoSingleton<StageManager>
     {
         base.Awake();
         MapSetting();
+
+        _xMaxSizeIn = _map.xMax;
+        _yMaxSizeIn = _map.yMax;
+        _xMinSizeIn = _map.xMin;
+        _yMinSizeIn = _map.yMin;
         _createEnemy = GetComponent<CreateEnemy>();
     }
-
-
     private void Update()
     {
-        _moveCountText.text = $"MoveCount[{_playerMoveCount}]";
-
-        MapSetting();
+        _moveCountText.text = $"ÀÌµ¿È½¼ö[{_playerMoveCount}]";
 
         _tileMap.transform.position = _tileTransform;
-        
-    }
 
+    }
     private void MapSetting()
     {
         foreach (MapData item in _mapData)
@@ -109,6 +114,8 @@ public class StageManager : MonoSingleton<StageManager>
 
         spawnEnemyType = _map.spawnEnemyType;
 
+        roundTime = _map.roundTime;
+
         minBossNum = _map.minBossNum;
         maxBossNum = _map.maxBossNum;
 
@@ -118,11 +125,6 @@ public class StageManager : MonoSingleton<StageManager>
         _yMinSize = _map.yMin;
         _enemyCount = _map.enemyCount;
         _boxCount = _map.boxCount;
-
-        _xMaxSizeIn = _map.xMax;
-        _yMaxSizeIn = _map.yMax;
-        _xMinSizeIn = _map.xMin;
-        _yMinSizeIn = _map.yMin;
     }
     public void CreateBox(int xMin, int xMax, int yMin, int yMax)
     {
@@ -138,10 +140,6 @@ public class StageManager : MonoSingleton<StageManager>
             _boxTileMap.SetTile(new Vector3Int(xRand, yRand), _boxTile);
         }
     }
-
-
-
-
     public void CreateEnemy(int count)
     {
         for (int i = 0; i < count; i++)
@@ -149,26 +147,10 @@ public class StageManager : MonoSingleton<StageManager>
             _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize, spawnEnemyType);
         }
     }
-
     public void TileSetCoroutineStart()
     {
         StartCoroutine(Setting(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize));
     }
-
-    private IEnumerator TileSet(int xMin, int xMax, int yMin, int yMax)
-    {
-        for (int i = xMin; i <= xMax; i++)
-        {
-            for (int j = yMin; j <= yMax; j++)
-            {
-                _tileMap.SetTile(new Vector3Int(i, j), _baseTile);
-                yield return new WaitForSeconds(0.005f);
-
-            }
-        }
-    }
-
-
     private IEnumerator Setting(int xMin, int xMax, int yMin, int yMax)
     {
         _xMaxSizeIn = _xMaxSize;
@@ -230,7 +212,6 @@ public class StageManager : MonoSingleton<StageManager>
         }
 
     }
-
     private IEnumerator BoxTileDestroy(int xMin, int xMax, int yMin, int yMax)
     {
         int xMaxSize = xMax;
@@ -365,4 +346,44 @@ public class StageManager : MonoSingleton<StageManager>
 
 
     }
+    private void MapDestroy(int xMin, int xMax, int yMin, int yMax)
+    {
+
+        int xMaxSize = xMax;
+        int xMinSize = xMin;
+        int yMaxSize = yMax;
+        int yMinSize = yMin;
+
+        for (int j = 0; j <= (xMax - xMin) / 2; j++)
+        {
+            for (int i = xMinSize; i <= xMaxSize; i++)
+            {
+                _tileMap.SetTile(new Vector3Int(i, yMaxSize), null);
+
+            }
+
+            for (int i = yMaxSize; i >= yMinSize; i--)
+            {
+                _tileMap.SetTile(new Vector3Int(xMaxSize, i), null);
+            }
+
+            for (int i = xMaxSize; i >= xMinSize; i--)
+            {
+                _tileMap.SetTile(new Vector3Int(i, yMinSize), null);
+            }
+
+            for (int i = yMinSize; i <= yMaxSize; i++)
+            {
+                _tileMap.SetTile(new Vector3Int(xMinSize, i), null);
+            }
+            xMaxSize--;
+            xMinSize++;
+            yMaxSize--;
+            yMinSize++;
+
+        }
+
+
+    }
+
 }

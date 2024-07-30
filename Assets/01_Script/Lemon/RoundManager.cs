@@ -21,13 +21,13 @@ public class RoundManager : MonoBehaviour
     {
         if (_isEndRound) // 라운드 끝
         {
+            InputReader.Instance.controls.Default.Disable();
             timer.TimerStop();
             if (isRoundWin) // 이김 ㅋRoundClear != null & 
             {
                 RoundClear.Invoke();
                 RoundWin.Invoke();
-                round++;
-                stageText.text = $"stage [ {round} ]";
+                stageText.text = $"라운드 [ {round} ]";
                 timer.TimerFlow();
                 _isEndRound = false;
             }
