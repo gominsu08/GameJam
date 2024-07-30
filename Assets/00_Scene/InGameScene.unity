@@ -2599,7 +2599,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnMoveEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4690026630505273471, guid: 8b429b2478130124499cb92505aec1fe, type: 3}
       propertyPath: OnDeathEvent.m_PersistentCalls.m_Calls.Array.size
