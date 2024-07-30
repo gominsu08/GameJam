@@ -21,11 +21,9 @@ public class Enemy : Entity, IPoolable
     }
     protected override void Awake()
     {
-
         base.Awake();
         if (!enemies.Contains(this))
             enemies.Add(this);
-
     }
     protected override void OnDisable()
     {
@@ -38,6 +36,10 @@ public class Enemy : Entity, IPoolable
     public void ResetItem()
     {
         gameObject.SetActive(true);
+        if (_visualTrm == null)
+            _visualTrm = transform.Find("Visual");
+        if (!Grid.Instance.set(this, transform.position))
+            Debug.Log($"entity : {transform.position}좌표에 이미 벽이 있습니다!");
         if (!enemies.Contains(this))
             enemies.Add(this);
     }
