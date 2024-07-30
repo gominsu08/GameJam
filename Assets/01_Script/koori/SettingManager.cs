@@ -26,7 +26,7 @@ public class SettingManager : MonoBehaviour
     [SerializeField] private bool _isTitle;
     public bool effect;
 
-    private void Start()
+    private void OnEnable()
     {
         SaveManager.Instance.LoadPlayerData();
         _musicVolume = SaveManager.Instance.playerData.musicVolume;
