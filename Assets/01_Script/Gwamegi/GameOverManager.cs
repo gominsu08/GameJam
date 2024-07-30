@@ -16,7 +16,7 @@ public class GameOverManager : MonoBehaviour
 
     public void Title()
     {
-        //타이틀 이동
+        SceneManager.LoadScene("Title");
     }
 
     public void ReStart()
