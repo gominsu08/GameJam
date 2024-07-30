@@ -9,7 +9,7 @@ public class GameOverManager : MonoBehaviour
 
     public void GameOver()
     {
-        SceneManager.LoadScene("GMSBossScene");
+        SceneManager.LoadScene("GMSBoosScene");
 
         //이동막는거 넣어야함
         //_gameOverPanel.SetActive(true);
