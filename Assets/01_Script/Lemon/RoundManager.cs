@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,14 +13,16 @@ public class RoundManager : MonoBehaviour
     public UnityEvent RoundWin;
     public UnityEvent Roundlose;
 
-    [SerializeField] private bool _isEndRound = false;
+    public bool isEndRound = false;
     [SerializeField] public bool isRoundWin = false;
     public int round = 1;
     [SerializeField] TMP_Text stageText;
 
+    private int maxRound;
+
     public void Update()
     {
-        if (_isEndRound) // 라운드 끝
+        if (isEndRound) // 라운드 끝
         {
             InputReader.Instance.controls.Default.Disable();
             timer.TimerStop();
@@ -29,22 +32,33 @@ public class RoundManager : MonoBehaviour
                 RoundWin.Invoke();
                 stageText.text = $"라운드 [ {round} ]";
                 timer.TimerFlow();
-                _isEndRound = false;
+                isEndRound = false;
             }
             else if (!isRoundWin) // 짐 ㅠㅠ
             {
                 RoundClear.Invoke();
                 Roundlose.Invoke();
                 Debug.Log("ming");
-                _isEndRound = false;
+                RoundDataSave();
+                isEndRound = false;
 
             }
         }
     }
 
+    public void RoundDataSave()
+    {
+        SaveManager.Instance.LoadPlayerData();
+        maxRound = SaveManager.Instance.playerData.round;
+
+        SaveManager.Instance.playerData.round = round >= maxRound ? round : maxRound;
+        SettingManager.Instance.DataSave();
+
+    }
+
     public void EndRound()
     {
-        _isEndRound = true;
+        isEndRound = true;
     }
 
     public void ResetRound()

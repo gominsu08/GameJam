@@ -7,9 +7,25 @@ using UnityEngine.UI;
 
 public class TitleBtn : MonoBehaviour
 {
+    [SerializeField] private SettingManager _settingManager;
+    [SerializeField] private TMP_Text _bestScore;
 
+    private void Awake()
+    {
+        _bestScore.gameObject.SetActive(false);
+    }
+    private void Start()
+    {
+        if (SaveManager.Instance.playerData.round != 0)
+        {
+            _bestScore.gameObject.SetActive(true);
+            _bestScore.text = $"최고 기록: {SaveManager.Instance.playerData.round}";
+        }
+    }
     public void GameStart()
     {
+        _settingManager.DataSave();
+       
         SceneManager.LoadScene("InGameScene");
     }
 
