@@ -34,10 +34,17 @@ public class SettingManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)&&_window.active)
         {
+            Time.timeScale = 1.0f;
             Close();
         }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0f;
+            Open();
+        }
+
     }
 
     public void OpenCredit()
