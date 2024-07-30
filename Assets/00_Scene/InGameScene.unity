@@ -2043,9 +2043,8 @@ MonoBehaviour:
   enemyList: []
   _roundManager: {fileID: 886869748}
   _mapData:
-  - {fileID: 11400000, guid: fc33580c604514a4abb593f9932c0fd1, type: 2}
-  - {fileID: 11400000, guid: e7c30738e03f1834696c94b1b7ffe0a2, type: 2}
-  - {fileID: 11400000, guid: 96e5e4e250b6f74499328bd89d1cb1aa, type: 2}
+  - {fileID: 11400000, guid: 340e438e852206245845d805a3defadd, type: 2}
+  - {fileID: 11400000, guid: 669e5fd35e75adb40a450fc464efa779, type: 2}
   roundTime: 0
   _tileMap: {fileID: 2135348196}
   _boxTileMap: {fileID: 733472296}
