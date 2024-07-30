@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,14 @@ public class Entity : MonoBehaviour
     protected virtual void OnDestroy()
     {
         OnDeathEvent?.Invoke();
-        Grid.Instance.remove(transform.position);
+        try
+        {
+            Grid.Instance.remove(transform.position);
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning(e.ToString());
+        }
     }
     private void Update()
     {
@@ -59,7 +67,6 @@ public class Entity : MonoBehaviour
                 }
 
                 targetEntity.OnMoveEvent.AddListener(OnTargetMove);
-                targetEntity.OnMoveEvent.AddListener(a => Debug.Log("밍"));
             }
             else
             {
@@ -71,10 +78,10 @@ public class Entity : MonoBehaviour
         else
         {
             Grid.Instance.remove(transform.position);
-            OnMoveEvent?.Invoke(targetPosition);
             command = new MoveCommand(this, 1 / _speed, targetPosition);
             command.onCompleteAction += () => isMoveing = false;
             commandInvoker.ExecuteCommand(command);
+            OnMoveEvent?.Invoke(targetPosition);
         }
     }
     IEnumerator a()

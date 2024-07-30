@@ -17,6 +17,9 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+    }
+    private void Start()
+    {
         switch (playerType)
         {
             case EnumPlayerType.Horizontal:
@@ -27,8 +30,20 @@ public class Player : Entity
                 break;
         }
     }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        _inputReader.OnPlayer1Move -= Move;
+        _inputReader.OnPlayer2Move -= Move;
+    }
     private void Update()
     {
+    }
+    public override void Move(Vector2 direction)
+    {
+        Debug.Log("Player");
+        base.Move(direction);
+        GameManager.Instance.test?.Invoke();
     }
     // public override void Move(Vector2 direction)
     // {

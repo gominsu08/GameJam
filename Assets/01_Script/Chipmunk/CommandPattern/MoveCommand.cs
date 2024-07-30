@@ -24,6 +24,7 @@ public class MoveCommand : Command
     NotifyValue<EnumCommandState> commandState = new NotifyValue<EnumCommandState>();
     public override void Execute()
     {
+        Debug.Log("enemy");
         commandState.Value = EnumCommandState.Executing;
 
         _beforePosition = _transform.position;
