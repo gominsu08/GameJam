@@ -19,21 +19,23 @@ public class Boom : BossAttackPattern
         _sequence = DOTween.Sequence();
         _sequence.Append(_spriteRenderer.DOColor(_spriteRenderer.color, 0));
 
-        float time = _duration;
-        for (int i = 1; i <= 10; i++)
+        int flashCount = Mathf.Max(1, Mathf.FloorToInt(_duration));
+        float initialtime = _duration / flashCount;
+
+        for (int i = 1; i <= flashCount; i++)
         {
-            time = _duration / (i * i);
-            _sequence.Append(_spriteRenderer.DOColor(Color.red, 0.05f));
-            _sequence.Join(transform.DOShakePosition(0.5f, new Vector2(0.01f, 0.01f) * i));
-            _sequence.Append(_spriteRenderer.DOColor(_defaultColor, 0.05f));
+            float time = (float) initialtime / i;
+            _sequence.Append(_spriteRenderer.DOColor(Color.red, time / 3));
+            _sequence.Join(transform.DOShakePosition(time / 3, new Vector2(0.01f, 0.01f) * i));
+            _sequence.Append(_spriteRenderer.DOColor(_defaultColor, time / 3));
             _sequence.AppendInterval(time);
         }
         base.Pattern();
     }
     public override void EndPattern()
     {
-        base.EndPattern();
         Attack();
+        base.EndPattern();
         _particle.Play();
     }
 }
