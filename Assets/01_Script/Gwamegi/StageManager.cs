@@ -1,30 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
 public class StageManager : MonoSingleton<StageManager>
 {
+    public List<GameObject> enemyList = new List<GameObject>();
+
     [SerializeField] private RoundManager _roundManager;
 
+    [SerializeField] private List<MapData> _mapData = new List<MapData>();
+
+    [SerializeField] private int _enemyCount;
+    [SerializeField] private int _boxCount;
 
     //타일맵
     [SerializeField] private Tilemap _tileMap;
+    //박스 타일맵
+    [SerializeField] private Tilemap _boxTileMap;
     //기본 타일
     [SerializeField] private Tile _baseTile;
-
+    //박스 타일
+    [SerializeField] private Tile _boxTile;
     //타일맵 위치
     [SerializeField] private Vector2 _tileTransform;
 
+    [SerializeField] private TMP_Text _moveCountText;
+
     private CreateEnemy _createEnemy;
 
+    //현재 스테이지
+    public int stage;
 
     //초기값 + 맵 데이터 나중에 없애도 상관없음
-    [SerializeField] private int _xMaxSize;
-    [SerializeField] private int _xMinSize;
-    [SerializeField] private int _yMaxSize;
-    [SerializeField] private int _yMinSize;
+    private int _xMaxSize;
+    private int _xMinSize;
+    private int _yMaxSize;
+    private int _yMinSize;
 
     //삭제 할떄 상용되는 변수
     private int _xMaxSizeIn;
@@ -33,9 +47,39 @@ public class StageManager : MonoSingleton<StageManager>
     private int _yMinSizeIn;
 
 
+    private int _playerMoveCount;
+
+
+    public void StageReset()
+    {
+        foreach (GameObject item in enemyList)
+        {
+            Destroy(item);
+        }
+        StartCoroutine(BoxTileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
+    }
+
+
+    public void playerMoveCountting()
+    {
+
+        _playerMoveCount++;
+
+        if (_playerMoveCount >= 20)
+        {
+            StartCoroutine(TileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
+            _playerMoveCount = 0;
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();
+        _xMaxSize = _mapData[stage].xMax;
+        _yMaxSize = _mapData[stage].yMax;
+        _xMinSize = _mapData[stage].xMin;
+        _yMinSize = _mapData[stage].yMin;
+
         _createEnemy = GetComponent<CreateEnemy>();
         _xMaxSizeIn = _xMaxSize;
         _yMaxSizeIn = _yMaxSize;
@@ -46,7 +90,14 @@ public class StageManager : MonoSingleton<StageManager>
 
     private void Update()
     {
+        _moveCountText.text = $"MoveCount[{_playerMoveCount}]";
+
         _tileMap.transform.position = _tileTransform;
+
+        _xMaxSize = _mapData[stage].xMax;
+        _yMaxSize = _mapData[stage].yMax;
+        _xMinSize = _mapData[stage].xMin;
+        _yMinSize = _mapData[stage].yMin;
 
         if (Input.GetKeyDown(KeyCode.V))
         {
@@ -64,12 +115,26 @@ public class StageManager : MonoSingleton<StageManager>
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            for (int i = 0; i < 25; i++)
-            {
-                _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
-            }
+            CreateBox(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
         }
     }
+
+    public void CreateBox(int xMin, int xMax, int yMin, int yMax)
+    {
+        int xRand = Random.Range(xMin, xMax + 1);
+        int yRand = Random.Range(yMin, yMax + 1);
+
+        if (_boxTileMap.GetTile(new Vector3Int(xRand, yRand)))
+        {
+            CreateBox(xMin, xMax, yMin, yMax);
+        }
+        else
+        {
+            _boxTileMap.SetTile(new Vector3Int(xRand, yRand), _boxTile);
+        }
+    }
+
+
 
 
     public void CreateEnemy(int count)
@@ -101,6 +166,11 @@ public class StageManager : MonoSingleton<StageManager>
 
     private IEnumerator Setting(int xMin, int xMax, int yMin, int yMax)
     {
+        _xMaxSizeIn = _xMaxSize;
+        _yMaxSizeIn = _yMaxSize;
+        _xMinSizeIn = _xMinSize;
+        _yMinSizeIn = _yMinSize;
+
         int xMaxSize = xMax;
         int xMinSize = xMin;
         int yMaxSize = yMax;
@@ -147,10 +217,53 @@ public class StageManager : MonoSingleton<StageManager>
         }
 
         _roundManager.timer.TileSet();
-        CreateEnemy(20);
+        CreateEnemy(_enemyCount);
+
+        for (int i = 0; i < _boxCount; i++)
+        {
+            CreateBox(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize);
+        }
+
     }
 
+    private IEnumerator BoxTileDestroy(int xMin, int xMax, int yMin, int yMax)
+    {
+        int xMaxSize = xMax;
+        int xMinSize = xMin;
+        int yMaxSize = yMax;
+        int yMinSize = yMin;
 
+        for (int j = 0; j <= (xMax - xMin) / 2; j++)
+        {
+            for (int i = xMinSize; i <= xMaxSize; i++)
+            {
+                _boxTileMap.SetTile(new Vector3Int(i, yMaxSize), null);
+            }
+
+            for (int i = yMaxSize; i >= yMinSize; i--)
+            {
+                _boxTileMap.SetTile(new Vector3Int(xMaxSize, i), null);
+            }
+
+            for (int i = xMaxSize; i >= xMinSize; i--)
+            {
+
+                _boxTileMap.SetTile(new Vector3Int(i, yMinSize), null);
+            }
+
+            for (int i = yMinSize; i <= yMaxSize; i++)
+            {
+                _boxTileMap.SetTile(new Vector3Int(xMinSize, i), null);
+            }
+
+            xMaxSize--;
+            xMinSize++;
+            yMaxSize--;
+            yMinSize++;
+
+        }
+        yield return null;
+    }
     private IEnumerator TileDestroy(int xMin, int xMax, int yMin, int yMax)
     {
         if (xMin == xMax - 2) yield break;
@@ -172,6 +285,7 @@ public class StageManager : MonoSingleton<StageManager>
         for (int i = xMinSize; i <= xMaxSize; i++)
         {
             _tileMap.SetTile(new Vector3Int(i, yMaxSize), null);
+            _boxTileMap.SetTile(new Vector3Int(i, yMaxSize), null);
             RaycastHit2D hit = Physics2D.Raycast(_tileMap.GetCellCenterWorld(new Vector3Int(i, yMaxSize)), Vector2.zero);
 
             if (hit.collider != null)
@@ -188,6 +302,7 @@ public class StageManager : MonoSingleton<StageManager>
 
         for (int i = yMaxSize; i >= yMinSize; i--)
         {
+            _boxTileMap.SetTile(new Vector3Int(xMaxSize, i), null);
             _tileMap.SetTile(new Vector3Int(xMaxSize, i), null);
             RaycastHit2D hit = Physics2D.Raycast(_tileMap.GetCellCenterWorld(new Vector3Int(xMaxSize, i)), Vector2.zero);
 
@@ -207,6 +322,7 @@ public class StageManager : MonoSingleton<StageManager>
         {
 
             _tileMap.SetTile(new Vector3Int(i, yMinSize), null);
+            _boxTileMap.SetTile(new Vector3Int(i, yMinSize), null);
             RaycastHit2D hit = Physics2D.Raycast(_tileMap.GetCellCenterWorld(new Vector3Int(i, yMinSize)), Vector2.zero);
 
             if (hit.collider != null)
@@ -225,6 +341,7 @@ public class StageManager : MonoSingleton<StageManager>
         for (int i = yMinSize; i <= yMaxSize; i++)
         {
             _tileMap.SetTile(new Vector3Int(xMinSize, i), null);
+            _boxTileMap.SetTile(new Vector3Int(xMinSize, i), null);
             RaycastHit2D hit = Physics2D.Raycast(_tileMap.GetCellCenterWorld(new Vector3Int(xMinSize, i)), Vector2.zero);
 
             if (hit.collider != null)

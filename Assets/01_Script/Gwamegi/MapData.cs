@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapData : MonoBehaviour
+[CreateAssetMenu(menuName = "SO/MapData")]
+public class MapData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int stage;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int xMax;
+    public int yMax;
+    public int xMin;
+    public int yMin;
 }

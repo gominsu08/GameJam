@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameTimer : MonoBehaviour
 {
@@ -9,8 +10,11 @@ public class GameTimer : MonoBehaviour
     [SerializeField] float CountDown123 = 0.0f;
     [SerializeField] bool isTimeFlow = true;
     [SerializeField] TMP_Text timerText;
+    [SerializeField] private NumCalculate _numCalculate;
 
     [SerializeField] private RoundManager roundManager;
+
+
 
     private bool isTileMapCreate;
      
@@ -18,7 +22,7 @@ public class GameTimer : MonoBehaviour
     {        
         timerText.text = $"Time [ {Mathf.Round(CountDown123)} ]";
         StageManager.Instance.TileSetCoroutineStart();
-        
+
     }
 
     private void Update()
@@ -35,15 +39,14 @@ public class GameTimer : MonoBehaviour
                 if (SetTime <= 0) return;
                 timerText.text = $"Time [ {Mathf.Round(SetTime)} ]";
                 SetTime -= Time.deltaTime;
-
+                
             }
         }
 
         if (SetTime <= 0 )
         {
-            roundManager.EndRound();
             TimeReset();
-            StageManager.Instance.TileSetCoroutineStart();
+            _numCalculate.StageClear();
             isTileMapCreate = false;
         }
     }
@@ -55,7 +58,7 @@ public class GameTimer : MonoBehaviour
 
     public void TimeReset()
     {
-        SetTime = 5;
+        SetTime = 60;
         CountDown123 = 0.0f;
         isTimeFlow = false;
     }
