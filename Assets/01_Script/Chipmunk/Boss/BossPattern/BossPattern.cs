@@ -16,7 +16,6 @@ public abstract class BossPattern : MonoBehaviour
     }
     public virtual void Pattern(){
         gameObject.SetActive(true);
-        Debug.Log("Pattern");
         gameObject.SetActive(true);
         _sequence.AppendCallback(EndPattern);
         _sequence.Play();
