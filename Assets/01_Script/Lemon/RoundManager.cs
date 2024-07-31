@@ -30,6 +30,7 @@ public class RoundManager : MonoBehaviour
                 RoundClear.Invoke();
                 RoundWin.Invoke();
                 stageText.text = $"¶ó¿îµå [ {DataManager.Instance.round} ]";
+                DataManager.Instance.round++;
                 timer.TimerFlow();
                 isEndRound = false;
             }
