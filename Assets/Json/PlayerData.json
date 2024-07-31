@@ -1,8 +1,8 @@
 {
-    "musicVolume": 0.0,
-    "sfxVolume": 0.0,
-    "bright": 0,
+    "musicVolume": 45.34331130981445,
+    "sfxVolume": 48.7745475769043,
+    "bright": 1,
     "effectOn": true,
     "round": 9,
-    "isDeveloper": true
+    "isDeveloper": false
 }
