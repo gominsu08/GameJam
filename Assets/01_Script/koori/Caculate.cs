@@ -19,6 +19,7 @@ public class Caculate : MonoBehaviour
         InputReader.Instance.OnPlayer1Move += aa;
         InputReader.Instance.OnPlayer2Move += aa;
     }
+    [SerializeField] LineRenderer lineRenderer;
     public void aa(Vector2 vector2)
     {
         if (_player1 == null || _player2 == null) return;
@@ -31,9 +32,21 @@ public class Caculate : MonoBehaviour
             _hit.Clear();
         }
     }
+    private void FixedUpdate()
+    {
+        if (IsPlayerInLine(_player1.position, _player2.position))
+        {
+
+            lineRenderer.positionCount = 2;
+            lineRenderer.SetPosition(0, _player1.position);
+            lineRenderer.SetPosition(1, _player2.position);
+        }
+        else
+            lineRenderer.positionCount = 0;
+
+    }
     private List<Collider2D> GetEntitiesBetweenPlayers(Vector2 player1Pos, Vector2 player2Pos)
     {
-        
         // 플레이어 1과 2 사이의 모든 좌표 계산
         var direction = (player2Pos - player1Pos).normalized;
         var distance = Vector2.Distance(player1Pos, player2Pos);

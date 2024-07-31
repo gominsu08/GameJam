@@ -36,7 +36,7 @@ public class Entity : MonoBehaviour
     private void Update()
     {
     }
-        public Command command;
+    public Command command;
     public virtual void Move(Vector2 direction)
     {
         if (isMoveing) return;
@@ -77,7 +77,7 @@ public class Entity : MonoBehaviour
         else
         {
             Grid.Instance.remove(transform.position);
-            command = new MoveCommand(this, 1 / _speed, targetPosition);
+            command = new MoveCommand(this, 1 / _speed / 3, targetPosition);
             OnMoveEvent?.Invoke(targetPosition);
             command.onCompleteAction += () => isMoveing = false;
             commandInvoker.ExecuteCommand(command);
