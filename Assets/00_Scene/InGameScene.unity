@@ -1251,6 +1251,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &224659193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224659195}
+  - component: {fileID: 224659194}
+  m_Layer: 0
+  m_Name: BossPatternDestroy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &224659194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224659193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e2cad585d09f84e9b4ffe8200812a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BossPaternList: []
+--- !u!4 &224659195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224659193}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 936.08594, y: 576.6582, z: -9.3251095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &279189466
 GameObject:
   m_ObjectHideFlags: 0
@@ -3181,6 +3226,7 @@ MonoBehaviour:
     bright: 1
     effectOn: 1
     round: 0
+    isDeveloper: 0
 --- !u!4 &709122832
 Transform:
   m_ObjectHideFlags: 0
@@ -5353,7 +5399,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBCF4\uC2A4\uC22B\uC790 [ 0 ]"
+  m_text: "\uBAA9\uD45C \uC22B\uC790 [ 0 ]"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9786378699af8de4d894fa3d641e871e, type: 2}
   m_sharedMaterial: {fileID: 5898914525763395673, guid: 9786378699af8de4d894fa3d641e871e, type: 2}
@@ -6977,7 +7023,6 @@ GameObject:
   - component: {fileID: 1736747101}
   - component: {fileID: 1736747100}
   - component: {fileID: 1736747104}
-  - component: {fileID: 1736747103}
   - component: {fileID: 1736747105}
   - component: {fileID: 1736747106}
   - component: {fileID: 1736747107}
@@ -7056,38 +7101,13 @@ Transform:
   m_GameObject: {fileID: 1736747099}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.03, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 628991079}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1736747103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736747099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e86d75cab4c14244c9386f6e5199efa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: {fileID: 0}
-  RoundClear:
-    m_PersistentCalls:
-      m_Calls: []
-  RoundWin:
-    m_PersistentCalls:
-      m_Calls: []
-  Roundlose:
-    m_PersistentCalls:
-      m_Calls: []
-  isEndRound: 0
-  isRoundWin: 0
-  stageText: {fileID: 0}
 --- !u!114 &1736747104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9626,3 +9646,4 @@ SceneRoots:
   - {fileID: 559634241}
   - {fileID: 1009743333}
   - {fileID: 1212683604}
+  - {fileID: 224659195}
