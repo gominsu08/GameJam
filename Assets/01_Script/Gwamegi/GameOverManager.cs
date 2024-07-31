@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,10 +10,21 @@ public class GameOverManager : MonoBehaviour
 {
     [SerializeField] private GameObject _gameOverPanel;
 
+    [SerializeField] private TMP_Text text;
+
     public void BossScene()
     {
-        SceneManager.LoadScene("GMSBoosScene");
+
+        StartCoroutine(GotoBoss());
         //이동막는거 넣어야함
+    }
+
+    private IEnumerator GotoBoss()
+    {
+        text.text = "목표 숫자에 도달하지 \n못하였습니다";
+        yield return new WaitForSeconds(1);
+        text.text = "";
+        SceneManager.LoadScene("GMSBoosScene");
     }
 
     public void GameOver()

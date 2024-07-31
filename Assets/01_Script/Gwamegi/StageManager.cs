@@ -70,6 +70,7 @@ public class StageManager : MonoSingleton<StageManager>
         {
             PoolManager.Instance.Push(item.GetComponent<IPoolable>());
         }
+        enemyList = new List<GameObject>();
         MapDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn);
         StartCoroutine(BoxTileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
         MapSetting();
@@ -122,7 +123,7 @@ public class StageManager : MonoSingleton<StageManager>
             isEnemyReset = false;
         }
 
-        _moveCountText.text = $"�̵�Ƚ��[{_playerMoveCount}]";
+        _moveCountText.text = $"이동횟수[{_playerMoveCount}]";
 
         _tileMap.transform.position = _tileTransform;
 
