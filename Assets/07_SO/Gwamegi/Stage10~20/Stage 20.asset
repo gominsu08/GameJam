@@ -23,5 +23,5 @@ MonoBehaviour:
   minBossNum: -5
   maxBossNum: -5
   roundTime: 30
-  player1: 90
-  player2: 99
+  player1: 3
+  player2: 9

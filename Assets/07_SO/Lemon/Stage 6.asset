@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Stage 6
   m_EditorClassIdentifier: 
   stage: 6
-  xMax: 17
+  xMax: 12
   yMax: 13
-  xMin: -17
+  xMin: -12
   yMin: -13
   boxCount: 50
   enemyCount: 30

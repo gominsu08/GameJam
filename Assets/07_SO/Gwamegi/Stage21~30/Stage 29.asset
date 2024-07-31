@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e23757968faea3488ee3c9338a4865c, type: 3}
-  m_Name: Stage 9
+  m_Name: Stage 29
   m_EditorClassIdentifier: 
-  stage: 9
+  stage: 29
   xMax: 12
   yMax: 15
   xMin: -12
   yMin: -15
   boxCount: 20
-  enemyCount: 35
+  enemyCount: 30
   spawnEnemyType: 0000000001000000
   minBossNum: 20
   maxBossNum: 30
