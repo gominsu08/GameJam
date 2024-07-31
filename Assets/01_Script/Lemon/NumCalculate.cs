@@ -16,7 +16,7 @@ public class NumCalculate : MonoBehaviour
 
     private void Awake()
     {
-        DataManager.Instance.round += 1;
+        
     }
 
     private void Update()
@@ -43,7 +43,7 @@ public class NumCalculate : MonoBehaviour
         {
             roundManager.isRoundWin = false;
             DataManager.Instance.Hp = pc1num + pc2num;
-            DataManager.Instance.time = 
+            DataManager.Instance.bossTime = 
                 ((pc1num > pc2num ? pc1num : pc2num) < bossNumber._bossNum ?
                 bossNumber._bossNum - (pc1num > pc2num ? pc1num : pc2num) : (pc1num > pc2num ? pc2num : pc1num) - bossNumber._bossNum) + 10;
             roundManager.EndRound();

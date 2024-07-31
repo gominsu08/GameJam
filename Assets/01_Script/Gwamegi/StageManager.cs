@@ -96,12 +96,8 @@ public class StageManager : MonoSingleton<StageManager>
     protected override void Awake()
     {
         base.Awake();
-        
+        DataManager.Instance.round += 1;
         _createEnemy = GetComponent<CreateEnemy>();
-    }
-
-    private void Start()
-    {
         MapSetting();
 
         _xMaxSizeIn = _map.xMax;
@@ -110,6 +106,11 @@ public class StageManager : MonoSingleton<StageManager>
         _yMinSizeIn = _map.yMin;
 
         _roundManager.timer.Initialize();
+    }
+
+    private void Start()
+    {
+       
     }
     private void Update()
     {

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Stage 6
   m_EditorClassIdentifier: 
   stage: 6
-  xMax: 15
-  yMax: 15
-  xMin: -15
-  yMin: -15
+  xMax: 17
+  yMax: 13
+  xMin: -17
+  yMin: -13
   boxCount: 50
-  enemyCount: 100
+  enemyCount: 30
   spawnEnemyType: 0200000001000000
   minBossNum: -60
   maxBossNum: -70
