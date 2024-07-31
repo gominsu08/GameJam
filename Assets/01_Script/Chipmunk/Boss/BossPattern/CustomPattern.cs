@@ -39,7 +39,6 @@ public class CustomPattern : BossPattern
             _sequence.AppendInterval(item.delay);
             _sequence.AppendCallback(pattern.Pattern);
         });
-        _sequence.JoinCallback(() => Debug.Log("c"));
         _sequence.Play();
         base.Pattern();
     }

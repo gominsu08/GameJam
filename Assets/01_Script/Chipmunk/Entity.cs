@@ -84,8 +84,4 @@ public class Entity : MonoBehaviour
             commandInvoker.ExecuteCommand(command);
         }
     }
-    IEnumerator a()
-    {
-        yield return null;
-    }
 }

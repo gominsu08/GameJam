@@ -33,16 +33,16 @@ public class TutorialCalculator : MonoBehaviour
     }
     private List<Collider2D> GetEntitiesBetweenPlayers(Vector2 player1Pos, Vector2 player2Pos)
     {
-        // ÇÃ·¹ÀÌ¾î 1°ú 2 »çÀÌÀÇ ¸ðµç ÁÂÇ¥ °è»ê
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ 1ï¿½ï¿½ 2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½
         var direction = (player2Pos - player1Pos).normalized;
         var distance = Vector2.Distance(player1Pos, player2Pos);
-        var steps = Mathf.CeilToInt(distance); // °Å¸®¸¸Å­ÀÇ ½ºÅÜ °è»ê
+        var steps = Mathf.CeilToInt(distance); // ï¿½Å¸ï¿½ï¿½ï¿½Å­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
         var positionsBetween = Enumerable.Range(0, steps)
                                          .Select(step => player1Pos + direction * step)
                                          .ToList();
 
-        // Grid.Instance.entities¿¡¼­ ÇØ´ç ÁÂÇ¥¿¡ ÀÖ´Â ¿£Æ¼Æ¼µéÀ» ÇÊÅÍ¸µ
+        // Grid.Instance.entitiesï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Æ¼Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½
         var entities = Grid.Instance.entityDic
                              .Where(entity => positionsBetween.Contains((Vector2)entity.Key))
                              .Select(entity => entity.Value.GetComponent<Collider2D>())
