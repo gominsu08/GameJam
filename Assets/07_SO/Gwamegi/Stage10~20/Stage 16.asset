@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e23757968faea3488ee3c9338a4865c, type: 3}
-  m_Name: Stage 5
+  m_Name: Stage 16
   m_EditorClassIdentifier: 
-  stage: 5
-  xMax: 12
-  yMax: 12
-  xMin: -12
-  yMin: -12
+  stage: 16
+  xMax: 17
+  yMax: 13
+  xMin: -17
+  yMin: -13
   boxCount: 50
-  enemyCount: 25
-  spawnEnemyType: 00000000010000000200000003000000
-  minBossNum: 10
-  maxBossNum: 10
+  enemyCount: 30
+  spawnEnemyType: 0200000001000000
+  minBossNum: -60
+  maxBossNum: -70
   roundTime: 30
-  player1: 1
-  player2: 9
+  player1: 7
+  player2: 3
