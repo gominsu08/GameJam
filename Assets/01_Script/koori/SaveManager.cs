@@ -32,4 +32,5 @@ public class SaveData
     public BrightValue bright = BrightValue.Low;
     public bool effectOn = true;
     public int round = 0;
+    public bool isDeveloper = false;
 }

@@ -41,9 +41,15 @@ public class Health : MonoBehaviour
     }
     private void Awake()
     {
+        SaveManager.Instance.LoadPlayerData();
         if (entity == null)
             entity = GetComponent<Entity>();
         Initialize();
+    }
+
+    private void Start()
+    {
+        invincibility = SaveManager.Instance.playerData.isDeveloper;
     }
     private void Die()
     {
