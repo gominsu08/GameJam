@@ -4,19 +4,6 @@ using UnityEngine;
 
 public class DataManager : MonoSingleton<DataManager>
 {
-    protected override void Awake()
-    {
-        var obj = FindObjectsOfType<DataManager>();
-        if (obj.Length == 1)
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public int round;
     private int hp = 40;
 

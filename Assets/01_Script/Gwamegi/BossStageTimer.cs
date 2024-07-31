@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class BossStageTimer : MonoBehaviour
 { 
 
-    [SerializeField]private float time;
-
+    private float time;
+    private int maxRound;
     public float Times
     {
         get {  return time; } 
@@ -28,7 +28,12 @@ public class BossStageTimer : MonoBehaviour
 
     private void BossStageClear()
     {
-       
+        SaveManager.Instance.LoadPlayerData();
+        maxRound = SaveManager.Instance.playerData.round;
+
+        SaveManager.Instance.playerData.round = DataManager.Instance.round >= maxRound ? DataManager.Instance.round : maxRound;
+        SettingManager.Instance.DataSave();
+        SaveManager.Instance.SavePlayerDataToJson();
         SceneManager.LoadScene("InGameScene");
     }
 

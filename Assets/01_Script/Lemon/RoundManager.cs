@@ -62,6 +62,5 @@ public class RoundManager : MonoBehaviour
 
     public void ResetRound()
     {
-        DataManager.Instance.round = 1; 
     }
 }
