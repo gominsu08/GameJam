@@ -48,8 +48,6 @@ public class NumCalculate : MonoBehaviour
                 bossNumber._bossNum - (pc1num > pc2num ? pc1num : pc2num) : (pc1num > pc2num ? pc2num : pc1num) - bossNumber._bossNum) + 10;
             roundManager.EndRound();
         }
-
-        
     }
 
     private IEnumerator Clear()
@@ -57,8 +55,9 @@ public class NumCalculate : MonoBehaviour
         yield return new WaitForSeconds(1);
         _player1.transform.position = new Vector3(0,1,0);
         _player2.transform.position = new Vector3(2,1,0);
-        DataManager.Instance.round++;
         roundManager.isRoundWin = true;
+        DataManager.Instance.round++;
+
         StageManager.Instance.StageReset();
         roundManager.timer.SetTime = StageManager.Instance.roundTime;
         StageManager.Instance.TileSetCoroutineStart();
