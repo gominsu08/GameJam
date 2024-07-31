@@ -58,7 +58,6 @@ public class CreateEnemy : MonoBehaviour
 
         if (enemySpawnpoint.TryAdd(vec,true))
         {
-            Debug.Log("Enemy ���� " + vec);
             Enemy enemy = PoolManager.Instance.Pop(_spawnEnemy[Random.Range(0, _spawnEnemy.Count)], vec) as Enemy;
             enemy.GetComponent<NumberContainer>().number = Random.Range(1, 10);
             StageManager.Instance.enemyList.Add(enemy.gameObject);

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class NumCalculate : MonoBehaviour
 {
-    private int pc1num; // ÇÃ·¹ÀÌ¾î ³Ñ ¿¬°á ÇÊ¿ä
-    private int pc2num; // ÇÃ·¹ÀÌ¾î ³Ñ ¿¬°á ÇÊ¿ä
+    private int pc1num; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
+    private int pc2num; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
     [SerializeField] BossNumber bossNumber;
     [SerializeField] RoundManager roundManager;
     [SerializeField] private PlayerNum playerNum;
@@ -33,6 +33,7 @@ public class NumCalculate : MonoBehaviour
 
     public void StageClear() 
     {
+        Grid.Instance.Reset();
 
         if ((pc1num <= bossNumber._bossNum && bossNumber._bossNum <= pc2num) || (pc2num <= bossNumber._bossNum & bossNumber._bossNum <= pc1num))
         {

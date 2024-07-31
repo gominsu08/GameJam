@@ -21,7 +21,8 @@ public class Enemy : Entity, IPoolable
     }
     protected override void Awake()
     {
-        base.Awake();
+        if (_visualTrm == null)
+            _visualTrm = transform.Find("Visual");
         if (!enemies.Contains(this))
             enemies.Add(this);
     }
@@ -39,13 +40,17 @@ public class Enemy : Entity, IPoolable
         if (_visualTrm == null)
             _visualTrm = transform.Find("Visual");
         if (!Grid.Instance.set(this, transform.position))
-            Debug.Log($"entity : {transform.position}좌표에 이미 벽이 있습니다!");
+            Debug.Log($"entity : {transform.position}!!!");
+        else
+            Debug.Log("entity : {transform.position} 성공");
         if (!enemies.Contains(this))
             enemies.Add(this);
     }
 
     public void Effect()
     {
+        gameObject.SetActive(true);
         Instantiate(_particleSystem, transform.position, Quaternion.identity);
+        PoolManager.Instance.Push(this);
     }
 }

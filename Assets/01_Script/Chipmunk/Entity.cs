@@ -59,7 +59,6 @@ public class Entity : MonoBehaviour
                 coroutine = StartCoroutine(waiter());
                 void OnTargetMove(Vector2 pos)
                 {
-                    Debug.Log("밍밍");
                     isMoveing = false;
                     Move(direction);
                     targetEntity.OnMoveEvent.RemoveListener(OnTargetMove);

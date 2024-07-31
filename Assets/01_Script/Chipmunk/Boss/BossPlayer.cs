@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -24,16 +25,15 @@ public class BossPlayer : Entity
         //     };
         // });
     }
+
     public override void Move(Vector2 direction)
     {
-        if (isMoveing) moveQueue.Enqueue(direction);
         base.Move(direction);
         // isMoveing = false;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         _visualTrm.DORotate(new Vector3(0, 0, angle), 1 / _speed);
         // transform.DORotate(new Vector3(0, 0, transform.rotation.eulerAngles.z + 90), 1 / _speed);
     }
-    Queue<Vector2> moveQueue = new Queue<Vector2>();
 
 
     private void OnDisable()
