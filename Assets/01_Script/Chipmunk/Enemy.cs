@@ -41,12 +41,16 @@ public class Enemy : Entity, IPoolable
             _visualTrm = transform.Find("Visual");
         if (!Grid.Instance.set(this, transform.position))
             Debug.Log($"entity : {transform.position}!!!");
+        else
+            Debug.Log("entity : {transform.position} 성공");
         if (!enemies.Contains(this))
             enemies.Add(this);
     }
 
     public void Effect()
     {
+        gameObject.SetActive(true);
         Instantiate(_particleSystem, transform.position, Quaternion.identity);
+        PoolManager.Instance.Push(this);
     }
 }

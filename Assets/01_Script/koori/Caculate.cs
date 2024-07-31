@@ -33,6 +33,7 @@ public class Caculate : MonoBehaviour
     }
     private List<Collider2D> GetEntitiesBetweenPlayers(Vector2 player1Pos, Vector2 player2Pos)
     {
+        
         // 플레이어 1과 2 사이의 모든 좌표 계산
         var direction = (player2Pos - player1Pos).normalized;
         var distance = Vector2.Distance(player1Pos, player2Pos);
