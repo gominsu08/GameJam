@@ -19,8 +19,10 @@ public class RoundManager : MonoBehaviour
 
     private int maxRound;
 
+
     public void Update()
     {
+        stageText.text = $"라운드 [ {DataManager.Instance.round} ]";
         if (isEndRound) // 라운드 끝
         {
             InputReader.Instance.controls.Default.Disable();
