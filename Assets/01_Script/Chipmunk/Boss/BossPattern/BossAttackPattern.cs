@@ -27,12 +27,12 @@ public class BossAttackPattern : BossPattern
         Vector2Int randomPos;
         randomPos = Vector2Int.RoundToInt(GetRandomPosition());
         int tryCount = 0;
-        while (patternDictionary.ContainsKey(randomPos) || tryCount < 99)
+        while (patternDictionary.ContainsKey(randomPos) && tryCount < 99)
         {
             tryCount++;
             randomPos = Vector2Int.RoundToInt(GetRandomPosition());
         }
-        transform.position = (Vector2) randomPos;
+        transform.position = (Vector2)randomPos;
         patternDictionary.Add(new Vector2Int((int)transform.position.x, (int)transform.position.y), this);
     }
     public virtual void Pattern(Vector2 position)
@@ -43,7 +43,9 @@ public class BossAttackPattern : BossPattern
     override public void EndPattern()
     {
         base.EndPattern();
-        patternDictionary.Remove(new Vector2Int((int)transform.position.x, (int)transform.position.y));
+        Vector2Int pos = new Vector2Int((int)transform.position.x, (int)transform.position.y);
+        if (patternDictionary[pos] == this)
+            patternDictionary.Remove(pos);
     }
     public void Attack()
     {
