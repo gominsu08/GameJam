@@ -318,7 +318,7 @@ public class StageManager : MonoSingleton<StageManager>
                     yield break;
                 }
             }
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.0001f);
         }
 
         for (int i = yMaxSize; i >= yMinSize; i--)
@@ -346,7 +346,7 @@ public class StageManager : MonoSingleton<StageManager>
             {
                 Debug.Log("Ÿ�� ���� ������Ʈ�� �����ϴ�.");
             }
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.0001f);
         }
 
         for (int i = xMaxSize; i >= xMinSize; i--)
@@ -375,7 +375,7 @@ public class StageManager : MonoSingleton<StageManager>
             {
                 Debug.Log("Ÿ�� ���� ������Ʈ�� �����ϴ�.");
             }
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.0001f);
 
         }
 
@@ -404,7 +404,7 @@ public class StageManager : MonoSingleton<StageManager>
             {
                 Debug.Log("Ÿ�� ���� ������Ʈ�� �����ϴ�.");
             }
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.0001f);
         }
 
 
