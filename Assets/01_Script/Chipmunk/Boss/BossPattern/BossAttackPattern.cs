@@ -27,7 +27,7 @@ public class BossAttackPattern : BossPattern
         Vector2Int randomPos;
         randomPos = Vector2Int.RoundToInt(GetRandomPosition());
         int tryCount = 0;
-        while (patternDictionary.ContainsKey(randomPos) || tryCount < 99)
+        while (patternDictionary.ContainsKey(randomPos) && tryCount < 99)
         {
             tryCount++;
             randomPos = Vector2Int.RoundToInt(GetRandomPosition());
