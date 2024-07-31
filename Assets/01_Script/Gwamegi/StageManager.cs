@@ -26,31 +26,31 @@ public class StageManager : MonoSingleton<StageManager>
 
     public UnityEvent OnGameOver;
 
-    //Å¸ÀÏ¸Ê
+    //Å¸ï¿½Ï¸ï¿½
     [SerializeField] private Tilemap _tileMap;
-    //¹Ú½º Å¸ÀÏ¸Ê
+    //ï¿½Ú½ï¿½ Å¸ï¿½Ï¸ï¿½
     [SerializeField] private Tilemap _boxTileMap;
-    //±âº» Å¸ÀÏ
+    //ï¿½âº» Å¸ï¿½ï¿½
     [SerializeField] private Tile _baseTile;
-    //¹Ú½º Å¸ÀÏ
+    //ï¿½Ú½ï¿½ Å¸ï¿½ï¿½
     [SerializeField] private Tile _boxTile;
-    //Å¸ÀÏ¸Ê À§Ä¡
+    //Å¸ï¿½Ï¸ï¿½ ï¿½ï¿½Ä¡
     [SerializeField] private Vector2 _tileTransform;
 
     [SerializeField] private TMP_Text _moveCountText;
 
     private CreateEnemy _createEnemy;
 
-    //ÇöÀç ½ºÅ×ÀÌÁö
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public int stage;
 
-    //ÃÊ±â°ª + ¸Ê µ¥ÀÌÅÍ ³ªÁß¿¡ ¾ø¾Öµµ »ó°ü¾øÀ½
+    //ï¿½Ê±â°ª + ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½Öµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private int _xMaxSize;
     private int _xMinSize;
     private int _yMaxSize;
     private int _yMinSize;
 
-    //»èÁ¦ ÇÒ‹š »ó¿ëµÇ´Â º¯¼ö
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ò‹ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½
     private int _xMaxSizeIn;
     private int _xMinSizeIn;
     private int _yMaxSizeIn;
@@ -103,7 +103,7 @@ public class StageManager : MonoSingleton<StageManager>
     }
     private void Update()
     {
-        _moveCountText.text = $"ÀÌµ¿È½¼ö[{_playerMoveCount}]";
+        _moveCountText.text = $"ï¿½Ìµï¿½È½ï¿½ï¿½[{_playerMoveCount}]";
 
         _tileMap.transform.position = _tileTransform;
 
@@ -287,7 +287,7 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
                 hit.collider.gameObject.SetActive(false);
                 if(hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
@@ -301,7 +301,7 @@ public class StageManager : MonoSingleton<StageManager>
             }
             else
             {
-                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
+                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             }
             yield return new WaitForSeconds(0.001f);
         }
@@ -314,7 +314,7 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
                 hit.collider.gameObject.SetActive(false);
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
@@ -328,7 +328,7 @@ public class StageManager : MonoSingleton<StageManager>
             }
             else
             {
-                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
+                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             }
             yield return new WaitForSeconds(0.001f);
         }
@@ -342,7 +342,7 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
                 hit.collider.gameObject.SetActive(false);
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
@@ -356,7 +356,7 @@ public class StageManager : MonoSingleton<StageManager>
             }
             else
             {
-                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
+                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             }
             yield return new WaitForSeconds(0.001f);
 
@@ -370,7 +370,7 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
                 hit.collider.gameObject.SetActive(false);
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
@@ -384,7 +384,7 @@ public class StageManager : MonoSingleton<StageManager>
             }
             else
             {
-                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
+                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             }
             yield return new WaitForSeconds(0.001f);
         }

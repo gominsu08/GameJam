@@ -6,9 +6,10 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] Entity entity;
+    [SerializeField][Tooltip("무적기능")] bool invincibility = false;
     [SerializeField]
     public int maxhp = 100;
-    [SerializeField][Tooltip("무적기능")] bool invincibility = false;
     [SerializeField]
     private int hp;
     public int HP
@@ -38,10 +39,12 @@ public class Health : MonoBehaviour
     }
     private void Awake()
     {
+        if (entity == null)
+            entity = GetComponent<Entity>();
         Initialize();
     }
     private void Die()
     {
-        Destroy(gameObject);
+        Destroy(entity.gameObject);
     }
 }

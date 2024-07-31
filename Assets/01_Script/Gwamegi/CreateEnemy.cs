@@ -58,7 +58,7 @@ public class CreateEnemy : MonoBehaviour
 
         if (enemySpawnpoint.TryAdd(vec,true))
         {
-            Debug.Log("Enemy »ý¼º " + vec);
+            Debug.Log("Enemy ï¿½ï¿½ï¿½ï¿½ " + vec);
             Enemy enemy = PoolManager.Instance.Pop(_spawnEnemy[Random.Range(0, _spawnEnemy.Count)], vec) as Enemy;
             enemy.GetComponent<NumberContainer>().number = Random.Range(1, 10);
             StageManager.Instance.enemyList.Add(enemy.gameObject);
@@ -72,7 +72,7 @@ public class CreateEnemy : MonoBehaviour
         //RaycastHit2D hit = Physics2D.Raycast(vec, Vector2.zero);
         ////if(Enemy.enemies.Where(a => (Vector2)a.transform.position == vec).ToList().Count == 0)
         ////{
-        ////    Debug.Log("Enemy »ý¼º");
+        ////    Debug.Log("Enemy ï¿½ï¿½ï¿½ï¿½");
         ////    Enemy enemy = PoolManager.Instance.Pop(_spawnEnemy[Random.Range(0, _spawnEnemy.Count)], vec) as Enemy;
         ////    enemy.GetComponent<NumberContainer>().number = Random.Range(1, 10);
         ////    StageManager.Instance.enemyList.Add(enemy.gameObject);
@@ -80,12 +80,12 @@ public class CreateEnemy : MonoBehaviour
         ////}
         //if (hit.collider != null)
         //{
-        //    Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
+        //    Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
         //    EnemyCreate(xMin, xMax,yMin,yMax, spawnEnemy);
         //}
         //else
         //{
-        //    Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
+        //    Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
         //    Enemy enemy = PoolManager.Instance.Pop(_spawnEnemy[Random.Range(0, _spawnEnemy.Count)], vec) as Enemy;
         //    enemy.GetComponent<NumberContainer>().number = Random.Range(1,10);
         //    StageManager.Instance.enemyList.Add(enemy.gameObject);
