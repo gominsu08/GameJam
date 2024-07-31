@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Stage 8
   m_EditorClassIdentifier: 
   stage: 8
-  xMax: 15
-  yMax: 15
-  xMin: -15
-  yMin: -15
+  xMax: 13
+  yMax: 14
+  xMin: -13
+  yMin: -14
   boxCount: 20
-  enemyCount: 50
+  enemyCount: 42
   spawnEnemyType: 020000000000000001000000
   minBossNum: 30
   maxBossNum: 70

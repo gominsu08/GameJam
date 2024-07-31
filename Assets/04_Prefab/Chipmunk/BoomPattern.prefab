@@ -51,7 +51,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _attacker: {fileID: 3809818678056674913}
-  damage: 5
+  damage: 35
   _spriteRenderer: {fileID: 4786556497956466570}
   _duration: 5
   _particle: {fileID: 615932751454317119}
