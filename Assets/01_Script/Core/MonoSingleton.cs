@@ -40,6 +40,10 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
     private void OnDisable()
     {

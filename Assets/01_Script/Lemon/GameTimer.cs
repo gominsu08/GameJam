@@ -21,6 +21,7 @@ public class GameTimer : MonoBehaviour
      
     public void Initialize()
     {        
+        StageManager.Instance.MapSetting();
         StageManager.Instance.TileSetCoroutineStart();
         InputReader.Instance.controls.Default.Disable();
         SetTime = StageManager.Instance.roundTime;

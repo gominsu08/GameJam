@@ -129,7 +129,7 @@ public class StageManager : MonoSingleton<StageManager>
         _tileMap.transform.position = _tileTransform;
 
     }
-    private void MapSetting()
+    public void MapSetting()
     {
         foreach (MapData item in _mapData)
         {
@@ -185,6 +185,7 @@ public class StageManager : MonoSingleton<StageManager>
     }
     public void TileSetCoroutineStart()
     {
+        
         StartCoroutine(Setting(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize));
     }
     private IEnumerator Setting(int xMin, int xMax, int yMin, int yMax)

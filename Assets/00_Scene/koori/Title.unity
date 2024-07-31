@@ -14469,7 +14469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28abccb06c2b9874dae47b598110046e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDontDestroy: 0
+  isDontDestroy: 1
   round: 0
 --- !u!4 &1992422475
 Transform:
