@@ -46,8 +46,19 @@ public class Cosole : MonoBehaviour
                 case "하늘":
                     _result.text = "158"; break;
                 case "대상혁":
-                    _result.text = "그는 신이야! 숭배해야만 해!"; break ;
-
+                    _result.text = "그는 신이야! 숭배해야만 해!"; break;
+                case "Baker":
+                    if (!SaveManager.Instance.playerData.isDeveloper)
+                    {
+                        _result.text = "디버그 모드 활성화.";
+                        SaveManager.Instance.playerData.isDeveloper = true;
+                    }
+                    else
+                    {
+                        _result.text = "디버그 모드 비활성화.";
+                        SaveManager.Instance.playerData.isDeveloper = false;
+                    }
+                    break;
             }
         }
         else
