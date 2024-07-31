@@ -9,7 +9,6 @@ public class TitleBtn : MonoBehaviour
 {
     [SerializeField] private SettingManager _settingManager;
     [SerializeField] private TMP_Text _bestScore;
-    [SerializeField] private AudioClip _clickClip;
 
     private void Awake()
     {
@@ -25,7 +24,7 @@ public class TitleBtn : MonoBehaviour
     }
     public void GameStart()
     {
-        SFXPlayer.Instance.PlaySFX(_clickClip);
+        SFXPlayer.Instance.PlayClick();
         _settingManager.DataSave();
        
         SceneManager.LoadScene("InGameScene");
@@ -33,7 +32,7 @@ public class TitleBtn : MonoBehaviour
 
     public void GameExit()
     {
-        SFXPlayer.Instance.PlaySFX(_clickClip);
+        SFXPlayer.Instance.PlayClick();
         Application.Quit();
     }
 }

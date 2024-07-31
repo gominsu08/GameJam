@@ -1542,7 +1542,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectIcon: {fileID: 21638405}
   _textImpact: 1.1
-  _enterClip: {fileID: 8300000, guid: 3e5cface5d688364888f7fa3589678a9, type: 3}
 --- !u!1 &239986364
 GameObject:
   m_ObjectHideFlags: 0
@@ -4782,6 +4781,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 0
+  _clickSound: {fileID: 8300000, guid: eccdeae28889a374d8d84c917addfc44, type: 3}
+  _closeSound: {fileID: 8300000, guid: 40014908f049b714c887802d4462230c, type: 3}
+  _enterSound: {fileID: 8300000, guid: 3e5cface5d688364888f7fa3589678a9, type: 3}
+  _playerMoveSound: {fileID: 8300000, guid: 71e120b30adb70b4ab99d3f93d1367ba, type: 3}
+  _enemyDestorySound: {fileID: 8300000, guid: c194764bcc1056440b524de1a66a8227, type: 3}
 --- !u!1 &1020189034
 GameObject:
   m_ObjectHideFlags: 0
@@ -11919,7 +11923,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectIcon: {fileID: 2091146357}
   _textImpact: 1.1
-  _enterClip: {fileID: 8300000, guid: 3e5cface5d688364888f7fa3589678a9, type: 3}
 --- !u!1 &1535211546
 GameObject:
   m_ObjectHideFlags: 0
@@ -12526,7 +12529,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingManager: {fileID: 2141628015}
   _bestScore: {fileID: 1115090915}
-  _clickClip: {fileID: 8300000, guid: eccdeae28889a374d8d84c917addfc44, type: 3}
 --- !u!4 &1686643865
 Transform:
   m_ObjectHideFlags: 0
@@ -14480,7 +14482,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectIcon: {fileID: 1559434821}
   _textImpact: 1.1
-  _enterClip: {fileID: 8300000, guid: 3e5cface5d688364888f7fa3589678a9, type: 3}
 --- !u!1 &2091146354
 GameObject:
   m_ObjectHideFlags: 0
@@ -15152,8 +15153,6 @@ MonoBehaviour:
   _musicVolume: 50
   _sfxVolume: 50
   _isTitle: 1
-  _sfxClip: {fileID: 8300000, guid: 40014908f049b714c887802d4462230c, type: 3}
-  _clickClip: {fileID: 8300000, guid: eccdeae28889a374d8d84c917addfc44, type: 3}
   effect: 1
 --- !u!4 &2141628016
 Transform:

@@ -9,7 +9,6 @@ public class TitleText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 {
     [SerializeField] private Image _selectIcon;
     [SerializeField] private float _textImpact;
-    [SerializeField] private AudioClip _enterClip;
 
     private bool _isActive = false;
 
@@ -31,7 +30,7 @@ public class TitleText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (!_isActive)
         {
-            SFXPlayer.Instance.PlaySFX(_enterClip);
+            SFXPlayer.Instance.PlayEnter();
             _isActive = true;
         }
         _selectIcon.gameObject.SetActive(true);
