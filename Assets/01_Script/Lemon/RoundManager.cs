@@ -19,11 +19,6 @@ public class RoundManager : MonoBehaviour
 
     private int maxRound;
 
-    private void Awake()
-    {
-        DataManager.Instance.round = 1;
-    }
-
     public void Update()
     {
         if (isEndRound) // 라운드 끝

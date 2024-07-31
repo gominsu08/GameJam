@@ -18,7 +18,7 @@ MonoBehaviour:
   xMin: -15
   yMin: -15
   boxCount: 50
-  enemyCount: 100
+  enemyCount: 50
   spawnEnemyType: 00000000010000000200000003000000
   minBossNum: 10
   maxBossNum: 10

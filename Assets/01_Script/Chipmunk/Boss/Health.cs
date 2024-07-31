@@ -8,6 +8,8 @@ public class Health : MonoBehaviour
 {
     [SerializeField] Entity entity;
     [SerializeField][Tooltip("무적기능")] bool invincibility = false;
+    public UnityEvent OnDieEvent;
+
     [SerializeField]
     public int maxhp = 100;
     [SerializeField]
@@ -46,5 +48,7 @@ public class Health : MonoBehaviour
     private void Die()
     {
         Destroy(entity.gameObject);
+        OnDieEvent?.Invoke();
+        gameObject.SetActive(false); 
     }
 }

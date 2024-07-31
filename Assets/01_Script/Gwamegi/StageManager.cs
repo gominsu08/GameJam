@@ -25,32 +25,33 @@ public class StageManager : MonoSingleton<StageManager>
     public int player2;
 
     public UnityEvent OnGameOver;
+    public UnityEvent OnPlayerDeath;
 
-    //Å¸ï¿½Ï¸ï¿½
+    //Å¸ÀÏ¸Ê
     [SerializeField] private Tilemap _tileMap;
-    //ï¿½Ú½ï¿½ Å¸ï¿½Ï¸ï¿½
+    //¹Ú½º Å¸ÀÏ¸Ê
     [SerializeField] private Tilemap _boxTileMap;
-    //ï¿½âº» Å¸ï¿½ï¿½
+    //±âº» Å¸ÀÏ
     [SerializeField] private Tile _baseTile;
-    //ï¿½Ú½ï¿½ Å¸ï¿½ï¿½
+    //¹Ú½º Å¸ÀÏ
     [SerializeField] private Tile _boxTile;
-    //Å¸ï¿½Ï¸ï¿½ ï¿½ï¿½Ä¡
+    //Å¸ÀÏ¸Ê À§Ä¡
     [SerializeField] private Vector2 _tileTransform;
 
     [SerializeField] private TMP_Text _moveCountText;
 
     private CreateEnemy _createEnemy;
 
-    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //ÇöÀç ½ºÅ×ÀÌÁö
     public int stage;
 
-    //ï¿½Ê±â°ª + ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½Öµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //ÃÊ±â°ª + ¸Ê µ¥ÀÌÅÍ ³ªÁß¿¡ ¾ø¾Öµµ »ó°ü¾øÀ½
     private int _xMaxSize;
     private int _xMinSize;
     private int _yMaxSize;
     private int _yMinSize;
 
-    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ò‹ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //»èÁ¦ ÇÒ‹š »ó¿ëµÇ´Â º¯¼ö
     private int _xMaxSizeIn;
     private int _xMinSizeIn;
     private int _yMaxSizeIn;
@@ -59,9 +60,10 @@ public class StageManager : MonoSingleton<StageManager>
 
     private int _playerMoveCount;
 
-
+    public bool isEnemyReset;
     public void StageReset()
     {
+        isEnemyReset = false;
         _createEnemy.SetEnemyDic();
         _createEnemy.SetEnemyList();
         foreach (GameObject item in enemyList)
@@ -71,6 +73,7 @@ public class StageManager : MonoSingleton<StageManager>
         MapDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn);
         StartCoroutine(BoxTileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
         MapSetting();
+        isEnemyReset = true;
     }
     public void playerMoveCountting()
     {
@@ -93,17 +96,34 @@ public class StageManager : MonoSingleton<StageManager>
     protected override void Awake()
     {
         base.Awake();
+        
+        _createEnemy = GetComponent<CreateEnemy>();
+    }
+
+    private void Start()
+    {
         MapSetting();
 
         _xMaxSizeIn = _map.xMax;
         _yMaxSizeIn = _map.yMax;
         _xMinSizeIn = _map.xMin;
         _yMinSizeIn = _map.yMin;
-        _createEnemy = GetComponent<CreateEnemy>();
+
+        _roundManager.timer.Initialize();
     }
     private void Update()
     {
-        _moveCountText.text = $"ï¿½Ìµï¿½È½ï¿½ï¿½[{_playerMoveCount}]";
+        Debug.Log(enemyList.Count);
+        Debug.Log(isEnemyReset);
+        if (enemyList.Count <= 0 && isEnemyReset)
+        {
+            Debug.Log("¿¡³Ê¹Ì ¾øÀ½");
+            _roundManager.timer.TimeSet();
+            _roundManager.timer.RoundEnd();
+            isEnemyReset = false;
+        }
+
+        _moveCountText.text = $"ÀÌµ¿È½¼ö[{_playerMoveCount}]";
 
         _tileMap.transform.position = _tileTransform;
 
@@ -117,6 +137,9 @@ public class StageManager : MonoSingleton<StageManager>
                 _map = item;
             }
         }
+
+        Debug.Log(DataManager.Instance.round);
+        Debug.Log(_map);
 
         player1 = _map.player1;
         player2 = _map.player2;
@@ -157,6 +180,7 @@ public class StageManager : MonoSingleton<StageManager>
         {
             _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize, spawnEnemyType);
         }
+        isEnemyReset = true;
     }
     public void TileSetCoroutineStart()
     {
@@ -287,21 +311,22 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
+                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
                 hit.collider.gameObject.SetActive(false);
                 if(hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
+                    enemyList.Remove(hit.collider.gameObject);
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
                 else
                 {
-                    OnGameOver?.Invoke();
+                    OnPlayerDeath?.Invoke();
                     yield break;
                 }
             }
             else
             {
-                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
             }
             yield return new WaitForSeconds(0.001f);
         }
@@ -314,21 +339,22 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
+                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
                 hit.collider.gameObject.SetActive(false);
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
+                    enemyList.Remove(hit.collider.gameObject);
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
                 else
                 {
-                    OnGameOver?.Invoke();
+                    OnPlayerDeath?.Invoke();
                     yield break;
                 }
             }
             else
             {
-                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
             }
             yield return new WaitForSeconds(0.001f);
         }
@@ -342,21 +368,22 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
+                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
                 hit.collider.gameObject.SetActive(false);
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
+                    enemyList.Remove(hit.collider.gameObject);
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
                 else
                 {
-                    OnGameOver?.Invoke();
+                    OnPlayerDeath?.Invoke();
                     yield break;
                 }
             }
             else
             {
-                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
             }
             yield return new WaitForSeconds(0.001f);
 
@@ -370,21 +397,22 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
+                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
                 hit.collider.gameObject.SetActive(false);
                 if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
+                    enemyList.Remove(hit.collider.gameObject);
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
                 else
                 {
-                    OnGameOver?.Invoke();
+                    OnPlayerDeath?.Invoke();
                     yield break;
                 }
             }
             else
             {
-                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
             }
             yield return new WaitForSeconds(0.001f);
         }

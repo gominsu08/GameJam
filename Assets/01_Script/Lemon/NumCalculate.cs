@@ -12,12 +12,23 @@ public class NumCalculate : MonoBehaviour
     [SerializeField] private PlayerNum playerNum;
 
     [SerializeField] private GameObject _player1; 
-    [SerializeField] private GameObject _player2; 
+    [SerializeField] private GameObject _player2;
+
+    private void Awake()
+    {
+        DataManager.Instance.round += 1;
+    }
 
     private void Update()
     {
         pc1num = playerNum.Pc1Num;
         pc2num = playerNum.Pc2Num;
+        if (((pc1num <= bossNumber._bossNum && bossNumber._bossNum <= pc2num) || (pc2num <= bossNumber._bossNum & bossNumber._bossNum <= pc1num)) && StageManager.Instance.isEnemyReset)
+        {
+            roundManager.timer.TimeSet();
+            roundManager.timer.RoundEnd();
+            StageManager.Instance.isEnemyReset = false;
+        }
     }
 
     public void StageClear() 
@@ -31,7 +42,10 @@ public class NumCalculate : MonoBehaviour
         else 
         {
             roundManager.isRoundWin = false;
-            DataManager.Instance.Hp = pc1num + pc2num;  
+            DataManager.Instance.Hp = pc1num + pc2num;
+            DataManager.Instance.time = 
+                ((pc1num > pc2num ? pc1num : pc2num) < bossNumber._bossNum ?
+                bossNumber._bossNum - (pc1num > pc2num ? pc1num : pc2num) : (pc1num > pc2num ? pc2num : pc1num) - bossNumber._bossNum) + 10;
             roundManager.EndRound();
         }
 

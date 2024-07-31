@@ -4,9 +4,22 @@ using UnityEngine;
 
 public class DataManager : MonoSingleton<DataManager>
 {
-    public int round = 1;
-    private int hp;
+    protected override void Awake()
+    {
+        var obj = FindObjectsOfType<DataManager>();
+        if (obj.Length == 1)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
+    public int round;
+    private int hp = 40;
+    public int time;
     public int Hp
     {
         get
@@ -16,9 +29,9 @@ public class DataManager : MonoSingleton<DataManager>
         set
         {
             if (value + 40 < 0)
-                hp = 0;
+                hp = 1;
             else
-                hp = value + 40;
+                hp = value + 60;
 
         }
     }

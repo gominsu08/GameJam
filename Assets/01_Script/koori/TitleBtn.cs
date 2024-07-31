@@ -24,6 +24,7 @@ public class TitleBtn : MonoBehaviour
     }
     public void GameStart()
     {
+        SFXPlayer.Instance.PlayClick();
         _settingManager.DataSave();
        
         SceneManager.LoadScene("InGameScene");
@@ -31,6 +32,7 @@ public class TitleBtn : MonoBehaviour
 
     public void GameExit()
     {
+        SFXPlayer.Instance.PlayClick();
         Application.Quit();
     }
 }
