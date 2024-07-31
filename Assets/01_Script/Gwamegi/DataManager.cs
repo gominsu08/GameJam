@@ -19,7 +19,26 @@ public class DataManager : MonoSingleton<DataManager>
 
     public int round;
     private int hp = 40;
-    public int time;
+
+    private int time;
+    public int bossTime
+    {
+        get 
+        { 
+            return time; 
+        }
+        set 
+        {
+            if(value >= 35)
+            {
+                time = 35;
+            }
+            else
+            {
+                time = value;
+            }
+        }
+    }
     public int Hp
     {
         get
