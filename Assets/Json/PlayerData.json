@@ -3,6 +3,6 @@
     "sfxVolume": 50.0,
     "bright": 1,
     "effectOn": true,
-    "round": 0,
+    "round": 2,
     "isDeveloper": true
 }
