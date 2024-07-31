@@ -58,7 +58,6 @@ public class NumCalculate : MonoBehaviour
         _player2.transform.position = new Vector3(2,1,0);
         roundManager.isRoundWin = true;
         DataManager.Instance.round++;
-
         StageManager.Instance.StageReset();
         roundManager.timer.SetTime = StageManager.Instance.roundTime;
         StageManager.Instance.TileSetCoroutineStart();
