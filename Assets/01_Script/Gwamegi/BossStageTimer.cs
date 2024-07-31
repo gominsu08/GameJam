@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class BossStageTimer : MonoBehaviour
 { 
 
-    private float time;
+    [SerializeField]private float time;
 
     public float Times
     {
