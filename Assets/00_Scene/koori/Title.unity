@@ -5674,6 +5674,7 @@ MonoBehaviour:
     bright: 1
     effectOn: 1
     round: 0
+    isDeveloper: 0
 --- !u!4 &1203963430
 Transform:
   m_ObjectHideFlags: 0
@@ -15253,7 +15254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD06C\uB798\uB527"
+  m_text: "\uD06C\uB808\uB527"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9786378699af8de4d894fa3d641e871e, type: 2}
   m_sharedMaterial: {fileID: 5898914525763395673, guid: 9786378699af8de4d894fa3d641e871e, type: 2}

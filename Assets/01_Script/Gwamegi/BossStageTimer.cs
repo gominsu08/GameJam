@@ -36,7 +36,7 @@ public class BossStageTimer : MonoBehaviour
 
     private void Start()
     {
-        Times = DataManager.Instance.time;
+        Times = DataManager.Instance.bossTime;
     }
 
     private void Update()
