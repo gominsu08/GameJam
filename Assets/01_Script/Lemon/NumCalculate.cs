@@ -16,7 +16,7 @@ public class NumCalculate : MonoBehaviour
 
     private void Awake()
     {
-        DataManager.Instance.round += 1;
+        
     }
 
     private void Update()
