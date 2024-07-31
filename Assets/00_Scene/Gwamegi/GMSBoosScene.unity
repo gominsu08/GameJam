@@ -7054,6 +7054,7 @@ MonoBehaviour:
     bright: 1
     effectOn: 1
     round: 0
+    isDeveloper: 0
 --- !u!4 &1790735135
 Transform:
   m_ObjectHideFlags: 0
@@ -8051,7 +8052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 389, y: 424}
+  m_AnchoredPosition: {x: 319, y: 424}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1973096336
@@ -8074,7 +8075,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBCF4\uC2A4 \uC2A4\uD14C\uC774\uC9C0"
+  m_text: "\uD398\uB110\uD2F0 \uC2A4\uD14C\uC774\uC9C0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9786378699af8de4d894fa3d641e871e, type: 2}
   m_sharedMaterial: {fileID: 5898914525763395673, guid: 9786378699af8de4d894fa3d641e871e, type: 2}
