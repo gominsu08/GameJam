@@ -24,7 +24,6 @@ public class SettingManager : MonoSingleton<SettingManager>
     [SerializeField] private Bloom _bloom;
     [SerializeField] private float _musicVolume, _sfxVolume;
     [SerializeField] private bool _isTitle;
-    [SerializeField] private AudioClip _sfxClip, _clickClip;
     public bool effect;
 
     private void OnEnable()
@@ -56,18 +55,18 @@ public class SettingManager : MonoSingleton<SettingManager>
     public void OpenCredit()
     {
         _creditWindow?.SetActive(true);
-        SFXPlayer.Instance.PlaySFX(_clickClip);
+        SFXPlayer.Instance.PlayClick();
     }
 
     public void CloseCredit()
     {
         _creditWindow.SetActive(false);
-        SFXPlayer.Instance.PlaySFX(_sfxClip);
+        SFXPlayer.Instance.PlayClose();
     }
 
     public void Open()
     {
-        SFXPlayer.Instance.PlaySFX(_clickClip);
+        SFXPlayer.Instance.PlayClick();
         _window?.SetActive(true);
         if (_isTitle)
         {
@@ -82,7 +81,7 @@ public class SettingManager : MonoSingleton<SettingManager>
 
     public void Close()
     {
-        SFXPlayer.Instance.PlaySFX(_sfxClip);
+        SFXPlayer.Instance.PlayClose();
         if (!_isTitle)
         {
             Time.timeScale = 1.0f;
@@ -92,7 +91,7 @@ public class SettingManager : MonoSingleton<SettingManager>
 
     public void EffectOn()
     {
-        SFXPlayer.Instance.PlaySFX(_clickClip);
+        SFXPlayer.Instance.PlayClick();
         if (!effect)
         {
             _effectOn.sprite = _btnOn;
@@ -103,7 +102,7 @@ public class SettingManager : MonoSingleton<SettingManager>
     }
     public void EffectOff()
     {
-        SFXPlayer.Instance.PlaySFX(_clickClip);
+        SFXPlayer.Instance.PlayClick();
         if (effect)
         {
             _effectOff.sprite = _btnOn;
@@ -123,12 +122,12 @@ public class SettingManager : MonoSingleton<SettingManager>
     {
         _sfxVolume = _sfxBar.value * 100;
         SFXPlayer.Instance.ChangeVolume(_sfxVolume);
-        SFXPlayer.Instance.PlaySFX(_sfxClip);
+        SFXPlayer.Instance.PlayEnter();
     }
 
     public void GoToTitle()
     {
-        SFXPlayer.Instance.PlaySFX(_clickClip);
+        SFXPlayer.Instance.PlayClick();
         Time.timeScale = 1.0f;
         DataSave();
         SceneManager.LoadScene("Title");
@@ -146,7 +145,7 @@ public class SettingManager : MonoSingleton<SettingManager>
 
     public void BrightChanged(string value)
     {
-        SFXPlayer.Instance.PlaySFX(_clickClip);
+        SFXPlayer.Instance.PlayClick();
         BrightReset();
         _brightValue = (BrightValue)Enum.Parse(typeof(BrightValue), value);
         if (effect)

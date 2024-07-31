@@ -75,6 +75,7 @@ public class Caculate : MonoBehaviour
             usedObj.gameObject.GetComponent<Enemy>().Effect();
             PoolManager.Instance.Push(usedObj.gameObject.GetComponent<Enemy>());
         }
+        SFXPlayer.Instance.PlayDestroy();
         usedObjects.Clear();
     }
 

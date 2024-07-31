@@ -18,10 +18,12 @@ public class Cosole : MonoBehaviour
 
     public void Open()
     {
+        SFXPlayer.Instance.PlayClick();
         _window.SetActive(true);
     }
     public void Close()
     {
+        SFXPlayer.Instance.PlayClose();
         _window.SetActive(false);
     }
 
@@ -34,6 +36,7 @@ public class Cosole : MonoBehaviour
 
     private void Check()
     {
+        SFXPlayer.Instance.PlayClick();
         if (_input != null)
         {
             switch (_input)
