@@ -11,11 +11,13 @@ public class Grid : MonoSingleton<Grid>
     [field: SerializeField] public Tilemap mapTilemap { get; private set; }
     [field: SerializeField] public Tile tile { get; private set; }
     public Dictionary<Vector2Int, Entity> entityDic = new();
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    public void Reset(){
+        entityDic.Clear();
+        gridTilemap.ClearAllTiles();
+    }
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.R)){
+            
         }
     }
     protected override void Awake()

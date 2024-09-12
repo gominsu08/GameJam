@@ -21,8 +21,10 @@ public class Enemy : Entity, IPoolable
     }
     protected override void Awake()
     {
-        base.Awake();
-        
+        if (_visualTrm == null)
+            _visualTrm = transform.Find("Visual");
+        if (!enemies.Contains(this))
+            enemies.Add(this);
     }
     protected override void OnDisable()
     {
@@ -35,12 +37,20 @@ public class Enemy : Entity, IPoolable
     public void ResetItem()
     {
         gameObject.SetActive(true);
+        if (_visualTrm == null)
+            _visualTrm = transform.Find("Visual");
+        if (!Grid.Instance.set(this, transform.position))
+            Debug.Log($"entity : {transform.position}!!!");
+        else
+            Debug.Log("entity : {transform.position} 성공");
         if (!enemies.Contains(this))
             enemies.Add(this);
     }
 
     public void Effect()
     {
+        gameObject.SetActive(true);
         Instantiate(_particleSystem, transform.position, Quaternion.identity);
+        PoolManager.Instance.Push(this);
     }
 }
