@@ -43,7 +43,7 @@ public class Entity : MonoBehaviour
         isMoveing = true;
         Vector2 targetPosition = (Vector2)transform.position + direction;
         // if (Physics2D.RaycastAll(transform.position, direction, direction.magnitude).ToList().Any((a) => a.transform != transform))
-        if (!Grid.Instance.set(this, targetPosition))
+        if (!Grid.Instance.settile(this, targetPosition))
         {
             if (Grid.Instance.entityDic.TryGetValue(Vector2Int.RoundToInt(targetPosition), out Entity targetEntity))
             {

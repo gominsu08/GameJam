@@ -16,9 +16,9 @@ public class DataManager : MonoSingleton<DataManager>
         }
         set 
         {
-            if(value >= 35)
+            if(value >= 25)
             {
-                time = 35;
+                time = 25;
             }
             else
             {

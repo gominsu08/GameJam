@@ -22,6 +22,6 @@ MonoBehaviour:
   spawnEnemyType: 0200000001000000
   minBossNum: -60
   maxBossNum: -70
-  roundTime: 30
-  player1: 1
-  player2: 9
+  roundTime: 45
+  player1: 3
+  player2: 4

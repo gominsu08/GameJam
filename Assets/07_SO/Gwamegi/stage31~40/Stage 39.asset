@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e23757968faea3488ee3c9338a4865c, type: 3}
+  m_Name: Stage 39
+  m_EditorClassIdentifier: 
+  stage: 39
+  xMax: 12
+  yMax: 9
+  xMin: -12
+  yMin: -9
+  boxCount: 30
+  enemyCount: 40
+  spawnEnemyType: 00000000010000000300000002000000020000000000000000000000
+  minBossNum: 20
+  maxBossNum: 60
+  roundTime: 50
+  player1: 2
+  player2: 7

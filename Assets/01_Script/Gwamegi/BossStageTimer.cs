@@ -31,7 +31,13 @@ public class BossStageTimer : MonoBehaviour
         SaveManager.Instance.LoadPlayerData();
         maxRound = SaveManager.Instance.playerData.round;
 
-        SaveManager.Instance.playerData.round = DataManager.Instance.round >= maxRound ? DataManager.Instance.round : maxRound;
+        int i = DataManager.Instance.round >= maxRound ? DataManager.Instance.round : maxRound;
+        if (i == DataManager.Instance.round)
+        {
+            i = DataManager.Instance.round + 1;
+        }
+
+        SaveManager.Instance.playerData.round = i;
         SettingManager.Instance.DataSave();
         SaveManager.Instance.SavePlayerDataToJson();
         SceneManager.LoadScene("InGameScene");

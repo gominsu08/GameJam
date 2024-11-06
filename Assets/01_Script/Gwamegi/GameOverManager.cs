@@ -12,6 +12,8 @@ public class GameOverManager : MonoBehaviour
 
     [SerializeField] private TMP_Text text;
 
+    int maxRound;
+
     public void BossScene()
     {
 
@@ -24,6 +26,7 @@ public class GameOverManager : MonoBehaviour
         text.text = "목표 숫자에 도달하지 \n못하였습니다";
         yield return new WaitForSeconds(1);
         text.text = "";
+        RoundDataSave();
         SceneManager.LoadScene("GMSBoosScene");
     }
 
@@ -31,6 +34,7 @@ public class GameOverManager : MonoBehaviour
     {
         Time.timeScale = 0;
         _gameOverPanel.SetActive(true);
+        RoundDataSave();
         InputReader.Instance.controls.Default.Disable();
     }
 
@@ -38,7 +42,7 @@ public class GameOverManager : MonoBehaviour
     {
         Time.timeScale = 1;
         DataManager.Instance.round = 0;
-        SettingManager.Instance.DataSave();
+        RoundDataSave();
         SceneManager.LoadScene("Title");
     }
 
@@ -48,7 +52,17 @@ public class GameOverManager : MonoBehaviour
         Time.timeScale = 1;
         DataManager.Instance.round = 0;
         InputReader.Instance.controls.Default.Enable();
-        SettingManager.Instance.DataSave();
+        RoundDataSave();
         SceneManager.LoadScene("InGameScene");
+    }
+
+    public void RoundDataSave()
+    {
+        SaveManager.Instance.LoadPlayerData();
+        maxRound = SaveManager.Instance.playerData.round;
+
+        SaveManager.Instance.playerData.round = DataManager.Instance.round >= maxRound ? DataManager.Instance.round : maxRound;
+        SettingManager.Instance.DataSave();
+
     }
 }

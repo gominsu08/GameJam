@@ -3558,7 +3558,8 @@ MonoBehaviour:
   isDontDestroy: 0
   <gridTilemap>k__BackingField: {fileID: 733472296}
   <mapTilemap>k__BackingField: {fileID: 2135348196}
-  <tile>k__BackingField: {fileID: 11400000, guid: 9514161b835ec5e409e11b70aa58b5ad, type: 2}
+  <tile>k__BackingField: {fileID: 11400000, guid: a44b9e6bc7640394988392eab6c5c49c, type: 2}
+  <defaulttile>k__BackingField: {fileID: 11400000, guid: 9514161b835ec5e409e11b70aa58b5ad, type: 2}
 --- !u!483693784 &733472295
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -5617,6 +5618,26 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 158b7a4739c6bc04f9110f01862a7a2c, type: 2}
   - {fileID: 11400000, guid: 456a25846c16b014a816d2c3fd388efb, type: 2}
   - {fileID: 11400000, guid: 653abeb80d796b04ba2293c7f28c947d, type: 2}
+  - {fileID: 11400000, guid: 7ac4a055b386f8c48be55944a5f3e68d, type: 2}
+  - {fileID: 11400000, guid: 4e90b4384fd179e4da1027169156cc35, type: 2}
+  - {fileID: 11400000, guid: 69381a3ac071cdc4eacf5010f20253fd, type: 2}
+  - {fileID: 11400000, guid: 20d07d209ec0a584090a87486a1d1dd9, type: 2}
+  - {fileID: 11400000, guid: b5cbc14f9f3700644abc3093c3f24e67, type: 2}
+  - {fileID: 11400000, guid: e53fb658e5374a946a2a06aa10f40e18, type: 2}
+  - {fileID: 11400000, guid: 1bc02132a6e2a6b458e5d32686af67ea, type: 2}
+  - {fileID: 11400000, guid: d6481dc3f243e9842ae05c42d1fbd65b, type: 2}
+  - {fileID: 11400000, guid: 5ca83db5b79793d429363cdd64f6d714, type: 2}
+  - {fileID: 11400000, guid: f80603eb6d63ed5459088e0dbf24d71a, type: 2}
+  - {fileID: 11400000, guid: 9d4359e1a78b7854f95548c03ce9fc1c, type: 2}
+  - {fileID: 11400000, guid: 1753639c949902246bd85f039500b870, type: 2}
+  - {fileID: 11400000, guid: 5741cbf9739b86542b0edc917aae7143, type: 2}
+  - {fileID: 11400000, guid: 4f463622a0a3cc643a10c10f482efd8a, type: 2}
+  - {fileID: 11400000, guid: 0e51db6a7b02ebf409ae658c13625a12, type: 2}
+  - {fileID: 11400000, guid: eb317f4d09a66dd4fb510c90fb8e52e4, type: 2}
+  - {fileID: 11400000, guid: 5b59afdfc79682a4dae8d7274e07098f, type: 2}
+  - {fileID: 11400000, guid: 44ec72fa37bfbca4abedd6927477d7c8, type: 2}
+  - {fileID: 11400000, guid: 13071b3823f6b6543ba7ac341881c838, type: 2}
+  - {fileID: 11400000, guid: fda65951d673f004d893b29788aa125f, type: 2}
   roundTime: 0
   player1: 0
   player2: 0

@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stage: 27
   xMax: 5
-  yMax: 5
-  xMin: -5
-  yMin: -5
+  yMax: 6
+  xMin: -3
+  yMin: -4
   boxCount: 10
   enemyCount: 21
-  spawnEnemyType: 0000000001000000
-  minBossNum: 0
-  maxBossNum: 0
+  spawnEnemyType: 00000000020000000100000003000000
+  minBossNum: -10
+  maxBossNum: 56
   roundTime: 30
   player1: 1
   player2: 9

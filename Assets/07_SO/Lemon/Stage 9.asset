@@ -18,10 +18,10 @@ MonoBehaviour:
   xMin: -12
   yMin: -15
   boxCount: 20
-  enemyCount: 35
+  enemyCount: 80
   spawnEnemyType: 0000000001000000
   minBossNum: 20
   maxBossNum: 30
-  roundTime: 30
+  roundTime: 50
   player1: 1
-  player2: 1
+  player2: 3

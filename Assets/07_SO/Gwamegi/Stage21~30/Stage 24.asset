@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e23757968faea3488ee3c9338a4865c, type: 3}
   m_Name: Stage 24
   m_EditorClassIdentifier: 
-  stage: 23
+  stage: 24
   xMax: 10
   yMax: 10
   xMin: -10
   yMin: -10
-  boxCount: 50
-  enemyCount: 40
+  boxCount: 25
+  enemyCount: 30
   spawnEnemyType: 000000000100000001000000010000000100000001000000
   minBossNum: 10
   maxBossNum: 10
   roundTime: 30
-  player1: 1
-  player2: 9
+  player1: 6
+  player2: 2
