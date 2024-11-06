@@ -36,14 +36,14 @@ public class Entity : MonoBehaviour
     private void Update()
     {
     }
+    public Command command;
     public virtual void Move(Vector2 direction)
     {
         if (isMoveing) return;
         isMoveing = true;
         Vector2 targetPosition = (Vector2)transform.position + direction;
-        Command command;
         // if (Physics2D.RaycastAll(transform.position, direction, direction.magnitude).ToList().Any((a) => a.transform != transform))
-        if (!Grid.Instance.set(this, targetPosition))
+        if (!Grid.Instance.settile(this, targetPosition))
         {
             if (Grid.Instance.entityDic.TryGetValue(Vector2Int.RoundToInt(targetPosition), out Entity targetEntity))
             {
@@ -59,7 +59,6 @@ public class Entity : MonoBehaviour
                 coroutine = StartCoroutine(waiter());
                 void OnTargetMove(Vector2 pos)
                 {
-                    Debug.Log("밍밍");
                     isMoveing = false;
                     Move(direction);
                     targetEntity.OnMoveEvent.RemoveListener(OnTargetMove);
@@ -78,14 +77,10 @@ public class Entity : MonoBehaviour
         else
         {
             Grid.Instance.remove(transform.position);
+            command = new MoveCommand(this, 1 / _speed / 3, targetPosition);
             OnMoveEvent?.Invoke(targetPosition);
-            command = new MoveCommand(this, 1 / _speed, targetPosition);
             command.onCompleteAction += () => isMoveing = false;
             commandInvoker.ExecuteCommand(command);
         }
-    }
-    IEnumerator a()
-    {
-        yield return null;
     }
 }

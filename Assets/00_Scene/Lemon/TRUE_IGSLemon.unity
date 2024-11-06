@@ -423,9 +423,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SetTime: 0
-  CountDown123: 0
   isTimeFlow: 1
   timerText: {fileID: 454404638}
+  countDownText: {fileID: 0}
   _numCalculate: {fileID: 358052793}
   roundManager: {fileID: 886869748}
 --- !u!4 &143493032
@@ -2091,14 +2091,21 @@ MonoBehaviour:
   enemyList: []
   _roundManager: {fileID: 886869748}
   _mapData:
-  - {fileID: 11400000, guid: fc33580c604514a4abb593f9932c0fd1, type: 2}
-  - {fileID: 11400000, guid: 669e5fd35e75adb40a450fc464efa779, type: 2}
-  - {fileID: 11400000, guid: dee88cb6f0d40564f97b3583db25322a, type: 2}
+  - {fileID: 11400000, guid: 547d09014fc886a4aba96885b89b1100, type: 2}
+  - {fileID: 11400000, guid: d120503df0f76724a989ba79e9916de3, type: 2}
+  - {fileID: 11400000, guid: 407f8a18369a6e84fb8edcaddba04454, type: 2}
+  - {fileID: 11400000, guid: ce62dcc6b93e1b148a159cb5cbb3fefa, type: 2}
+  - {fileID: 11400000, guid: d96f0b4a5a100214a81f4b1991d56a6a, type: 2}
+  - {fileID: 11400000, guid: 245feada873cb4948a4cddbfa4f67019, type: 2}
+  - {fileID: 11400000, guid: cb4390fa429b3bf48bf9793341616a20, type: 2}
+  - {fileID: 11400000, guid: 0b9911579048c9148a5f193dd75b4b1c, type: 2}
+  - {fileID: 11400000, guid: 7acc3a07484c25742a38494b00bb9f37, type: 2}
+  - {fileID: 11400000, guid: 30093f2bb5b71054581a6d18f1263790, type: 2}
   roundTime: 0
   player1: 0
   player2: 0
   _tileMap: {fileID: 2135348196}
-  _boxTileMap: {fileID: 733472296}
+  _boxTileMap: {fileID: 0}
   _baseTile: {fileID: 11400000, guid: 9514161b835ec5e409e11b70aa58b5ad, type: 2}
   _boxTile: {fileID: 11400000, guid: a44b9e6bc7640394988392eab6c5c49c, type: 2}
   _tileTransform: {x: 0.5, y: 0.5}

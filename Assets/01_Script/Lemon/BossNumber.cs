@@ -16,8 +16,14 @@ public class BossNumber : MonoBehaviour
 
     public void BossNumRand()
     {
-        _bossNum = Random.Range(StageManager.Instance.minBossNum, StageManager.Instance.maxBossNum + 1);
-        bossNumText.text = $"보스숫자 [ {_bossNum} ]";
+        int rend = Random.Range(StageManager.Instance.minBossNum, StageManager.Instance.maxBossNum + 1);
+        if (1 >= rend && 9 <= rend)
+        {
+            BossNumRand();
+            return;
+        }
+        _bossNum = rend;
+        bossNumText.text = $"목표숫자 [ {_bossNum} ]";
     }
 
 

@@ -5,23 +5,35 @@ using UnityEngine;
 
 public class NumCalculate : MonoBehaviour
 {
-    private int pc1num; // ÇÃ·¹ÀÌ¾î ³Ñ ¿¬°á ÇÊ¿ä
-    private int pc2num; // ÇÃ·¹ÀÌ¾î ³Ñ ¿¬°á ÇÊ¿ä
+    private int pc1num; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
+    private int pc2num; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
     [SerializeField] BossNumber bossNumber;
     [SerializeField] RoundManager roundManager;
     [SerializeField] private PlayerNum playerNum;
 
     [SerializeField] private GameObject _player1; 
-    [SerializeField] private GameObject _player2; 
+    [SerializeField] private GameObject _player2;
+
+    private void Awake()
+    {
+        
+    }
 
     private void Update()
     {
         pc1num = playerNum.Pc1Num;
         pc2num = playerNum.Pc2Num;
+        if (((pc1num <= bossNumber._bossNum && bossNumber._bossNum <= pc2num) || (pc2num <= bossNumber._bossNum & bossNumber._bossNum <= pc1num)) && StageManager.Instance.isEnemyReset)
+        {
+            roundManager.timer.TimeSet();
+            roundManager.timer.RoundEnd();
+            StageManager.Instance.isEnemyReset = false;
+        }
     }
 
     public void StageClear() 
     {
+        Grid.Instance.Reset();
 
         if ((pc1num <= bossNumber._bossNum && bossNumber._bossNum <= pc2num) || (pc2num <= bossNumber._bossNum & bossNumber._bossNum <= pc1num))
         {
@@ -31,10 +43,12 @@ public class NumCalculate : MonoBehaviour
         else 
         {
             roundManager.isRoundWin = false;
+            DataManager.Instance.Hp = pc1num + pc2num;
+            DataManager.Instance.bossTime = 
+                ((pc1num > pc2num ? pc1num : pc2num) < bossNumber._bossNum ?
+                bossNumber._bossNum - (pc1num > pc2num ? pc1num : pc2num) : (pc1num > pc2num ? pc2num : pc1num) - bossNumber._bossNum) + 10;
             roundManager.EndRound();
         }
-
-        
     }
 
     private IEnumerator Clear()
@@ -42,8 +56,8 @@ public class NumCalculate : MonoBehaviour
         yield return new WaitForSeconds(1);
         _player1.transform.position = new Vector3(0,1,0);
         _player2.transform.position = new Vector3(2,1,0);
-        roundManager.round++;
         roundManager.isRoundWin = true;
+        DataManager.Instance.round++;
         StageManager.Instance.StageReset();
         roundManager.timer.SetTime = StageManager.Instance.roundTime;
         StageManager.Instance.TileSetCoroutineStart();

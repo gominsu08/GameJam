@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
@@ -10,6 +11,8 @@ public class StageManager : MonoSingleton<StageManager>
     public List<GameObject> enemyList = new List<GameObject>();
 
     [SerializeField] private RoundManager _roundManager;
+
+    [SerializeField] private PlayerNum _playerNum;
 
     [SerializeField] private List<MapData> _mapData = new List<MapData>();
     private MapData _map;
@@ -21,32 +24,34 @@ public class StageManager : MonoSingleton<StageManager>
     public int player1;
     public int player2;
 
+    public UnityEvent OnGameOver;
+    public UnityEvent OnPlayerDeath;
 
-    //Å¸ÀÏ¸Ê
+    //Å¸ï¿½Ï¸ï¿½
     [SerializeField] private Tilemap _tileMap;
-    //¹Ú½º Å¸ÀÏ¸Ê
+    //ï¿½Ú½ï¿½ Å¸ï¿½Ï¸ï¿½
     [SerializeField] private Tilemap _boxTileMap;
-    //±âº» Å¸ÀÏ
+    //ï¿½âº» Å¸ï¿½ï¿½
     [SerializeField] private Tile _baseTile;
-    //¹Ú½º Å¸ÀÏ
+    //ï¿½Ú½ï¿½ Å¸ï¿½ï¿½
     [SerializeField] private Tile _boxTile;
-    //Å¸ÀÏ¸Ê À§Ä¡
+    //Å¸ï¿½Ï¸ï¿½ ï¿½ï¿½Ä¡
     [SerializeField] private Vector2 _tileTransform;
 
     [SerializeField] private TMP_Text _moveCountText;
 
     private CreateEnemy _createEnemy;
 
-    //ÇöÀç ½ºÅ×ÀÌÁö
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public int stage;
 
-    //ÃÊ±â°ª + ¸Ê µ¥ÀÌÅÍ ³ªÁß¿¡ ¾ø¾Öµµ »ó°ü¾øÀ½
+    //ï¿½Ê±â°ª + ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½Öµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private int _xMaxSize;
     private int _xMinSize;
     private int _yMaxSize;
     private int _yMinSize;
 
-    //»èÁ¦ ÇÒ‹š »ó¿ëµÇ´Â º¯¼ö
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ò‹ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½
     private int _xMaxSizeIn;
     private int _xMinSizeIn;
     private int _yMaxSizeIn;
@@ -55,17 +60,20 @@ public class StageManager : MonoSingleton<StageManager>
 
     private int _playerMoveCount;
 
-
+    public bool isEnemyReset;
     public void StageReset()
     {
+        isEnemyReset = false;
+        _createEnemy.SetEnemyDic();
+        _createEnemy.SetEnemyList();
         foreach (GameObject item in enemyList)
         {
-            Destroy(item);
+            PoolManager.Instance.Push(item.GetComponent<IPoolable>());
         }
         MapDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn);
         StartCoroutine(BoxTileDestroy(_xMinSizeIn, _xMaxSizeIn, _yMinSizeIn, _yMaxSizeIn));
-        _createEnemy.SetEnemyList();
         MapSetting();
+        isEnemyReset = true;
     }
     public void playerMoveCountting()
     {
@@ -88,33 +96,43 @@ public class StageManager : MonoSingleton<StageManager>
     protected override void Awake()
     {
         base.Awake();
+        DataManager.Instance.round += 1;
+        _createEnemy = GetComponent<CreateEnemy>();
         MapSetting();
 
         _xMaxSizeIn = _map.xMax;
         _yMaxSizeIn = _map.yMax;
         _xMinSizeIn = _map.xMin;
         _yMinSizeIn = _map.yMin;
-        _createEnemy = GetComponent<CreateEnemy>();
+
+        _roundManager.timer.Initialize();
+    }
+
+    private void Start()
+    {
+
     }
     private void Update()
     {
-        _moveCountText.text = $"ÀÌµ¿È½¼ö[{_playerMoveCount}]";
+
+        _moveCountText.text = $"ì´ë™íšŸìˆ˜[{_playerMoveCount}]";
 
         _tileMap.transform.position = _tileTransform;
 
     }
-    private void MapSetting()
+    public void MapSetting()
     {
         foreach (MapData item in _mapData)
         {
-            if (item.stage == _roundManager.round)
+            if (item.stage == DataManager.Instance.round)
             {
                 _map = item;
             }
         }
-
         player1 = _map.player1;
         player2 = _map.player2;
+
+        _playerNum.Start();
 
         spawnEnemyType = _map.spawnEnemyType;
 
@@ -150,9 +168,11 @@ public class StageManager : MonoSingleton<StageManager>
         {
             _createEnemy.EnemyCreate(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize, spawnEnemyType);
         }
+        isEnemyReset = true;
     }
     public void TileSetCoroutineStart()
     {
+        
         StartCoroutine(Setting(_xMinSize, _xMaxSize, _yMinSize, _yMaxSize));
     }
     private IEnumerator Setting(int xMin, int xMax, int yMin, int yMax)
@@ -166,8 +186,6 @@ public class StageManager : MonoSingleton<StageManager>
         int xMinSize = xMin;
         int yMaxSize = yMax;
         int yMinSize = yMin;
-
-        Debug.Log(1);
 
         for (int j = 0; j <= (xMax - xMin) / 2; j++)
         {
@@ -280,18 +298,19 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
                 hit.collider.gameObject.SetActive(false);
-                if(hit.collider.gameObject.TryGetComponent(out Enemy enemy))
+                if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
                 {
+                    enemyList.Remove(hit.collider.gameObject);
                     PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
                 }
+                else
+                {
+                    OnPlayerDeath?.Invoke();
+                    yield break;
+                }
             }
-            else
-            {
-                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
-            }
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.0001f);
         }
 
         for (int i = yMaxSize; i >= yMinSize; i--)
@@ -302,14 +321,24 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
-                Destroy(hit.collider.gameObject);
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
+                hit.collider.gameObject.SetActive(false);
+                if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
+                {
+                    enemyList.Remove(hit.collider.gameObject);
+                    PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
+                }
+                else
+                {
+                    OnPlayerDeath?.Invoke();
+                    yield break;
+                }
             }
             else
             {
-                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
+                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             }
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.0001f);
         }
 
         for (int i = xMaxSize; i >= xMinSize; i--)
@@ -321,14 +350,24 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
-                Destroy(hit.collider.gameObject);
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
+                hit.collider.gameObject.SetActive(false);
+                if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
+                {
+                    enemyList.Remove(hit.collider.gameObject);
+                    PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
+                }
+                else
+                {
+                    OnPlayerDeath?.Invoke();
+                    yield break;
+                }
             }
             else
             {
-                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
+                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             }
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.0001f);
 
         }
 
@@ -340,14 +379,24 @@ public class StageManager : MonoSingleton<StageManager>
 
             if (hit.collider != null)
             {
-                Debug.Log("¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÕ´Ï´Ù: " + hit.collider.gameObject.name);
-                Destroy(hit.collider.gameObject);
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½: " + hit.collider.gameObject.name);
+                hit.collider.gameObject.SetActive(false);
+                if (hit.collider.gameObject.TryGetComponent(out Enemy enemy))
+                {
+                    enemyList.Remove(hit.collider.gameObject);
+                    PoolManager.Instance.Push(hit.collider.gameObject.GetComponent<IPoolable>());
+                }
+                else
+                {
+                    OnPlayerDeath?.Invoke();
+                    yield break;
+                }
             }
             else
             {
-                Debug.Log("Å¸ÀÏ À§¿¡ ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
+                Debug.Log("Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             }
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.0001f);
         }
 
 

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/08_Sound/Music.meta
+guid: f848647310665ce46a055ea4a3e382ab
+========
 guid: 8b3cd4df6fa11e84c9728ceaa80cb52a
+>>>>>>>> origin/MainBase:Assets/07_SO/Lemon.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

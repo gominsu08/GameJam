@@ -32,9 +32,9 @@ public class PlayerNum : MonoBehaviour
     public int Pc2Num { get {return _pc2Num; } set { if (value >= 100) { _pc2Num = 99; } else { _pc2Num = value; } } }
     [SerializeField] TMP_Text pc1NumText, pc2NumText;
 
-    private void Start()
+    public void Start()
     {
-        PCNumChange(StageManager.Instance.player1, StageManager.Instance.player1);
+        PCNumChange(StageManager.Instance.player1, StageManager.Instance.player2);
     }
 
     public void PCNumChange(int num1, int num2)

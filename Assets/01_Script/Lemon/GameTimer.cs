@@ -7,9 +7,10 @@ using UnityEngine.Events;
 public class GameTimer : MonoBehaviour
 {
     public float SetTime;
-    [SerializeField] float CountDown123 = 0.0f;
+    float CountDown123 = 3f;
     [SerializeField] bool isTimeFlow = true;
     [SerializeField] TMP_Text timerText;
+    [SerializeField] TMP_Text countDownText;
     [SerializeField] private NumCalculate _numCalculate;
 
     [SerializeField] private RoundManager roundManager;
@@ -18,12 +19,13 @@ public class GameTimer : MonoBehaviour
 
     private bool isTileMapCreate;
      
-    private void Start()
+    public void Initialize()
     {        
-        timerText.text = $"남은시간 [ {Mathf.Round(CountDown123)} ]";
+        StageManager.Instance.MapSetting();
         StageManager.Instance.TileSetCoroutineStart();
         InputReader.Instance.controls.Default.Disable();
         SetTime = StageManager.Instance.roundTime;
+        timerText.text = $"남은시간 [ {Mathf.Round(SetTime)} ]";
 
     }
 
@@ -31,29 +33,40 @@ public class GameTimer : MonoBehaviour
     {
         if (isTimeFlow == true)
         {
-            if (Mathf.Round(CountDown123) <= 3 && isTileMapCreate)
+            if (Mathf.Round(CountDown123) <= 3  && Mathf.Round(CountDown123) >= 0 &&isTileMapCreate)
             {
                 InputReader.Instance.controls.Default.Disable();
 
-                timerText.text = $"남은시간 [ {Mathf.Round(CountDown123)} ]";
-                CountDown123 += Time.deltaTime;
+                countDownText.text = $"{Mathf.Round(CountDown123)}";
+                CountDown123 -= Time.deltaTime;
             }
-            else if (Mathf.Round(CountDown123) > 3 && isTileMapCreate)
+            else if (Mathf.Round(CountDown123) <= 0 && isTileMapCreate)
             {
                 if (SetTime <= 0) return;
+                countDownText.text = "";
                 InputReader.Instance.controls.Default.Enable();
                 timerText.text = $"남은시간 [ {Mathf.Round(SetTime)} ]";
                 SetTime -= Time.deltaTime;
-                
             }
         }
 
-        if (SetTime <= 0 )
+        if (SetTime <= 0)
         {
-            TimeReset();
-            _numCalculate.StageClear();
-            isTileMapCreate = false;
+            Debug.Log("나 if문임");
+            RoundEnd();
         }
+    }
+
+    public void RoundEnd()
+    {
+        TimeReset();
+        _numCalculate.StageClear();
+        isTileMapCreate = false;
+    }
+
+    public void TimeSet()
+    {
+        SetTime = 0;
     }
 
     public void TileSet()
@@ -64,7 +77,7 @@ public class GameTimer : MonoBehaviour
     public void TimeReset()
     {
         SetTime = StageManager.Instance.roundTime;
-        CountDown123 = 0.0f;
+        CountDown123 = 3f;
         isTimeFlow = false;
     }
 

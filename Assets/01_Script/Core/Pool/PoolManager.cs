@@ -47,6 +47,19 @@ public class PoolManager : MonoSingleton<PoolManager>
         return null;
     }
 
+    public IPoolable Pop(string itemName, Vector2 pos)
+    {
+        if (_pools.ContainsKey(itemName))
+        {
+            IPoolable item = _pools[itemName].Pop();
+            (item as MonoBehaviour).transform.position = pos;
+            item.ResetItem();
+            return item;
+        }
+        Debug.LogError($"There is no pool {itemName}");
+        return null;
+    }
+
     public void Push(IPoolable item)
     {
         if(_pools.ContainsKey(item.PoolName))
